@@ -4,54 +4,43 @@ type UserId = string;
 
 import { cookies } from "next/headers";
 
-export function getAuthToken(): AuthToken | undefined {
-    const cookieStore = cookies();
-    return cookieStore.get("auth-token")?.value;
+export function getAuthToken(): AuthToken | null {
+    return localStorage?.getItem("auth-token");
   }
 
 function setAuthToken(sessionId: AuthToken): void {
-    const cookieStore = cookies();
-    cookieStore.set("auth-token", sessionId);
+    localStorage?.setItem("auth-token", sessionId);
 }
 
 export function deleteAuthToken() {
-    const cookieStore = cookies();
-    cookieStore.delete("auth-token")
+    localStorage?.removeItem("auth-token")
 }
 // _____________________
 
-export function getUserName(): UserName | undefined {
-    const cookieStore = cookies();
-    return cookieStore.get("username")?.value;
-  }
+export function getUserName(): UserName | null {
+    return localStorage?.getItem("username");
+}
 
 function setUserName(sessionId: UserName): void {
-    const cookieStore = cookies();
-    cookieStore.set("username", sessionId);
+    localStorage?.setItem("username", sessionId);
 }
 
 export function deleteUserName() {
-    const cookieStore = cookies();
-    cookieStore.delete("username")
+    localStorage?.delete("username")
 }
-export function getUserId(): UserId | undefined {
-    const cookieStore = cookies();
-    return cookieStore.get("userid")?.value;
+export function getUserId(): UserId | null {
+    return localStorage?.getItem("userid");
   }
 
 function setUserId(sessionId: UserId): void {
-    const cookieStore = cookies();
-    cookieStore.set("userid", sessionId);
+    localStorage?.setItem("userid", sessionId);
 }
 
 export function deleteUserId() {
-    const cookieStore = cookies();
-    cookieStore.delete("userid")
+    localStorage?.removeItem("userid")
 }
-export async function logout() {
-    "use server";
-    const cookieStore = cookies();
-    cookieStore.delete("auth-token")
-    cookieStore.delete("username")
-    cookieStore.delete("userid")
+export function logout() {
+    localStorage?.removeItem("auth-token")
+    localStorage?.removeItem("username")
+    localStorage?.removeItem("userid")
 }

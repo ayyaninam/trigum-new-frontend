@@ -1,21 +1,35 @@
-import Navbar from "@/components/Navbar";
+
+import NewsLetter from "@/components/NewsLetter";
+import PeopleSays from "@/components/PeopleSays";
 import SearchBox from "@/components/SearchBox";
-import { getAuthToken, getUserName, logout } from "@/lib/session";
-import {fetchAllBrands, fetchAllSizes} from "@/processor/custom"
+import SuccessStory from "@/components/SuccessStory";
+import { fetchAllBrands, fetchAllSizes } from "@/processor/custom";
+import { AllBrandsType, AllSizesType } from "@/types";
 
-export default async function Home() {
-  const allSizes = await fetchAllSizes()
-  const allBrands = await fetchAllBrands()
-  console.log(allSizes)
+const Home:React.FC = async  () => {
 
-  const authToken = getAuthToken()
-  const userName = getUserName()
-  
-  
+  const allBrands:AllBrandsType[] = await fetchAllBrands()
+  const allSizes:AllSizesType[] = await fetchAllSizes()
+
   return (
     <>
-    <Navbar authToken={authToken} logoutUser={logout} userName={userName} />
-    <SearchBox authToken={authToken} size={""} brands={""} issteel={false} isdrive={false} istrailer={false} isretreaded={false} allBrands={allBrands} allSizes={allSizes}/>
+    <SearchBox size={""} brands={""} issteel={false} isdrive={false} istrailer={false} isretreaded={false} allBrands={allBrands} allSizes={allSizes} />
+
+    <div className="my-16">
+      <SuccessStory/>
+      </div>
+
+    <div className="my-16">
+      <PeopleSays/>
+      </div>
+
+    <div className="my-16">
+      <NewsLetter/>
+      </div>
+
     </>
   );
 }
+
+
+export default Home;

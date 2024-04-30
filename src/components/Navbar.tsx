@@ -1,19 +1,31 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import AuthBtn from './AuthBtn';
 import { FaFacebook, FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa';
 import { ALUProps } from '@/types';
+import { getAuthToken, getUserName, logout } from '@/lib/session';
 
 
 
-const Navbar:React.FC<ALUProps> = ({ authToken, logoutUser, userName }) => {
+const Navbar:React.FC = () => {
     const [menuIcon, setMenuIcon] = useState<boolean>(false);
 
     const handleMenuIcon = () => {
         setMenuIcon(!menuIcon);
     };
+
+    const [authToken, setAuthToken] = useState<string | null>("")
+    const [userName, setUserName] = useState<string | null>("")
+
+    const logoutUser = () => logout()
+
+    useEffect(() => {
+        setUserName(getUserName())
+        setAuthToken(getAuthToken())
+    }, [])
+    
     return (
         <div>
             <div className="flex opening__hrs__headline bg-orange-400 text-white z-50 justify-between font-serif mx-auto items-center py-1 px-4">
