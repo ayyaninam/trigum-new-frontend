@@ -177,10 +177,7 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
                         <span className="text-gray-800">Bieżnik:</span>
                         <span className="text-gray-600">{product?.tread_name ? product.tread_name : "------"}</span>
                     </p>
-                    <p className="text-gray-400 font-semibold space-x-2">
-                        <span className="text-gray-800">Rozmiar:</span>
-                        <span className="text-gray-600">{product?.size_text ? product.size_text : "------"}</span>
-                    </p>
+
                     <p className="text-gray-400 font-semibold space-x-2">
                         <span className="text-gray-800">Głębokość bieżnika:</span>
                         <span className="text-gray-600">{product?.tread_depth_min} - {product?.tread_depth_max}</span>
