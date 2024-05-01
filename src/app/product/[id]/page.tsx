@@ -136,10 +136,10 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
                     magnifieWidth={400}
                     zoomLevel={1.7}
                 />
-
-                <div className={`flex space-x-2 my-2`}>
+{images &&
+                <div className={`grid grid-cols-3 gap-2 my-2`}>
                     {/* Render smaller images dynamically */}
-                    {images && images.slice(1).map((image, index) => (
+                     {images?.slice(1).map((image, index) => (
                         <img
                             key={index}
                             src={image}
@@ -149,6 +149,7 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
                         />
                     ))}
                 </div>
+}
 
 
             </div>
