@@ -92,29 +92,29 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
   }, [isretreaded])
 
   return (
-    <div className="h-max min-h-[500px] bg-cover flex items-center justify-center">
+    <div className="h-max bg-cover flex items-center justify-center">
 
 
       {/* Basic */}
-      <div className="relative w-full">
+      <div className="relative w-full top-0">
 
       <div className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 bg-gray-200 flex flex-col space-y-2 p-4 rounded-md mx-auto my-10">
 
         {/* Rozmiar */}
         <div className="size__main">
-          <label htmlFor="size" className=" text-black space-x-2">
-            <span>Rozmiar</span>
-            <span className="text-red-500">*</span>
-          </label>
+
 
           <div id="size" className="w-[100%] " >
             <div className="relative">
-              <label htmlFor="size__input" className="block mb-2 text-sm font-medium text-black dark:text-black">Choose a Size</label>
-              <input onBlur={() => setTimeout(() => { setSizePartActive(false) }, 200)} onFocus={() => setSizePartActive(true)} value={sizeInputVal} onChange={(e) => handleSizeChange(e)} type="text" id="size__input" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="385/55 R22.5" />
+              <label htmlFor="size__input" className="block mb-2 text-sm font-medium text-black dark:text-black">
+                <span>Choose a Size</span>
+                <span className="text-red-500 mx-2">*</span>
+              </label>
+              <input onBlur={() => setTimeout(() => { setSizePartActive(false) }, 200)} onFocus={() => setSizePartActive(true)} value={sizeInputVal} onChange={(e) => handleSizeChange(e)} type="text" id="size__input" className="text-xl bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="385/55 R22.5" />
 
-              <div className={`all_suggestions rounded-xl bg-slate-50 overflow-auto ${sizePartActive ? "opacity-100 max-h-40" : "opacity-0 max-h-0"}  transition-opacity transition-height ease-in-out delay-150 duration-500 absolute w-full z-10`} >
+              <div className={`all_suggestions rounded-xl bg-slate-50 overflow-auto ${sizePartActive ? "opacity-100 max-h-40" : "opacity-0 max-h-0"}  transition-opacity transition-height ease-in-out delay-150 duration-500 absolute w-full z-30`} >
                 {allFilteredSizes && allFilteredSizes.map((data) => {
-                  return <div key={data.id} className="hover:bg-slate-200 border-b border-slate-100 cursor-pointer w-[100%] text-black px-4 py-2" onClick={() => { setsizeInputVal(data.size), setAllFilteredSizes([]) }}>{data.size}</div>
+                  return <div key={data.id} className="hover:bg-slate-200 border-b border-slate-100 cursor-pointer w-[100%] text-black px-4 py-2 text-md" onClick={() => { setsizeInputVal(data.size), setAllFilteredSizes([]) }}>{data.size}</div>
                 })}
               </div>
 
@@ -124,9 +124,9 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
         {/* brand Name */}
         <div id="brand_name" className="w-[100%] relative">
-          <label className="mb-2 text-sm font-medium text-black dark:text-black bg-slate-50 px-4 py-2 rounded-xl cursor-pointer flex justify-between hover:bg-slate-100" onClick={() => setAllBrandsShow(!allBrandsShow)}>
+          <label className="mb-2 text-sm font-medium text-black dark:text-black bg-slate-50 px-4 py-2 rounded-xl cursor-pointer flex justify-between hover:bg-slate-100 items-center" onClick={() => setAllBrandsShow(!allBrandsShow)}>
 
-            <span>{activeBrands.length > 0 ? `${activeBrands.includes(0) ? "All Brands Selected" : `${activeBrands.length} Brand Selected`}` : "Select a Brand"}</span>
+            <span className="text-xl text-gray-500 font-normal">{activeBrands.length > 0 ? `${activeBrands.includes(0) ? "All Brands Selected" : `${activeBrands.length} Brand Selected`}` : "Select a Brand"}</span>
 
             {!allBrandsShow ? (
               <span>
@@ -141,7 +141,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
           </label>
           {allBrandsShow && (
-            <div className={`rounded-xl bg-slate-50 p-4 cursor-pointer space-y-2 max-h-40 overflow-auto absolute w-full`}>
+            <div className={`rounded-xl bg-slate-50 p-4 cursor-pointer space-y-2 max-h-40 overflow-auto absolute w-full z-20`}>
               <div onClick={() => handleSingleBrandClick(0)} className={`hover:bg-slate-200 flex justify-between py-2 px-2 rounded-lg`}>
                 {"All"}
                 {activeBrands?.includes(0) && (
@@ -179,40 +179,40 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
         <div className="w-[100%] flex flex-col space-y-2 mt-8">
           <label htmlFor="osie" className="block text-sm font-medium text-black dark:text-black">Osie</label>
           <div id="osie">
-            <ul className="max-w-full w-full flex justify-between items-center flex-wrap">
+            <ul className="max-w-full w-full grid grid-cols-2 sm:grid-cols-4 items-stretch">
 
-              <li className="max-w-[50%] w-[50%] p-1">
+              <li className="flex p-1">
                 <input onClick={() => setIsSteel(!isSteel)} type="checkbox" id="Sterujaca" value="" className="hidden peer" />
-                <label htmlFor="Sterujaca" className={`inline-flex items-center justify-between  p-5 bg-white border-2  rounded-lg cursor-pointer ${isSteel ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
+                <label htmlFor="Sterujaca" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isSteel ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                   <div className="block">
-                    <div className="break-all text-lg font-semibold">Sterujaca</div>
+                    <div className="break-all text-xs font-semibold">Sterujaca</div>
                   </div>
                 </label>
               </li>
 
-              <li className="max-w-[50%] w-[50%] p-1">
+              <li className="flex p-1">
                 <input onClick={() => setIsDrive(!isDrive)} type="checkbox" id="Naped" value="" className="hidden peer" />
-                <label htmlFor="Naped" className={`inline-flex items-center justify-between  p-5 bg-white border-2  rounded-lg cursor-pointer ${isDrive ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
+                <label htmlFor="Naped" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isDrive ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                   <div className="block">
-                    <div className="break-all text-lg font-semibold">Naped</div>
+                    <div className="break-all text-xs font-semibold">Naped</div>
                   </div>
                 </label>
               </li>
 
-              <li className="max-w-[50%] w-[50%] p-1">
+              <li className="flex p-1">
                 <input onClick={() => setIsTrailer(!isTrailer)} type="checkbox" id="Wleczona" value="" className="hidden peer" />
-                <label htmlFor="Wleczona" className={`inline-flex items-center justify-between  p-5 bg-white border-2  rounded-lg cursor-pointer ${isTrailer ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
+                <label htmlFor="Wleczona" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isTrailer ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                   <div className="block">
-                    <div className="break-all text-lg font-semibold">Wleczona</div>
+                    <div className="break-all text-xs font-semibold">Wleczona</div>
                   </div>
                 </label>
               </li>
 
-              <li className="max-w-[50%] w-[50%] p-1">
+              <li className="flex p-1">
                 <input onClick={() => setIsRetreaded(!isRetreaded)} type="checkbox" id="Bieżnikowana" value="" className="hidden peer" />
-                <label htmlFor="Bieżnikowana" className={`inline-flex items-center justify-between  p-5 bg-white border-2  rounded-lg cursor-pointer ${isRetreaded ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
+                <label htmlFor="Bieżnikowana" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isRetreaded ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                   <div className="block">
-                    <div className="break-all text-lg font-semibold ">Bieżnikowana</div>
+                    <div className="break-all text-xs font-semibold ">Bieżnikowana</div>
                   </div>
                 </label>
               </li>
@@ -234,7 +234,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
             width={100}
             height={100}
             unoptimized={true}
-            className="absolute top-0 left-0 w-full h-full min-h-[500px]  object-cover -z-10 opacity-90"
+            className="absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-90"
         />
 
         
