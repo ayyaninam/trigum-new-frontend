@@ -233,6 +233,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
             quality={100}
             width={100}
             height={100}
+            unoptimized={true}
             className="absolute top-0 left-0 w-full h-full min-h-[500px]  object-cover -z-10 opacity-90"
         />
 

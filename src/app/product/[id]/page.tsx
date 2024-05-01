@@ -139,10 +139,13 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
                         {/* Render smaller images dynamically */}
                         {images?.slice(1).map((image, index) => (
                             <Image
+                            key={index}
                             width={100}
                             height={100}
                             loader={() => image} 
+                            unoptimized={true}
                             src={image}
+                            onClick={() => handleImageClick(index)}
                             className="w-full aspect-square object-cover cursor-pointer border border-primary"
                             alt={`${product?.brand_name} ${product?.tread_name} ${product?.size_text}`}
                             />
