@@ -225,8 +225,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
         <SearchBtn />
 
       </div>
-
-      
+  
         <Image
             src="/termopres.jpg"
             objectFit="cover"
