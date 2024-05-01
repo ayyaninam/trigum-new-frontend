@@ -7,7 +7,7 @@ import Link from "next/link";
 // import { useRouter } from 'next/router'
 import { ProductList } from "@/types";
 import { ImageMagnifierType } from "@/types";
-
+import Image from "next/image";
 
 const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
 
@@ -126,8 +126,6 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
         <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mt-40 mx-auto px-8 sm:px-0">
 
             <div>
-
-                {/* <img src={images && images[0]} alt="" className="max-w-full w-full h-auto" /> */}
                 <ImageMagnifier
                     src={images && images[0]}
                     width={"100%"}
@@ -140,12 +138,13 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
                     <div className={`grid grid-cols-3 gap-2 my-2`}>
                         {/* Render smaller images dynamically */}
                         {images?.slice(1).map((image, index) => (
-                            <img
-                                key={index}
-                                src={image}
-                                alt=""
-                                className="w-full aspect-square object-cover cursor-pointer border border-primary"
-                                onClick={() => handleImageClick(index + 1)}
+                            <Image
+                            width={100}
+                            height={100}
+                            loader={() => image} 
+                            src={image}
+                            className="w-full aspect-square object-cover cursor-pointer border border-primary"
+                            alt={`${product?.brand_name} ${product?.tread_name} ${product?.size_text}`}
                             />
                         ))}
                     </div>

@@ -1,13 +1,22 @@
 import React from 'react'
 import Link from 'next/link'
 import { BsArrowRight } from 'react-icons/bs'
+import Image from 'next/image'
 const Footer:React.FC = () => {
   return (
     <div className='bg-slate-100 pt-16 rounded-t-2xl text-black border-t-4 border-orange-400 mt-8'>
     <div className='container grid gap-8 grid-cols-1 sm:grid-cols-3 px-8 sm:px-0 mx-auto'>
       <div>
         <Link href="/" className='flex items-center space-x-3 rtl:space-x-reverse'>
-          <img src="/logo.png" className='w-80 h-32 object-cover' alt="" />
+
+          <Image
+          src="/logo.png"
+          height={150}
+          width={150}
+          className='w-80 h-32 object-cover'
+          alt="Tirgum Logo"
+          />
+
         </Link>
       </div>
       <div className='text-start'>

@@ -7,8 +7,6 @@ import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { useRouter } from 'next/navigation'
 import { SearchBoxProps } from "@/types";
 
-
-
 const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, istrailer, isretreaded, allBrands, allSizes }) => {
 
   const [allFilteredSizes, setAllFilteredSizes] = useState(allSizes)
@@ -37,7 +35,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
     const queryParams = {
       size: sizeInputVal,
-      brands: activeBrands?.includes(0) ? "" : activeBrands.join(','),
+      brands: activeBrands?.includes(0) ? "0" : activeBrands.join(','),
       issteel: isSteel.toString(),
       isdrive: isDrive.toString(),
       istrailer: isTrailer.toString(),
@@ -94,10 +92,13 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
   }, [isretreaded])
 
   return (
-    <div className="h-max min-h-[500px] py-4 bg-[url('/termopres.jpg')] bg-cover flex items-center justify-center">
+    <div className="h-max min-h-[500px] bg-cover flex items-center justify-center">
+
 
       {/* Basic */}
-      <div className="w-96 sm:w-2/5 bg-gray-200 bg-opacity-90 flex flex-col space-y-2 p-4 rounded-md">
+      <div className="relative w-full">
+
+      <div className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 bg-gray-200 flex flex-col space-y-2 p-4 rounded-md mx-auto my-10">
 
         {/* Rozmiar */}
         <div className="size__main">
@@ -223,6 +224,18 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
         <div></div>
         <SearchBtn />
 
+      </div>
+      
+        <Image
+            src="/termopres.jpg"
+            objectFit="cover"
+            alt="Tirgum main Image"
+            width={100}
+            height={100}
+            className="absolute top-0 left-0 w-full h-full min-h-[500px]  object-cover -z-10 opacity-90"
+        />
+
+        
       </div>
 
 

@@ -7,6 +7,7 @@ import { MdVerified } from "react-icons/md";
 import { BsApple, BsGoogle } from "react-icons/bs";
 import { getAuthToken, getUserId } from "@/lib/session";
 import { setUserId, setUserName, setAuthToken } from "@/lib/session";
+import Image from "next/image";
 
 function Login() {
   const router = useRouter()
@@ -178,7 +179,15 @@ function Login() {
     <div className="mx-auto container grid md:grid-cols-2 grid-cols-1 gap-16 my-16">
       <div className="my-auto md:block hidden">
         <Link href="/" className='flex items-center space-x-3 rtl:space-x-reverse'>
-          <img src="/logo.png" className='mx-4 w-40 h-16 object-cover' alt="" />
+
+          <Image
+          src="/logo.png"
+          height={150}
+          width={150}
+          className='mx-4 w-40 h-16 object-cover'
+          alt="Tirgum Logo"
+          />
+
         </Link>
         <div className="my-8 flex space-x-2 items-center font-bold text-2xl">
           <span className="text-orange-400"><MdVerified /></span>

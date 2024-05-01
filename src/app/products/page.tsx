@@ -24,7 +24,7 @@ const Products = async ({params, searchParams} : {
 
   const queryParams = {
     size: size,
-    brands: brands,
+    brands: brands==="0"?"":brands,
     is_steel: issteel,
     is_drive: isdrive,
     is_trailer: istrailer,
@@ -52,7 +52,8 @@ const Products = async ({params, searchParams} : {
       <SearchBox size={size} brands={brands} issteel={issteel} isdrive={isdrive} istrailer={istrailer} isretreaded={isretreaded} allBrands={allBrands} allSizes={allSizes}
       />
 
-      <div className="">
+      <div className="my-8">
+        <h1 className="text-start sm:text-center text-5xl text-mono font-bold decoration-orange-400 underline sm:mx-0 mx-8">{list.length} Products Found</h1>
         <ProductItems list={list} />
       </div>
     </div>

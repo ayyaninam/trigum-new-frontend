@@ -6,12 +6,13 @@ import AuthBtn from './AuthBtn';
 import { FaFacebook, FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa';
 import { ALUProps } from '@/types';
 import { getAuthToken, getUserName, logout } from '@/lib/session';
-import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { CookieValueTypes } from 'cookies-next';
-
+import Image from 'next/image';
 
 const Navbar = () => {
-    const router = useRouter();
+    const pathname = usePathname()
+
     const [menuIcon, setMenuIcon] = useState<boolean>(false);
 
     const handleMenuIcon = () => {
@@ -25,14 +26,13 @@ const Navbar = () => {
         logout()
         setAuthToken(getAuthToken())
         setUserName(getUserName())
-    
     }
 
     useEffect(() => {
         setAuthToken(getAuthToken())
         setUserName(getUserName())
-    }, [])
-    
+    }, [pathname])
+
     return (
         <div>
             <div className="flex opening__hrs__headline bg-orange-400 text-white z-50 justify-between font-serif mx-auto items-center py-1 px-4">
@@ -51,7 +51,14 @@ const Navbar = () => {
             <nav className="border-gray-200 bg-slate-700">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between md:justify-center md:space-x-4 lg:justify-between mx-auto p-4">
                     <Link onClick={() => menuIcon && handleMenuIcon()} href="/" className='flex items-center space-x-3 rtl:space-x-reverse'>
-                        <img src="/logo.png" className='w-40 h-16 object-cover' alt="" />
+                        <Image
+                            src="/logo.png"
+                            height={150}
+                            width={150}
+                            className='w-40 h-16 object-cover'
+                            alt="Tirgum Logo"
+                        />
+
                     </Link>
                     <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                         <div className='hidden md:block'>
