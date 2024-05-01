@@ -1,46 +1,43 @@
-type AuthToken = string;
-type UserName = string;
-type UserId = string;
+import { getCookies, getCookie, setCookie, deleteCookie, CookieValueTypes } from 'cookies-next';
 
-import { cookies } from "next/headers";
 
-export function getAuthToken(): AuthToken | null {
-    return localStorage?.getItem("auth-token");
+export function getAuthToken(): CookieValueTypes {
+    return getCookie("authToken");
   }
 
-function setAuthToken(sessionId: AuthToken): void {
-    localStorage?.setItem("auth-token", sessionId);
+export function setAuthToken(sessionId: string): void {
+    setCookie("authToken", sessionId);
 }
 
 export function deleteAuthToken() {
-    localStorage?.removeItem("auth-token")
+    deleteCookie("authToken")
 }
 // _____________________
 
-export function getUserName(): UserName | null {
-    return localStorage?.getItem("username");
+export function getUserName(): CookieValueTypes {
+    return getCookie("userName");
 }
 
-function setUserName(sessionId: UserName): void {
-    localStorage?.setItem("username", sessionId);
+export function setUserName(sessionId: string): void {
+    setCookie("userName", sessionId);
 }
 
 export function deleteUserName() {
-    localStorage?.delete("username")
+    localStorage?.delete("userName")
 }
-export function getUserId(): UserId | null {
-    return localStorage?.getItem("userid");
+export function getUserId(): CookieValueTypes {
+    return getCookie("userID");
   }
 
-function setUserId(sessionId: UserId): void {
-    localStorage?.setItem("userid", sessionId);
+export function setUserId(sessionId: string): void {
+    setCookie("userID", sessionId);
 }
 
 export function deleteUserId() {
-    localStorage?.removeItem("userid")
+    deleteCookie("userID")
 }
 export function logout() {
-    localStorage?.removeItem("auth-token")
-    localStorage?.removeItem("username")
-    localStorage?.removeItem("userid")
+    deleteCookie("authToken")
+    deleteCookie("userName")
+    deleteCookie("userID")
 }

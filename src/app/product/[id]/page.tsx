@@ -1,5 +1,5 @@
 'use client'
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { FaCircleCheck } from "react-icons/fa6";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
@@ -33,7 +33,7 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
             throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setProduct(data&&data)
+        setProduct(data && data)
         setImages(data?.image_urls)
     };
 
@@ -121,7 +121,7 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
     useEffect(() => {
         fetchProduct();
     }, [params?.id])
-    
+
     return (
         <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mt-40 mx-auto px-8 sm:px-0">
 
@@ -136,20 +136,20 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
                     magnifieWidth={400}
                     zoomLevel={1.7}
                 />
-{images &&
-                <div className={`grid grid-cols-3 gap-2 my-2`}>
-                    {/* Render smaller images dynamically */}
-                     {images?.slice(1).map((image, index) => (
-                        <img
-                            key={index}
-                            src={image}
-                            alt=""
-                            className="w-full aspect-square object-cover cursor-pointer border border-primary"
-                            onClick={() => handleImageClick(index + 1)}
-                        />
-                    ))}
-                </div>
-}
+                {images &&
+                    <div className={`grid grid-cols-3 gap-2 my-2`}>
+                        {/* Render smaller images dynamically */}
+                        {images?.slice(1).map((image, index) => (
+                            <img
+                                key={index}
+                                src={image}
+                                alt=""
+                                className="w-full aspect-square object-cover cursor-pointer border border-primary"
+                                onClick={() => handleImageClick(index + 1)}
+                            />
+                        ))}
+                    </div>
+                }
 
 
             </div>

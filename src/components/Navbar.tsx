@@ -6,24 +6,31 @@ import AuthBtn from './AuthBtn';
 import { FaFacebook, FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa';
 import { ALUProps } from '@/types';
 import { getAuthToken, getUserName, logout } from '@/lib/session';
+import { useRouter } from 'next/navigation';
+import { CookieValueTypes } from 'cookies-next';
 
 
-
-const Navbar:React.FC = () => {
+const Navbar = () => {
+    const router = useRouter();
     const [menuIcon, setMenuIcon] = useState<boolean>(false);
 
     const handleMenuIcon = () => {
         setMenuIcon(!menuIcon);
     };
 
-    const [authToken, setAuthToken] = useState<string | null>("")
-    const [userName, setUserName] = useState<string | null>("")
+    const [authToken, setAuthToken] = useState<CookieValueTypes>("")
+    const [userName, setUserName] = useState<CookieValueTypes>("")
 
-    const logoutUser = () => logout()
+    const logoutUser = () => {
+        logout()
+        setAuthToken(getAuthToken())
+        setUserName(getUserName())
+    
+    }
 
     useEffect(() => {
-        setUserName(getUserName())
         setAuthToken(getAuthToken())
+        setUserName(getUserName())
     }, [])
     
     return (
