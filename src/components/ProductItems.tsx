@@ -1,7 +1,7 @@
 import React, {useMemo} from 'react'
 import Link from 'next/link';
 import { ProductItemsProps } from '@/types';
-
+import Image from 'next/image';
 const ProductItems:React.FC<ProductItemsProps> = ({ list }) => {
 
     const MemoizedProductList = useMemo(() => list, [list]);
@@ -88,7 +88,14 @@ const ProductItems:React.FC<ProductItemsProps> = ({ list }) => {
             {MemoizedProductList&& MemoizedProductList?.length > 0 ? MemoizedProductList.map((product) => (
                 <div key={product?.id} className="w-[99%] max-w-full bg-white border border-gray-200 rounded-lg shadow mb-2">
                     <Link href={`/product/${product?.id}`}>
-                        <img className="p-8 rounded w-full h-80 sm:h-96 object-cover" src={product?.image_urls[0]} alt={product?.brand_name} />
+                        <Image
+                        src={product?.image_urls[0]}
+                        alt={product?.brand_name}
+                        width={100}
+                        height={100}
+                        unoptimized={true}
+                        className="p-8 rounded w-full h-80 sm:h-96 object-cover"
+                        />
                     </Link>
                     <div className="px-5 pb-5">
                     <Link href={`/product/${product?.id}`}>

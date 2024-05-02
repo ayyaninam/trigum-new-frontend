@@ -228,9 +228,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
   
         <Image
             src="/termopres.jpg"
-            objectFit="cover"
             alt="Tirgum main Image"
-            quality={100}
             width={100}
             height={100}
             unoptimized={true}
