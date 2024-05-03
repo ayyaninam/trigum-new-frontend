@@ -113,3 +113,21 @@ export type ProductList = {
 };
 
 
+export type UserType =  {
+    address: string;
+    date_joined: string; // Assuming this is always in ISO 8601 format
+    email: string | null;
+    id: number;
+    is_active: boolean;
+    is_approved: boolean;
+    is_staff: boolean;
+    is_superuser: boolean;
+    last_login: string; // Assuming this is always in ISO 8601 format
+    name: string | null;
+    phone: string | null;
+    profile_picture: string | null;
+    surname: string | null;
+    username: string | null;
+}
+
+

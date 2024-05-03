@@ -30,21 +30,7 @@ const fetchAllBrands = async () => {
 };
 
 
-const fetchUserDetails = async (userID:CookieValueTypes, authToken:CookieValueTypes) => {
-  let response = await fetch(`${process.env.API_URL}/api/users/${userID}/`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Token ${authToken}`
-    },
-  });
-
-  if (!response.ok) {
-      throw new Error('Failed to fetch data')
-  }
-
-  return response.json();
-};
 
 
-export {fetchAllSizes, fetchAllBrands, fetchUserDetails}
+
+export {fetchAllSizes, fetchAllBrands}
