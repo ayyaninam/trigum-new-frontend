@@ -48,6 +48,7 @@ export type SearchBoxProps = {
     isretreaded: boolean | string | null;
     allBrands: AllBrandsType[];
     allSizes: AllSizesType[];
+    ispair: boolean | string | null;
 }
 
 
@@ -131,3 +132,21 @@ export type UserType =  {
 }
 
 
+
+
+export type PairProduct =  {
+    id: number;
+    title: string;
+    brand_name: string;
+    tread_name: string;
+    size_text: string;
+    image_urls: string[];
+}
+
+export type PairItem =  {
+    id: number;
+    products: PairProduct[];
+    name: string;
+}
+
+export type PairItemsArray = {list: PairItem[] | null};

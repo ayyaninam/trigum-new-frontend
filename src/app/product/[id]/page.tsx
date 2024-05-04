@@ -280,7 +280,7 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
                     </div>
                 </div>
                 <div className="flex items-baseline mb-1 space-x-2 font-roboto mt-4">
-                    <p className="text-5xl text-red-600 text-primary font-semibold">
+                    <p className="text-5xl text-orange-400 text-primary font-semibold">
                         {product?.net_price ? `${product?.net_price} zł` : "NOT AVAILABLE"}
                     </p>
                     <p className="text-base text-gray-400 line-through">550 zł</p>
@@ -294,7 +294,7 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
                 <div className="gap-3 border-b border-gray-200 pb-5 mt-6">
                     <Link
                         href="#"
-                        className="bg-red-500 border border-primary text-white px-8 py-2 rounded-md uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition hover:border-black hover:text-black"
+                        className="bg-orange-400 border border-primary text-white px-8 py-2 rounded-md uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition hover:border-orange-400 hover:text-orange-400"
                     >
                         <FaCartShopping />
                         Kup

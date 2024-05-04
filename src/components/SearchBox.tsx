@@ -7,7 +7,7 @@ import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { useRouter } from 'next/navigation'
 import { SearchBoxProps } from "@/types";
 
-const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, istrailer, isretreaded, allBrands, allSizes }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, istrailer, isretreaded, allBrands, allSizes, ispair }) => {
 
   const [allFilteredSizes, setAllFilteredSizes] = useState(allSizes)
   const [sizeInputVal, setsizeInputVal] = useState<string>("")
@@ -20,6 +20,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
   const [isDrive, setIsDrive] = useState<boolean>(false);
   const [isTrailer, setIsTrailer] = useState<boolean>(false);
   const [isRetreaded, setIsRetreaded] = useState<boolean>(false);
+  const [isPair, setIsPair] = useState<boolean>(false);
 
   const router = useRouter()
 
@@ -40,11 +41,12 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
       isdrive: isDrive.toString(),
       istrailer: isTrailer.toString(),
       isretreaded: isRetreaded.toString(),
+      ispair: isPair.toString(),
     };
 
     const queryString = new URLSearchParams(queryParams).toString();
 
-    router.push(`/products?${queryString}`);
+    isPair?router.push(`/products/pair?${queryString}`):router.push(`/products?${queryString}`)
 
   }
 
@@ -86,6 +88,10 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
   useEffect(() => {
     setIsTrailer(istrailer ? istrailer === "true" : false);
   }, [istrailer])
+
+  useEffect(() => {
+    setIsPair(ispair ? ispair === "true" : false);
+  }, [ispair])
 
   useEffect(() => {
     setIsRetreaded(isretreaded ? isretreaded === "true" : false);
@@ -213,6 +219,15 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
                 <label htmlFor="Bieżnikowana" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isRetreaded ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                   <div className="block">
                     <div className="break-all text-xs font-semibold ">Bieżnikowana</div>
+                  </div>
+                </label>
+              </li>
+
+              <li className="flex p-1">
+                <input onClick={() => setIsPair(!isPair)} type="checkbox" id="ispair" value="" className="hidden peer" />
+                <label htmlFor="ispair" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isPair ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
+                  <div className="block">
+                    <div className="break-all text-xs font-semibold ">Pair Tyres</div>
                   </div>
                 </label>
               </li>

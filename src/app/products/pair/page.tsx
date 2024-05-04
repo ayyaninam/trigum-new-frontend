@@ -5,8 +5,9 @@ import ProductItems from "@/components/ProductItems";
 import { useSearchParams } from 'next/navigation'
 import { fetchAllBrands, fetchAllSizes } from "@/processor/custom";
 import { AllBrandsType, AllSizesType } from "@/types";
+import PairProductItems from "@/components/PairProductItems";
 
-const Products = async ({params, searchParams} : {
+const PairProducts = async ({params, searchParams} : {
   params: { slug: string };
   searchParams?: { [key: string]: string };
 }) => {
@@ -23,6 +24,7 @@ const Products = async ({params, searchParams} : {
   const ispair = searchParams?.ispair || '';
 
 
+
   const queryParams = {
     size: size,
     brands: brands==="0"?"":brands,
@@ -36,17 +38,18 @@ const Products = async ({params, searchParams} : {
 
   const fetchProducts = async () => {
     const response = await fetch(
-      `${process.env.API_URL}/api/tyreadderapp/products/?${queryString}`
+      `${process.env.API_URL}/api/tyreadderapp/pairs/?${queryString}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    const ListData = data?.results;
+    const ListData = data&&data;
     return ListData;
   };
-  const list = await fetchProducts()
 
+  const list = await fetchProducts()
+  
   
   return (
     <div>
@@ -54,10 +57,10 @@ const Products = async ({params, searchParams} : {
       />
 
       <div className="my-8">
-        <h1 className="text-start sm:text-center text-5xl text-mono font-bold decoration-orange-400 underline sm:mx-0 mx-8">{list.length} Products Found</h1>
-        <ProductItems list={list} />
+        <h1 className="text-start sm:text-center text-5xl text-mono font-bold decoration-orange-400 underline sm:mx-0 mx-8">All Pairs Found</h1>
+        <PairProductItems list={list}/>
       </div>
     </div>
   );
 }
-export default Products;
+export default PairProducts;
