@@ -27,7 +27,7 @@ function Login() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: email,
+        email: email,
         password: password
       })
     });
@@ -247,11 +247,11 @@ function Login() {
         <form onSubmit={(e) => login(e)}>
 
         <div className="flex flex-col my-4">
-          <label className="" htmlFor="username">Username</label>
+          <label className="" htmlFor="username">Email</label>
           <input 
           className="bg-white border border-gray-300 py-2 rounded-lg my-1 px-4" 
-          type="text" 
-          placeholder="Enter your username"
+          type="email" 
+          placeholder="Enter your Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           

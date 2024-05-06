@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { PairItem, PairItemsArray, PairProduct, ProductItemsProps } from '@/types';
 import Image from 'next/image';
 
-const PairProductItems: React.FC<PairItemsArray> = ({ list }) => {
+const PairProductItems: React.FC<PairItemsArray> = ({ list, queryString }) => {
 
     const MemoizedProductList = useMemo(() => list, [list]);
     const isLoading = false
@@ -28,7 +28,7 @@ const PairProductItems: React.FC<PairItemsArray> = ({ list }) => {
                         <div className={`grid md:grid-cols-${plist.products.length+1}  gap-4 items-end my-8 bg-gray-100 rounded-lg px-8 py-8 grid-cols-1 mx-auto w-full sm:w-fit md:w-full md:place-items-end`} key={plist?.id}>
 
                             {plist.products.map((product: PairProduct) => (
-                                <Link href={`/product/${product?.id}`} className='cursor-pointer' key={product?.size_text}>
+                                <Link href={`/product/pair/${plist?.id}/?${queryString&&queryString}`} className='cursor-pointer' key={product?.size_text}>
                                     <Image
                                         src={product?.image_urls[0]}
                                         width={100}

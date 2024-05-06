@@ -49,6 +49,8 @@ const PairProducts = async ({params, searchParams} : {
   };
 
   const list = await fetchProducts()
+
+
   
   
   return (
@@ -58,7 +60,7 @@ const PairProducts = async ({params, searchParams} : {
 
       <div className="my-8">
         <h1 className="text-start sm:text-center text-5xl text-mono font-bold decoration-orange-400 underline sm:mx-0 mx-8">All Pairs Found</h1>
-        <PairProductItems list={list}/>
+        <PairProductItems list={list} queryString={queryString}/>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ const Profile = () => {
     const [email, setEmail] = useState<string>("")
     const [phone, setPhone] = useState<string>("")
     const [userName, setUserName] = useState<string>("")
-    const [orignalUserName, setOrignalUserName] = useState<string>("")
+    const [orignalEmail, setOrignalEmail] = useState<string>("")
     const [error, setError] = useState<boolean>(false)
     const [imageSrc, setImageSrc] = useState<string>("/userpp.jpeg");
     const [file, setFile] = useState<File | null>(null);
@@ -45,7 +45,7 @@ const Profile = () => {
         setEmail(data?.email ? data?.email : "")
         setPhone(data?.phone ? data?.phone : "")
         setUserName(data?.username ? data?.username : "")
-        setOrignalUserName(data?.username ? data?.username : "")
+        setOrignalEmail(data?.email ? data?.email : "")
         setImageSrc(data?.profile_picture ? data?.profile_picture : imageSrc)
     };
 
@@ -74,7 +74,7 @@ const Profile = () => {
             setError(true);
         } else {
             fetchUserDetails(gettedUserId, gettedAuthToken);
-            if (orignalUserName !== userName) {
+            if (orignalEmail !== email) {
                 logout();
                 router.push("/");
             }
@@ -160,6 +160,9 @@ const Profile = () => {
                             <label className='text-white text-xl'>Email:</label>
                             <input className='rounded-full px-4 py-1 w-full col-span-3' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
+
+                        <small className='text-gray-400'>Note: Changing Email will change your login credentials, You will be Logout Immediately after changing Email.</small>
+
                         <div className='grid grid-cols-4 gap-4'>
                             <label className='text-white text-xl'>Phone:</label>
                             <input className='rounded-full px-4 py-1 w-full col-span-3' type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
@@ -169,10 +172,6 @@ const Profile = () => {
                             <input className='rounded-full px-4 py-1 w-full col-span-3' type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
 
                         </div>
-
-                        <small className='text-gray-400'>Note: Changing Username will change your login credentials, You will be Logout Immediately after changing Username.</small>
-
-
 
                         <button type='submit' className='bg-orange-400 rounded-full px-4 py-2 font-bold text-white w-full'>
                             {loading ? (

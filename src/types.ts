@@ -149,4 +149,37 @@ export type PairItem =  {
     name: string;
 }
 
-export type PairItemsArray = {list: PairItem[] | null};
+export type PairItemsArray = {
+    list: PairItem[] | null;
+    queryString:string;
+};
+
+
+export type PairProductsList =  {
+    id: number;
+    title: string;
+    brand_name: string;
+    tread_name: string;
+    size_text: string;
+    image_urls: string[];
+}
+
+export type PairProductsListData =  {
+    id: number;
+    products: PairProductsList[];
+    name: string;
+}
+
+
+
+export type PairProductImageClickType =  {
+    id: number;
+    title: string;
+    brand_name: string;
+    tread_name: string;
+    size_text: string;
+    image_urls: string[];
+}
+
+// Define an array of Product objects
+export type PairProductImageClickArrayType = PairProductImageClickType[];
