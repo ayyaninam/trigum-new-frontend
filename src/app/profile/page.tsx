@@ -37,7 +37,7 @@ const Profile = () => {
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch data')
+            router.push("/")
         }
 
         const data: UserType = await response.json()

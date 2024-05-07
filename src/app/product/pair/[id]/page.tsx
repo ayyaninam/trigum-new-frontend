@@ -161,7 +161,6 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
                         }
 
 
-
                     </div>
 
 

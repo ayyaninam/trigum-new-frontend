@@ -39,21 +39,13 @@ function Login() {
       setUserName(data.user.username)
 
       setLoginLoading(false)
-      router.push("/")
+      router.push("/profile")
       
     } else {
       setResponse("Invalid username or password. Please try again.")
       setLoginLoading(false)
     }
   }
-
-
-  useEffect(() => {
-    if (authToken) {
-      router.push('/')
-    }
-  }, [authToken])
-
 
 
   return (

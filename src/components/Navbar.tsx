@@ -6,12 +6,13 @@ import AuthBtn from './AuthBtn';
 import { FaFacebook, FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa';
 import { ALUProps } from '@/types';
 import { getAuthToken, getUserName, logout } from '@/lib/session';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { CookieValueTypes } from 'cookies-next';
 import Image from 'next/image';
 
 const Navbar = () => {
-    const pathname = usePathname()
+    const pathname = usePathname();
+    const router =useRouter();
 
     const [menuIcon, setMenuIcon] = useState<boolean>(false);
 
@@ -26,6 +27,7 @@ const Navbar = () => {
         logout()
         setAuthToken(getAuthToken())
         setUserName(getUserName())
+        router.push('/')
     }
 
     useEffect(() => {
