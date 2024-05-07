@@ -98,8 +98,8 @@ function Signup() {
   }, [])
 
   return (
-    <div className="mx-auto container grid md:grid-cols-2 grid-cols-1 gap-16 my-16">
-      <div className="my-auto md:block hidden">
+    <div className="mx-auto container grid md:grid-cols-2 grid-cols-1 gap-16 my-16 items-start">
+      <div className="md:block hidden">
         <Link href="/" className='flex items-center space-x-3 rtl:space-x-reverse'>
 
           <Image
