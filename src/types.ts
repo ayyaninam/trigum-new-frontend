@@ -129,6 +129,13 @@ export type UserType =  {
     profile_picture: string | null;
     surname: string | null;
     username: string | null;
+    company_name: string | null;
+    nip: number;
+    city: string | null;
+    post_code: string | null;
+    street: string | null;
+    street_number: string | null;
+    apartment_number: string | null;
 }
 
 

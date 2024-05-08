@@ -13,7 +13,26 @@ const Profile = () => {
     const [userDetails, setUserDetails] = useState<UserType>()
     const [email, setEmail] = useState<string>("")
     const [phone, setPhone] = useState<string>("")
-    const [userName, setUserName] = useState<string>("")
+
+
+
+
+  const [companyName, setCompanyName] = useState<string>("")
+  const [surName, setSurName] = useState<string>("")
+  const [name, setName] = useState<string>("")
+  const [nip, setNip] = useState<number>()
+
+
+  const [city, setCity] = useState<string>("")
+  const [postCode, setPostCode] = useState<string>("")
+  const [street, setStreet] = useState<string>("")
+  const [buidlingNumber, setBuidlingNumber] = useState<string>("")
+  const [apartmentNumber, setApartmentNumber] = useState<string>("")
+
+
+
+
+
     const [orignalEmail, setOrignalEmail] = useState<string>("")
     const [error, setError] = useState<boolean>(false)
     const [imageSrc, setImageSrc] = useState<string>("/userpp.jpeg");
@@ -44,8 +63,21 @@ const Profile = () => {
         setUserDetails(data)
         setEmail(data?.email ? data?.email : "")
         setPhone(data?.phone ? data?.phone : "")
-        setUserName(data?.username ? data?.username : "")
+
+        setCompanyName(data?.company_name ? data?.company_name : "")
+        setSurName(data?.surname ? data?.surname : "")
+        setName(data?.name ? data?.name : "")
+        setNip(data?.nip && data?.nip)
+        setCity(data?.city ? data?.city : "")
+        setPostCode(data?.post_code ? data?.post_code : "")
+        setStreet(data?.street ? data?.street : "")
+        setBuidlingNumber(data?.street_number ? data?.street_number : "")
+        setApartmentNumber(data?.apartment_number ? data?.apartment_number : "")
+
+
+        // ---------
         setOrignalEmail(data?.email ? data?.email : "")
+        // ---------
         setImageSrc(data?.profile_picture ? data?.profile_picture : imageSrc)
     };
 
@@ -57,10 +89,19 @@ const Profile = () => {
         if (file) {
             formData.append('profile_picture', file);
         }
-        formData.append('email', email);
-        formData.append('phone', phone);
-        formData.append('username', userName);
 
+        formData.append('email', email)
+        formData.append('phone', phone)
+        formData.append('company_name', companyName)
+        formData.append('surname', surName)
+        formData.append('name', name)
+        formData.append('nip', nip?nip?.toString():"")
+        formData.append('city', city)
+        formData.append('post_code', postCode)
+        formData.append('street', street)
+        formData.append('street_number', buidlingNumber)
+        formData.append('apartment_number', apartmentNumber)
+        
         const response = await fetch(`${process.env.API_URL}/api/users/${userID}/`, {
             method: "PATCH",
             headers: {
@@ -134,8 +175,7 @@ const Profile = () => {
                         className='bg-white px-4 py-1'
                     />
 
-                    <span className='text-gray-400 italic text-center text-xl'>@{userDetails?.username}</span>
-                    <span className='text-white font-extrabold my-2 text-3xl'>{userDetails?.name || userDetails?.username && userDetails?.username.toUpperCase()}</span>
+                    <span className='text-white font-extrabold my-2 text-3xl'>{userDetails?.name || userDetails?.surname && userDetails?.surname.toUpperCase()}</span>
                 </div>
                 <div className=' py-16 flex flex-col items-start bg-slate-700 rounded-b-3xl'>
                     <div className='w-4/5 mx-auto space-y-8'>
@@ -156,22 +196,99 @@ const Profile = () => {
                             </div>
                         )}
 
-                        <div className='grid grid-cols-4 gap-4'>
+                        <div className='grid grid-cols-4 gap-4 items-center'>
                             <label className='text-white text-xl'>Email:</label>
-                            <input className='rounded-full px-4 py-1 w-full col-span-3' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
 
                         <small className='text-gray-400'>Note: Changing Email will change your login credentials, You will be Logout Immediately after changing Email.</small>
 
-                        <div className='grid grid-cols-4 gap-4'>
+                        <div className='grid grid-cols-4 gap-4 items-center'>
                             <label className='text-white text-xl'>Phone:</label>
-                            <input className='rounded-full px-4 py-1 w-full col-span-3' type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
                         </div>
-                        <div className='grid grid-cols-4 gap-4'>
-                            <label className='text-white text-xl'>Username:</label>
-                            <input className='rounded-full px-4 py-1 w-full col-span-3' type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
 
+
+                        <hr className='border-gray-600' />
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Company Name:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
                         </div>
+
+
+
+
+
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Name:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                        </div>
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Surname:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={surName} onChange={(e) => setSurName(e.target.value)} />
+                        </div>
+
+
+
+                        <hr className='border-gray-600' />
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>NIP:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={nip}
+                            onChange={(e) => setNip(((/^\d{0,10}$/.test(e.target.value)) ? parseInt(e.target.value) : nip))}
+                            />
+                        </div>
+
+
+
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>City:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={city} onChange={(e) => setCity(e.target.value)} />
+                        </div>
+
+
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>ZIP Code:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={postCode} onChange={(e) => setPostCode(e.target.value)} />
+                        </div>
+
+                        <hr className='border-gray-600' />
+
+
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Street:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={street} onChange={(e) => setStreet(e.target.value)} />
+                        </div>
+
+
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Building Number:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={buidlingNumber} onChange={(e) => setBuidlingNumber(e.target.value)} />
+                        </div>
+
+
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Apartment Number:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={apartmentNumber} onChange={(e) => setApartmentNumber(e.target.value)} />
+                        </div>
+
 
                         <button type='submit' className='bg-orange-400 rounded-full px-4 py-2 font-bold text-white w-full'>
                             {loading ? (
