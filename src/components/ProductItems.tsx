@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { ProductItemsProps } from '@/types';
 import Image from 'next/image';
 
-import { addToCart } from '@/lib/session';
 import AddToCartBtn from './AddToCartBtn';
 
 const ProductItems:React.FC<ProductItemsProps> = ({ list }) => {
