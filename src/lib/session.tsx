@@ -1,9 +1,10 @@
-import { getCookies, getCookie, setCookie, deleteCookie, CookieValueTypes } from 'cookies-next';
+import { getCookie, setCookie, deleteCookie, CookieValueTypes } from 'cookies-next';
+import { UserType } from '@/types';
 
 
 export function getAuthToken(): CookieValueTypes {
     return getCookie("authToken");
-  }
+}
 
 export function setAuthToken(sessionId: string): void {
     setCookie("authToken", sessionId);
@@ -27,7 +28,7 @@ export function deleteUserName() {
 }
 export function getUserId(): CookieValueTypes {
     return getCookie("userID");
-  }
+}
 
 export function setUserId(sessionId: string): void {
     setCookie("userID", sessionId);
@@ -41,3 +42,5 @@ export function logout() {
     deleteCookie("userName")
     deleteCookie("userID")
 }
+
+

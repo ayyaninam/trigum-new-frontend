@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { fetchAllBrands, fetchAllSizes } from "@/processor/custom";
 import { AllBrandsType, AllSizesType } from "@/types";
 
+
 const Products = async ({params, searchParams} : {
   params: { slug: string };
   searchParams?: { [key: string]: string };

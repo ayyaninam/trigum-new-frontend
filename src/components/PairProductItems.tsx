@@ -5,7 +5,8 @@ import Image from 'next/image';
 
 const PairProductItems: React.FC<PairItemsArray> = ({ list, queryString }) => {
 
-    const MemoizedProductList = useMemo(() => list, [list]);
+    // const MemoizedProductList = useMemo(() => list, [list]);
+    const MemoizedProductList = list
     const isLoading = false
 
     return (

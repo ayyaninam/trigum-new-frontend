@@ -18,7 +18,7 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
 
     const fetchProduct = async () => {
         const response = await fetch(
-            `${process.env.API_URL}/api/tyreadderapp/pairs/${params?.id}/?${queryString&&queryString}`
+            `${process.env.API_URL}/api/tyreadderapp/pairs/${params?.id}/?${queryString && queryString}`
         );
         if (!response.ok) {
             throw new Error("Network response was not ok");
@@ -132,6 +132,39 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
 
             {products?.products.map((product, prod_index) => {
                 return <div>
+
+                    <div className="space-y-2 my-8">
+                        <h2 className="text-4xl font-bold uppercase mb-2">
+                            {product?.brand_name}
+                            <br />
+                            <small className="text-slate-400">{product?.tread_name}</small>
+                            <br />
+                            {product?.size_text}
+                        </h2>
+                        <div className="border-b border-gray-200">
+                            <p className="text-gray-400 font-semibold space-x-2">
+                                <span className="text-gray-800">Id:</span>
+                                <span className="text-gray-600">{product?.id}</span>
+                            </p>
+                            <p className="text-gray-400 font-semibold space-x-2">
+                                <span className="text-gray-800">Marka:</span>
+                                <span className="text-gray-600">{product?.brand_name ? product.brand_name : "------"}</span>
+                            </p>
+                            <p className="text-gray-400 font-semibold space-x-2">
+                                <span className="text-gray-800">Bieżnik:</span>
+                                <span className="text-gray-600">{product?.tread_name ? product.tread_name : "------"}</span>
+                            </p>
+
+
+                        </div>
+
+
+
+
+                    </div>
+
+
+
                     <div>
                         <ImageMagnifier
                             src={product && product.image_urls[0]}
@@ -164,35 +197,7 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
                     </div>
 
 
-                    <div className="space-y-2">
-                        <h2 className="text-4xl font-bold uppercase mb-2">
-                            {product?.brand_name}
-                            <br />
-                            <small className="text-slate-400">{product?.tread_name}</small>
-                            <br />
-                            {product?.size_text}
-                        </h2>
-                        <div className="border-b border-gray-200">
-                            <p className="text-gray-400 font-semibold space-x-2">
-                                <span className="text-gray-800">Id:</span>
-                                <span className="text-gray-600">{product?.id}</span>
-                            </p>
-                            <p className="text-gray-400 font-semibold space-x-2">
-                                <span className="text-gray-800">Marka:</span>
-                                <span className="text-gray-600">{product?.brand_name ? product.brand_name : "------"}</span>
-                            </p>
-                            <p className="text-gray-400 font-semibold space-x-2">
-                                <span className="text-gray-800">Bieżnik:</span>
-                                <span className="text-gray-600">{product?.tread_name ? product.tread_name : "------"}</span>
-                            </p>
 
-
-                        </div>
-
-
-
-
-                    </div>
                 </div>
 
             })}

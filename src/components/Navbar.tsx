@@ -9,10 +9,11 @@ import { getAuthToken, getUserName, logout } from '@/lib/session';
 import { usePathname, useRouter } from 'next/navigation';
 import { CookieValueTypes } from 'cookies-next';
 import Image from 'next/image';
+import CartDropdown from './CartDropdown';
 
 const Navbar = () => {
     const pathname = usePathname();
-    const router =useRouter();
+    const router = useRouter();
 
     const [menuIcon, setMenuIcon] = useState<boolean>(false);
 
@@ -50,7 +51,7 @@ const Navbar = () => {
                     <Link href={"/"}><FaTwitter /></Link>
                 </div>
             </div>
-            <nav className="border-gray-200 bg-slate-700">
+            <nav className="border-gray-200 bg-slate-700 h-full">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between md:justify-center md:space-x-4 lg:justify-between mx-auto p-4">
                     <Link onClick={() => menuIcon && handleMenuIcon()} href="/" className='flex items-center space-x-3 rtl:space-x-reverse'>
                         <Image
@@ -94,6 +95,9 @@ const Navbar = () => {
                             </li>
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
                                 <Link href="/contact">Kontakt</Link>
+                            </li>
+                            <li className='py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300'>
+                                <CartDropdown />
                             </li>
 
                             <Link onClick={() => menuIcon && handleMenuIcon()} className='bg-orange-400 text-white rounded-full my-4 text-center md:px-2' href={"tel: 733-456-474"}>733-456-474</Link>
