@@ -47,7 +47,7 @@ const Products = async ({params, searchParams} : {
   };
   const list = await fetchProducts()
 
-  
+
   return (
     <div>
       <SearchBox size={size} brands={brands} issteel={issteel} isdrive={isdrive} istrailer={istrailer} isretreaded={isretreaded} allBrands={allBrands} allSizes={allSizes} ispair={ispair}

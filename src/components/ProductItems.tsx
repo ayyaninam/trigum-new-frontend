@@ -4,8 +4,10 @@ import { ProductItemsProps } from '@/types';
 import Image from 'next/image';
 const ProductItems:React.FC<ProductItemsProps> = ({ list }) => {
 
-    const MemoizedProductList = useMemo(() => list, [list]);
+    // const MemoizedProductList = useMemo(() => list, [list]);
+    const MemoizedProductList = list
     const isLoading = false
+
   return (
     <div className="h-full">
     {isLoading ? (
