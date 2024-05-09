@@ -1,5 +1,14 @@
 
 
+export type UserContextType =  {
+    authToken: string | undefined;
+    setAuthToken: (token:string |undefined) => void;
+}
+export type CartContextType =  {
+    cartProductIds: string | undefined;
+    setCartProductIds: () => void
+}
+
 export type RootLayoutProps  = {
     children: any;
     allSizes: any; // Update the type of allSizes
@@ -190,3 +199,11 @@ export type PairProductImageClickType =  {
 
 // Define an array of Product objects
 export type PairProductImageClickArrayType = PairProductImageClickType[];
+
+
+export type CartProductType = {
+    count:number, 
+    next:string,
+    previous:string,
+    results:ProductList[] | [],
+}

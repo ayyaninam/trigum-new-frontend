@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { CartProvider } from "@/context/CartContext/CartState";
 
 export const metadata: Metadata = {
   title: "Tirgum",
@@ -19,9 +20,9 @@ export default function RootLayout({
 
       <body>
         <Navbar/>
-
+        <CartProvider>
         {children}
-
+        </CartProvider>
         <Footer/>
         </body>
     </html>

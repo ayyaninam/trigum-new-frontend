@@ -46,6 +46,7 @@ const Products = async ({params, searchParams} : {
     const ListData = data?.results;
     return ListData;
   };
+  
   const list = await fetchProducts()
 
 

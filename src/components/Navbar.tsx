@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Link from 'next/link'
 import AuthBtn from './AuthBtn';
 import { FaFacebook, FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa';
@@ -14,6 +14,7 @@ import CartDropdown from './CartDropdown';
 const Navbar = () => {
     const pathname = usePathname();
     const router = useRouter();
+
 
     const [menuIcon, setMenuIcon] = useState<boolean>(false);
 

@@ -1,6 +1,8 @@
 'use client'
 import React, {useState} from 'react';
 import { addOrUpdateProductToCart } from '@/lib/cart';
+import { useCart } from '@/context/CartContext/CartState';
+
 type AddToCartBtnProps =  {
     productId: number;
     productQty: number ;
@@ -11,10 +13,13 @@ const AddToCartBtn: React.FC<AddToCartBtnProps> = ({ productId, productQty }) =>
 
     const [loading, setLoading] = useState(false)
 
+    const {setCartProductIds} = useCart()
+
     const addToCartClicked = async () => {
         setLoading(true)
         addOrUpdateProductToCart(productId, productQty)
         setLoading(false)
+        setCartProductIds()
     }
 
     return (
