@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import CartTable from '@/components/CartTable'
 import { CartProductType } from '@/types'
-import { getAllCartProductIds } from '@/lib/cart'
+import { getAllCartProductIds, getCartProductsAsJSON } from '@/lib/cart'
 
 
 const page = () => {
@@ -12,9 +12,11 @@ const page = () => {
   const [loading, setloading] = useState(true)
 
   const getCartProducts = () => {
-    fetch(`${process.env.API_URL}/api/tyreadderapp/products/?ids=${getAllCartProductIds()}`)
+    const allIds = getAllCartProductIds()
+    fetch(`${process.env.API_URL}/api/tyreadderapp/products/?ids=${allIds?allIds:-1}`)
       .then((res) => res.json())
       .then((data) => {
+
         setCartProducts(data)
         setloading(false)
       })
