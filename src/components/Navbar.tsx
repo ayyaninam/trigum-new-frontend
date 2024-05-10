@@ -4,12 +4,10 @@ import React, { useEffect, useState, useContext } from 'react'
 import Link from 'next/link'
 import AuthBtn from './AuthBtn';
 import { FaFacebook, FaInstagram, FaYoutube, FaTwitter } from 'react-icons/fa';
-import { ALUProps } from '@/types';
-import { getAuthToken, getUserName, logout } from '@/lib/session';
 import { usePathname, useRouter } from 'next/navigation';
-import { CookieValueTypes } from 'cookies-next';
 import Image from 'next/image';
-import CartDropdown from './CartDropdown';
+import CartDrawer from './CartDrawer';
+import { useUser } from '@/context/UserContext/UserState';
 
 const Navbar = () => {
     const pathname = usePathname();
@@ -22,20 +20,16 @@ const Navbar = () => {
         setMenuIcon(!menuIcon);
     };
 
-    const [authToken, setAuthToken] = useState<CookieValueTypes>("")
-    const [userName, setUserName] = useState<CookieValueTypes>("")
+    const {authToken, setAuthToken, userName, setUserName, logout} = useUser()
 
     const logoutUser = () => {
         logout()
-        setAuthToken(getAuthToken())
-        setUserName(getUserName())
         router.push('/')
     }
 
-    useEffect(() => {
-        setAuthToken(getAuthToken())
-        setUserName(getUserName())
-    }, [pathname])
+    // useEffect(() => {
+    //     setUserName(getUserName())
+    // }, [pathname])
 
     return (
         <div>
@@ -64,9 +58,15 @@ const Navbar = () => {
                         />
 
                     </Link>
-                    <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    <div className="flex md:order-2 space-x-3  rtl:space-x-reverse items-center">
                         <div className='hidden md:block'>
                             <AuthBtn authToken={authToken} logoutUser={logoutUser} userName={userName} handleMenuIcon={null} />
+                           
+                        </div>
+
+                        <div className='ml-8'>
+
+                        <CartDrawer handleMenuIcon={() => handleMenuIcon()}/>
                         </div>
 
 
@@ -97,15 +97,16 @@ const Navbar = () => {
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
                                 <Link href="/contact">Kontakt</Link>
                             </li>
-                            <li className='py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300'>
-                                <CartDropdown />
-                            </li>
+
 
                             <Link onClick={() => menuIcon && handleMenuIcon()} className='bg-orange-400 text-white rounded-full my-4 text-center md:px-2' href={"tel: 733-456-474"}>733-456-474</Link>
+
+
 
                             <div className='flex md:hidden mx-auto'>
                                 <AuthBtn authToken={authToken} logoutUser={logoutUser} userName={userName} handleMenuIcon={handleMenuIcon} />
                             </div>
+                            
 
                             <div className="flex md:hidden space-x-4 text-2xl cursor-pointer my-8 justify-center text-white">
                                 <Link href={"/"}><FaFacebook /></Link>

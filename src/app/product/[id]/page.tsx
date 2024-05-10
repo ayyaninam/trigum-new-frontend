@@ -8,10 +8,11 @@ import Link from "next/link";
 import { ProductList } from "@/types";
 import { ImageMagnifierType } from "@/types";
 import Image from "next/image";
+import AddToCartBtn from "@/components/AddToCartBtn";
 
 const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
 
-    const [product, setProduct] = useState<ProductList | null>(null)
+    const [product, setProduct] = useState<ProductList >()
     const [images, setImages] = useState<string[]>([]);
 
 
@@ -292,13 +293,7 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
 
                 {/* button */}
                 <div className="gap-3 border-b border-gray-200 pb-5 mt-6">
-                    <Link
-                        href="#"
-                        className="bg-orange-400 border border-primary text-white px-8 py-2 rounded-md uppercase flex items-center gap-2 hover:bg-transparent hover:text-primary transition hover:border-orange-400 hover:text-orange-400"
-                    >
-                        <FaCartShopping />
-                        Kup
-                    </Link>
+                    <AddToCartBtn productId={product?.id ? product?.id : -1} productQty={product?.id? 1 : -1} fullWidth={true}/>
                 </div>
                 {/* social share */}
                 <div className="flex gap-3 mt-4 items-center">

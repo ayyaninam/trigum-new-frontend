@@ -8,13 +8,19 @@ import Link from "next/link";
 import { PairProductImageClickArrayType, PairProductsListData } from "@/types";
 import { ImageMagnifierType } from "@/types";
 import Image from "next/image";
+import PairAddToCartBtn from "@/components/PairAddToCartBtn";
+import { getPairProductsAllIds } from "@/processor/custom";
 
 const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: string } }> = ({ params, searchParams }) => {
 
 
     const [products, setProducts] = useState<PairProductsListData | null>(null)
+    const [productsIds, setProductsIds] = useState<string>("")
 
     const queryString = new URLSearchParams(searchParams).toString()
+
+
+
 
     const fetchProduct = async () => {
         const response = await fetch(
@@ -25,7 +31,6 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
         }
         const data = await response.json();
         setProducts(data && data)
-        // setImages(data?.image_urls)
     };
 
 
@@ -126,12 +131,19 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
         fetchProduct();
     }, [params?.id])
 
+
+    useEffect(() => {
+        if (products){
+            setProductsIds(getPairProductsAllIds(products));
+        }
+    }, [products])
+
     return (
         <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mt-40 mx-auto px-8 sm:px-0">
 
 
             {products?.products.map((product, prod_index) => {
-                return <div>
+                return <div key={prod_index}>
 
                     <div className="space-y-2 my-8">
                         <h2 className="text-4xl font-bold uppercase mb-2">
@@ -192,8 +204,6 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
                                 ))}
                             </div>
                         }
-
-
                     </div>
 
 
@@ -205,11 +215,7 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
 
 
 
-            <div className="flex justify-end my-16">
-                <Link href={"/"} className="text-white h-fit bg-orange-400 hover:bg-orange-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center animate-bounce max-w-16 float-end">
-                    Kup
-                </Link>
-            </div>
+            <PairAddToCartBtn productIds={productsIds} productQty={1}/>
 
 
 

@@ -1,65 +1,90 @@
-
-import React from "react";
+'use client'
+import React, { useEffect, useState } from "react";
 import SearchBox from "@/components/SearchBox";
 import ProductItems from "@/components/ProductItems";
-import { useSearchParams } from 'next/navigation'
 import { fetchAllBrands, fetchAllSizes } from "@/processor/custom";
-import { AllBrandsType, AllSizesType } from "@/types";
+import { AllBrandsType, AllSizesType, ProductList } from "@/types";
+
+import { useSearchParams } from 'next/navigation'
+
+import { useData } from "@/context/DataContext/DataState";
+
+const Products = () => {
+
+    const search = useSearchParams();
+
+    const { allBrands, allSizes } = useData()
+
+    const [products, setProducts] = useState<ProductList[] | null>(null)
+    const [prodLoading, setprodLoading] = useState(true)
+
+    const [searchParams, setSearchParams] = useState({
+        size: search.get('size') || "",
+        brands: search.get('brands') || "",
+        issteel: search.get('issteel') || "",
+        isdrive: search.get('isdrive') || "",
+        istrailer: search.get('istrailer') || "",
+        isretreaded: search.get('isretreaded') || "",
+        ispair: search.get('ispair') || "",
+    });
 
 
-const Products = async ({params, searchParams} : {
-  params: { slug: string };
-  searchParams?: { [key: string]: string };
-}) => {
+    const queryParams = {
+        size: searchParams.size,
+        brands: searchParams.brands === "0" ? "" : searchParams.brands,
+        is_steel: searchParams.issteel,
+        is_drive: searchParams.isdrive,
+        is_trailer: searchParams.istrailer,
+        is_retreaded: searchParams.isretreaded,
+    };
 
-  const allBrands: AllBrandsType[] = await fetchAllBrands()
-  const allSizes: AllSizesType[] = await fetchAllSizes()
+    const queryString = new URLSearchParams(queryParams).toString();
 
-  const size = searchParams?.size || '';
-  const brands = searchParams?.brands || '';
-  const issteel = searchParams?.issteel || '';
-  const isdrive = searchParams?.isdrive || '';
-  const istrailer = searchParams?.istrailer || '';
-  const isretreaded = searchParams?.isretreaded || '';
-  const ispair = searchParams?.ispair || '';
+    const fetchProducts = async () => {
+        setprodLoading(true)
+        const response = await fetch(
+            `${process.env.API_URL}/api/tyreadderapp/products/?${queryString}`
+        );
+        if (!response.ok) {
+            throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        const ListData = data?.results;
+        setProducts(ListData)
+        setprodLoading(false)
+    };
 
 
-  const queryParams = {
-    size: size,
-    brands: brands==="0"?"":brands,
-    is_steel: issteel,
-    is_drive: isdrive,
-    is_trailer: istrailer,
-    is_retreaded: isretreaded,
-  };
 
-  const queryString = new URLSearchParams(queryParams).toString();
+    useEffect(() => {
+        fetchProducts()
+    }, [])
+    useEffect(() => {
+        fetchProducts()
+    }, [searchParams])
 
-  const fetchProducts = async () => {
-    const response = await fetch(
-      `${process.env.API_URL}/api/tyreadderapp/products/?${queryString}`
+    useEffect(() => {
+        setSearchParams({
+            size: search.get('size') || "",
+            brands: search.get('brands') || "",
+            issteel: search.get('issteel') || "",
+            isdrive: search.get('isdrive') || "",
+            istrailer: search.get('istrailer') || "",
+            isretreaded: search.get('isretreaded') || "",
+            ispair: search.get('ispair') || "",
+        })
+    }, [search])
+
+    return (
+        <div>
+            <SearchBox size={searchParams.size} brands={searchParams.brands} issteel={searchParams.issteel} isdrive={searchParams.isdrive} istrailer={searchParams.istrailer} isretreaded={searchParams.isretreaded} allBrands={allBrands} allSizes={allSizes} ispair={searchParams.ispair}
+            />
+
+            <div className="my-8">
+                <h1 className="text-start sm:text-center text-5xl text-mono font-bold decoration-orange-400 underline sm:mx-0 mx-8">{products ? products.length : 0} Products Found</h1>
+                <ProductItems list={products} prodLoading={prodLoading} />
+            </div>
+        </div>
     );
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    const data = await response.json();
-    const ListData = data?.results;
-    return ListData;
-  };
-  
-  const list = await fetchProducts()
-
-
-  return (
-    <div>
-      <SearchBox size={size} brands={brands} issteel={issteel} isdrive={isdrive} istrailer={istrailer} isretreaded={isretreaded} allBrands={allBrands} allSizes={allSizes} ispair={ispair}
-      />
-
-      <div className="my-8">
-        <h1 className="text-start sm:text-center text-5xl text-mono font-bold decoration-orange-400 underline sm:mx-0 mx-8">{list.length} Products Found</h1>
-        <ProductItems list={list} />
-      </div>
-    </div>
-  );
 }
 export default Products;

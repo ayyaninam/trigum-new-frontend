@@ -1,13 +1,16 @@
 'use client'
 import React, { useEffect, useState, FormEvent, ChangeEvent, useRef } from 'react'
 import Image from 'next/image'
-import { getAuthToken, getUserId, logout } from '@/lib/session'
+
 import { CookieValueTypes } from 'cookies-next'
 import { UserType } from '@/types'
 import { useRouter } from 'next/navigation'
+import { useUser } from '@/context/UserContext/UserState'
 
 const Profile = () => {
     const router = useRouter()
+
+    const {authToken, userId, logout} = useUser();
 
     const [activeSet, setActiveSet] = useState<string>("cart")
     const [userDetails, setUserDetails] = useState<UserType>()
@@ -43,8 +46,8 @@ const Profile = () => {
 
 
 
-    const gettedUserId = getUserId()
-    const gettedAuthToken = getAuthToken()
+    const gettedUserId = userId
+    const gettedAuthToken = authToken
 
     const fetchUserDetails = async (userID: CookieValueTypes, authToken: CookieValueTypes) => {
         let response = await fetch(`${process.env.API_URL}/api/users/${userID}/`, {
@@ -147,8 +150,6 @@ const Profile = () => {
     useEffect(() => {
         fetchUserDetails(gettedUserId, gettedAuthToken)
     }, [])
-
-
 
     return (
         <div className='mx-auto container grid grid-cols-5 gap-8 my-16'>

@@ -1,4 +1,4 @@
-import { CookieValueTypes } from "cookies-next";
+import { PairProductsListData } from "@/types";
 
 const fetchAllSizes = async () => {
     let response = await fetch(`${process.env.API_URL}/api/tyreadderapp/sizes/`, {
@@ -31,6 +31,12 @@ const fetchAllBrands = async () => {
 
 
 
+const getPairProductsAllIds = (productsList:PairProductsListData):string => {
+  const ids = productsList?.products.map((product:any) => product.id)
+  const combinedIds: string = ids.join(",");
+  return combinedIds;
+}
 
 
-export {fetchAllSizes, fetchAllBrands}
+
+export {fetchAllSizes, fetchAllBrands, getPairProductsAllIds}

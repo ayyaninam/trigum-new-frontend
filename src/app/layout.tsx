@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext/CartState";
+import { UserProvider } from "@/context/UserContext/UserState";
+import { DataProvider } from "@/context/DataContext/DataState";
 
 export const metadata: Metadata = {
   title: "Tirgum",
@@ -19,12 +21,21 @@ export default function RootLayout({
     <html lang="en">
 
       <body>
-        <Navbar/>
-        <CartProvider>
-        {children}
-        </CartProvider>
-        <Footer/>
-        </body>
+        <DataProvider>
+        <UserProvider>
+          <CartProvider>
+
+            
+            <Navbar />
+            {children}
+            <Footer />
+
+
+          </CartProvider>
+        </UserProvider>
+        </DataProvider>
+
+      </body>
     </html>
   );
 }

@@ -2,12 +2,29 @@
 
 export type UserContextType =  {
     authToken: string | undefined;
-    setAuthToken: (token:string |undefined) => void;
+    setAuthToken: (token:string | undefined) => void;
+    
+    userName: string | undefined;
+    setUserName: (token:string | undefined) => void;
+    
+    userId: string | undefined;
+    setUserId: (token:string | undefined) => void;
+    
+    logout: () => void;
 }
+
+
+export type DataContextType =  {
+    allBrands:AllBrandsType[];
+    allSizes:AllSizesType[];
+}
+
 export type CartContextType =  {
-    cartProductIds: string | undefined;
-    setCartProductIds: () => void
+    cartProducts: CartProductType | null;
+    cartLoading: boolean;
+    fetchCartProducts: () => void;
 }
+
 
 export type RootLayoutProps  = {
     children: any;
@@ -63,6 +80,7 @@ export type SearchBoxProps = {
 
 export type ProductItemsProps = {
     list: ProductList[] | null,
+    prodLoading: boolean,
 }
 
 export type ImageMagnifierType = {
@@ -168,6 +186,7 @@ export type PairItem =  {
 export type PairItemsArray = {
     list: PairItem[] | null;
     queryString:string;
+    prodLoading:boolean
 };
 
 

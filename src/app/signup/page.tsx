@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { MdVerified } from "react-icons/md";
 import { BsApple, BsGoogle } from "react-icons/bs";
-import { getAuthToken, setAuthToken, setUserId, setUserName } from "@/lib/session";
 import Image from "next/image";
 import Alert from "@/components/Alert";
+import { useUser } from "@/context/UserContext/UserState";
 
 function Signup() {
   const router = useRouter()
@@ -56,7 +56,7 @@ function Signup() {
 
   // Auth Token Getter 
 
-  const authToken = getAuthToken()
+  const {authToken} = useUser()
 
   const signupfunc = async (event: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();

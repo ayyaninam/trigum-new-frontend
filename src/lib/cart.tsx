@@ -140,3 +140,16 @@ export const decreaseProductQuantity = (productId: number, quantityToSubtract: n
     // Update the cart in the cookie
     updateCartInCookie(cart);
 }
+
+
+export const isProductInCart = (productId: number): boolean => {
+    let cartProducts = getCartProductsAsJSON();
+
+    if (!Array.isArray(cartProducts)) {
+        // Assuming getCartProductsAsJSON() returns a JSON string
+        cartProducts = JSON.parse(cartProducts);
+    }
+    
+    // Check if the product with productId exists in the cart
+    return cartProducts.some(item => item.productId === productId);
+}
