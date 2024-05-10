@@ -8,7 +8,6 @@ const Footer:React.FC = () => {
     <div className='container grid gap-8 grid-cols-1 sm:grid-cols-3 px-8 sm:px-0 mx-auto'>
       <div>
         <Link href="/" className='flex items-center space-x-3 rtl:space-x-reverse'>
-
           <Image
           src="/logo.png"
           height={150}
@@ -16,7 +15,6 @@ const Footer:React.FC = () => {
           className='w-80 h-32 object-cover'
           alt="Tirgum Logo"
           />
-
         </Link>
       </div>
       <div className='text-start'>
