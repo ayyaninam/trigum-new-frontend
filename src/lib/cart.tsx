@@ -49,10 +49,10 @@ export function addOrUpdateProductToCart(productId:number, quantity:number): voi
 
 
 export const removeProductFromCart = (productId:number) => {
-    const cart = getCartProductsAsJSON();
+    let cart = getCartProductsAsJSON();
 
     // Find index of product in cart array
-    const index = cart.findIndex(item => item.productId === productId);
+    const index = cart?.findIndex(item => item.productId === productId);
 
     // If product found, remove it from cart
     if (index !== -1) {

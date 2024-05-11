@@ -17,7 +17,7 @@ const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty,
     const router = useRouter();
     const [isInCart, setIsInCart] = useState(false)
 
-    const { fetchCartProducts } = useCart();
+    const { fetchCartProducts, cartProducts } = useCart();
 
     const addToCartClicked = async () => {
         if (isInCart) {
@@ -35,6 +35,7 @@ const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty,
             }
             fetchCartProducts()
             setIsInCart(true)
+            router.push('/cart')
         }
     }
 
@@ -63,13 +64,13 @@ const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty,
 
     useEffect(() => {
         checkpoint()
-    }, [productIds])
+    }, [productIds, cartProducts])
 
 
     return (
         <button
             onClick={() => addToCartClicked()}
-            className={`${fullWidth && "w-full"} flex justify-center text-white ${isInCart ? "bg-green-400 hover:bg-green-500 text-xl" : "bg-orange-400 hover:bg-orange-300 text-sm"} font-medium rounded-lg px-5 py-2.5 text-center animate-bounce`}
+            className={`${fullWidth && "w-full"} flex justify-center text-white ${isInCart ? "bg-green-400 hover:bg-green-500 text-xl" : "bg-orange-400 hover:bg-orange-500 text-sm"} font-medium rounded-lg px-5 py-2.5 text-center`}
         >
             {isInCart ? <CiShoppingBasket /> : "KUP"}
         </button>

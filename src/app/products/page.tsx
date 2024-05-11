@@ -8,6 +8,7 @@ import { AllBrandsType, AllSizesType, ProductList } from "@/types";
 import { useSearchParams } from 'next/navigation'
 
 import { useData } from "@/context/DataContext/DataState";
+import { useCart } from "@/context/CartContext/CartState";
 
 const Products = () => {
 
@@ -17,6 +18,9 @@ const Products = () => {
 
     const [products, setProducts] = useState<ProductList[] | null>(null)
     const [prodLoading, setprodLoading] = useState(true)
+
+
+    const {cartProducts} = useCart()
 
     const [searchParams, setSearchParams] = useState({
         size: search.get('size') || "",
@@ -61,7 +65,7 @@ const Products = () => {
     }, [])
     useEffect(() => {
         fetchProducts()
-    }, [searchParams])
+    }, [searchParams, cartProducts])
 
     useEffect(() => {
         setSearchParams({

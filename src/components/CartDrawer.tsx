@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 import { useCart } from '@/context/CartContext/CartState';
+import { addOrUpdateProductToCart, decreaseProductQuantity, removeProductFromCart } from '@/lib/cart';
 
 const CartDrawer = ({handleMenuIcon}:{handleMenuIcon:() => void}) => {
     const pathname = usePathname();
@@ -15,6 +16,13 @@ const CartDrawer = ({handleMenuIcon}:{handleMenuIcon:() => void}) => {
     const handleCartMobile = () =>{
         setIsOpen(!isOpen);
         handleMenuIcon()
+    }
+
+    const {fetchCartProducts} = useCart();
+
+    const removeProductsFromCartCalled = (prodID:number) => {
+        decreaseProductQuantity(prodID, 1)
+        fetchCartProducts();
     }
 
     useEffect(() => {
@@ -35,7 +43,7 @@ const CartDrawer = ({handleMenuIcon}:{handleMenuIcon:() => void}) => {
             {isOpen && (
                 <div
                     id="drawer-right-example"
-                    className="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform bg-slate-700 min-w-96 w-fit text-white"
+                    className="fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform bg-slate-700 min-w-full sm:min-w-[40rem] w-full sm:w-[40rem] text-white"
                     tabIndex={-1}
                     aria-labelledby="drawer-right-label"
                 >
@@ -76,8 +84,8 @@ const CartDrawer = ({handleMenuIcon}:{handleMenuIcon:() => void}) => {
                             {!cartLoading ? (
                                 <div>
                                     {cartProducts?.results && cartProducts?.results.length > 0 ? (
-                                        <div className="relative overflow-x-auto">
-                                            <table className="w-full text-sm text-left rtl:text-right text-gray-500 -400">
+                                        <div className="relative overflow-x-auto w-full">
+                                            <table className="text-sm text-left rtl:text-right text-gray-500 -400">
                                                 <thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
                                                     <tr>
                                                         <th scope="col" className="px-6 py-3">
@@ -88,6 +96,9 @@ const CartDrawer = ({handleMenuIcon}:{handleMenuIcon:() => void}) => {
                                                         </th>
                                                         <th scope="col" className="px-6 py-3">
                                                             Price
+                                                        </th>
+                                                        <th scope="col" className="px-6 py-3">
+                                                            Action
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -117,6 +128,9 @@ const CartDrawer = ({handleMenuIcon}:{handleMenuIcon:() => void}) => {
                                                                 <Link onClick={()=>handleCartMobile()} className='' href={`/product/${product?.id}`}>
                                                                     {product?.net_price ? `${product?.net_price} zł` : "NOT AVAILABLE"}
                                                                 </Link>
+                                                            </td>
+                                                            <td className="px-6 py-4 text-white">
+                                                                <div onClick={(e) => removeProductsFromCartCalled(product?.id)} className='bg-orange-400 rounded-lg px-4 py-2 '>Remove</div>
                                                             </td>
                                                         </tr>
 

@@ -7,6 +7,7 @@ import { fetchAllBrands, fetchAllSizes } from "@/processor/custom";
 import { AllBrandsType, AllSizesType, PairItem, PairItemsArray } from "@/types";
 import PairProductItems from "@/components/PairProductItems";
 import { useData } from "@/context/DataContext/DataState";
+import { useCart } from "@/context/CartContext/CartState";
 
 const PairProducts = () => {
 
@@ -15,6 +16,9 @@ const PairProducts = () => {
   const { allBrands, allSizes } = useData();
   const [products, setProducts] = useState<PairItem[] | null>(null)
   const [prodLoading, setprodLoading] = useState<boolean>(true)
+
+
+  const {cartProducts} = useCart()
 
   const [searchParams, setSearchParams] = useState({
     size: search.get('size') || "",
@@ -60,7 +64,7 @@ const PairProducts = () => {
 
   useEffect(() => {
     fetchProducts()
-  }, [searchParams])
+  }, [searchParams, cartProducts])
 
     useEffect(() => {
         setSearchParams({

@@ -146,7 +146,7 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
                             loader={() => image} 
                             unoptimized={true}
                             src={image}
-                            onClick={() => handleImageClick(index)}
+                            onClick={() => handleImageClick(index+1)}
                             className="w-full aspect-square object-cover cursor-pointer border border-primary"
                             alt={`${product?.brand_name} ${product?.tread_name} ${product?.size_text}`}
                             />

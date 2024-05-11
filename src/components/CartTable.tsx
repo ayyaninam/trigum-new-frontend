@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { useCart } from '@/context/CartContext/CartState'
 import Link from 'next/link';
 
-const CartTable = ({ img, name, price, id, updateCartTotal }: { img: string, name: string, price: number, id: number, updateCartTotal: () => void }) => {
+const CartTable = ({ img, name, price, id, updateCartTotal, onlyWithPrice = false }: { img: string, name: string, price: number, id: number, updateCartTotal: () => void, onlyWithPrice?: boolean }) => {
 
 
     const { fetchCartProducts } = useCart()
@@ -31,6 +31,12 @@ const CartTable = ({ img, name, price, id, updateCartTotal }: { img: string, nam
         setquantity(getCartProductQuantity(id))
     }
 
+
+    const removeProductsFromCartCalled = (prodID:number) => {
+        decreaseProductQuantity(prodID, 1)
+        fetchCartProducts();
+    }
+
     useEffect(() => {
         setquantity(getCartProductQuantity(id))
     }, [])
@@ -49,35 +55,53 @@ const CartTable = ({ img, name, price, id, updateCartTotal }: { img: string, nam
         return (
 
             <tr key={id} className="bg-white border-b">
-                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    <Link href={`product/${id}`}>
-                    <Image
-                        src={img}
-                        width={50}
-                        height={50}
-                        alt="user profile picture"
-                        className='rounded-lg '
-                        loader={() => img}
-                    />
-                    </Link>
-                </th>
-                <th className="px-6 py-4">
-                <Link href={`product/${id}`}>
-                    {name}
-                </Link>
-                </th>
-                <th className="px-6 py-4">
+                {!onlyWithPrice && (
+                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        <Link href={`product/${id}`}>
+                            <Image
+                                src={img}
+                                width={50}
+                                height={50}
+                                alt="user profile picture"
+                                className='rounded-lg '
+                                loader={() => img}
+                            />
+                        </Link>
+                    </th>
+                )}
 
+
+                    <th className="px-6 py-4">
+                        <Link href={`product/${id}`}>
+                            {name}
+                        </Link>
+                    </th>
+
+
+
+                {/* <th className="px-6 py-4">
                     <button className='rounded-l-lg px-4 py-2 bg-gray-200 hover:bg-gray-300' onClick={() => minusClicked(id)}>-</button>
                     <button className='px-4 py-2'>{quantity}</button>
                     <button className='rounded-r-lg px-4 py-2 bg-gray-200 hover:bg-gray-300' onClick={() => plusClicked(id)}>+</button>
-                </th>
-                <th className="px-6 py-4">
-                    {price ? `${price} zł` : "NOT AVAILABLE"}
-                </th>
-                <th className="px-6 py-4 text-orange-400">
+                </th> */}
+
+                {onlyWithPrice && (
+
+                    <th className="px-6 py-4">
+                        {price ? `${price} zł` : "NOT AVAILABLE"}
+                    </th>
+                )}
+                {!onlyWithPrice && (
+
+                    <th className="px-6 py-4">
+                        <div onClick={(e) => removeProductsFromCartCalled(id&&id)} className='bg-orange-400 rounded-lg px-4 py-2 text-center text-white cursor-pointer'>Remove</div>
+                    </th>
+                )}
+
+
+                {/* <th className="px-6 py-4 text-orange-400">
                     {total ? `${total} zł` : "NOT AVAILABLE"}
-                </th>
+                </th> */}
             </tr>
 
         );
