@@ -29,9 +29,8 @@ const PairProducts = () => {
     istrailer: search.get('istrailer') || "",
     isretreaded: search.get('isretreaded') || "",
     ispair: search.get('ispair') || "",
+    advance: search.get('advance') === "true",
   });
-
-
 
   const queryParams = {
     size: searchParams.size,
@@ -76,13 +75,14 @@ const PairProducts = () => {
       istrailer: search.get('istrailer') || "",
       isretreaded: search.get('isretreaded') || "",
       ispair: search.get('ispair') || "",
+      advance: search.get('advance') === "true",
     })
   }, [search])
 
 
   return (
     <div>
-      <SearchBox size={searchParams.size} brands={searchParams.brands} issteel={searchParams.issteel} isdrive={searchParams.isdrive} istrailer={searchParams.istrailer} isretreaded={searchParams.isretreaded} allBrands={allBrands} allSizes={allSizes} ispair={searchParams.ispair}
+      <SearchBox size={searchParams.size} brands={searchParams.brands} issteel={searchParams.issteel} isdrive={searchParams.isdrive} istrailer={searchParams.istrailer} isretreaded={searchParams.isretreaded} allBrands={allBrands} allSizes={allSizes} ispair={searchParams.ispair} advance={searchParams.advance}
       />
 
       <div className="my-8">

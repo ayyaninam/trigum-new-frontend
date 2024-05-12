@@ -75,6 +75,7 @@ export type SearchBoxProps = {
     allBrands: AllBrandsType[];
     allSizes: AllSizesType[];
     ispair: boolean | string | null;
+    advance: boolean
 }
 
 

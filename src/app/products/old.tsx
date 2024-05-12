@@ -24,6 +24,7 @@ const Products = async ({params, searchParams} : {
   const ispair = searchParams?.ispair || '';
 
 
+
   const queryParams = {
     size: size,
     brands: brands==="0"?"":brands,
@@ -52,7 +53,7 @@ const Products = async ({params, searchParams} : {
 
   return (
     <div>
-      <SearchBox size={size} brands={brands} issteel={issteel} isdrive={isdrive} istrailer={istrailer} isretreaded={isretreaded} allBrands={allBrands} allSizes={allSizes} ispair={ispair}
+      <SearchBox size={size} brands={brands} issteel={issteel} isdrive={isdrive} istrailer={istrailer} isretreaded={isretreaded} allBrands={allBrands} allSizes={allSizes} ispair={ispair} advance={false}
       />
 
       <div className="my-8">
