@@ -8,6 +8,7 @@ import { AllBrandsType, AllSizesType, PairItem, PairItemsArray } from "@/types";
 import PairProductItems from "@/components/PairProductItems";
 import { useData } from "@/context/DataContext/DataState";
 import { useCart } from "@/context/CartContext/CartState";
+import BreadCrumb from "@/components/BreadCrumb";
 
 const PairProducts = () => {
 
@@ -18,7 +19,7 @@ const PairProducts = () => {
   const [prodLoading, setprodLoading] = useState<boolean>(true)
 
 
-  const {cartProducts} = useCart()
+  const { cartProducts } = useCart()
 
   const [searchParams, setSearchParams] = useState({
     size: search.get('size') || "",
@@ -39,7 +40,7 @@ const PairProducts = () => {
     is_drive: searchParams.isdrive,
     is_trailer: searchParams.istrailer,
     is_retreaded: searchParams.isretreaded,
-};
+  };
 
   const queryString = new URLSearchParams(queryParams).toString();
 
@@ -66,26 +67,32 @@ const PairProducts = () => {
     fetchProducts()
   }, [searchParams, cartProducts])
 
-    useEffect(() => {
-        setSearchParams({
-            size: search.get('size') || "",
-            brands: search.get('brands') || "",
-            issteel: search.get('issteel') || "",
-            isdrive: search.get('isdrive') || "",
-            istrailer: search.get('istrailer') || "",
-            isretreaded: search.get('isretreaded') || "",
-            ispair: search.get('ispair') || "",
-        })
-    }, [search])
+  useEffect(() => {
+    setSearchParams({
+      size: search.get('size') || "",
+      brands: search.get('brands') || "",
+      issteel: search.get('issteel') || "",
+      isdrive: search.get('isdrive') || "",
+      istrailer: search.get('istrailer') || "",
+      isretreaded: search.get('isretreaded') || "",
+      ispair: search.get('ispair') || "",
+    })
+  }, [search])
 
-  
+
   return (
     <div>
       <SearchBox size={searchParams.size} brands={searchParams.brands} issteel={searchParams.issteel} isdrive={searchParams.isdrive} istrailer={searchParams.istrailer} isretreaded={searchParams.isretreaded} allBrands={allBrands} allSizes={allSizes} ispair={searchParams.ispair}
       />
 
       <div className="my-8">
-        <h1 className="text-start sm:text-center text-5xl text-mono font-bold decoration-orange-400 underline sm:mx-0 mx-8">{products?products?.length:0} Pairs Found</h1>
+        <h1 className="text-start sm:text-center text-5xl text-mono font-bold decoration-orange-400 underline sm:mx-0 mx-8">{products ? products?.length : 0} Pairs Found</h1>
+        <BreadCrumb
+          links={[
+            { name: "Home", link: "/" },
+            { name: "Pair Products", link: "/" },
+          ]}
+        />
         <PairProductItems list={products} queryString={queryString} prodLoading={prodLoading} />
       </div>
     </div>

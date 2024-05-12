@@ -11,7 +11,6 @@ import CartTable from '@/components/CartTable'
 import ProductModal from '@/components/profile/ProductModal'
 import AddressModal from '@/components/profile/AddressModal'
 import FloatingInput from '@/components/FloatingInput'
-
 const Profile = () => {
     const router = useRouter()
 
@@ -30,7 +29,7 @@ const Profile = () => {
     const [companyName, setCompanyName] = useState<string>("")
     const [surName, setSurName] = useState<string>("")
     const [name, setName] = useState<string>("")
-    const [nip, setNip] = useState<number | undefined>()
+    const [nip, setNip] = useState<number>()
 
 
     const [city, setCity] = useState<string>("")
@@ -154,10 +153,6 @@ const Profile = () => {
 
 
 
-    const nipValueSetter = (valueToSet:string) =>{
-        valueToSet ? setNip(((/^\d{0,10}$/.test(valueToSet)) ? parseInt(valueToSet) : nip)): setNip(undefined)
-    }
-
     useEffect(() => {
         fetchUserDetails(gettedUserId, gettedAuthToken)
     }, [])
@@ -167,7 +162,7 @@ const Profile = () => {
             <form className='space-y-16 col-span-2' onSubmit={(e) => (updateUserDetails(gettedUserId, gettedAuthToken, e))}>
 
                 <div className='py-8 flex flex-col justify-center items-center
-         bg-slate-700 rounded-t-xl'>
+         bg-slate-700 rounded-t-3xl'>
                     <Image
                         src={imageSrc}
                         width={200}
@@ -190,7 +185,7 @@ const Profile = () => {
                     <span className='text-white font-extrabold my-2 text-3xl'>{userDetails?.name || userDetails?.surname && userDetails?.surname.toUpperCase()}</span>
 
                 </div>
-                <div className=' py-16 flex flex-col items-start bg-slate-700 rounded-b-xl'>
+                <div className=' py-16 flex flex-col items-start bg-slate-700 rounded-b-3xl'>
                     <div className='w-4/5 mx-auto space-y-8'>
 
                         {error && (
@@ -209,54 +204,101 @@ const Profile = () => {
                             </div>
                         )}
 
-                        <FloatingInput value={email} valueSetter={setEmail} inputPlaceHolder='Email' inputType='email' />
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Email:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        </div>
 
 
                         <small className='text-gray-400'>Note: Changing Email will change your login credentials, You will be Logout Immediately after changing Email.</small>
 
-                        <FloatingInput value={phone} valueSetter={setPhone} inputPlaceHolder='Phone Number' inputType='text' />
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Phone:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                        </div>
+
+
+                        <hr className='border-gray-600' />
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Company Name:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                        </div>
+
+
+
+
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Name:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={name} onChange={(e) => setName(e.target.value)} />
+                        </div>
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Surname:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={surName} onChange={(e) => setSurName(e.target.value)} />
+                        </div>
 
 
 
                         <hr className='border-gray-600' />
 
 
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>NIP:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={nip}
+                                onChange={(e) => setNip(((/^\d{0,10}$/.test(e.target.value)) ? parseInt(e.target.value) : nip))}
+                            />
+                        </div>
 
-                        <FloatingInput value={companyName} valueSetter={setCompanyName} inputPlaceHolder='Company Name' inputType='text' />
-                        <FloatingInput value={name} valueSetter={setName} inputPlaceHolder='Name' inputType='text' />
-                        <FloatingInput value={surName} valueSetter={setSurName} inputPlaceHolder='Surname' inputType='text' />
 
 
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>City:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={city} onChange={(e) => setCity(e.target.value)} />
+                        </div>
+
+
+
+
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>ZIP Code:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={postCode} onChange={(e) => setPostCode(e.target.value)} />
+                        </div>
 
                         <hr className='border-gray-600' />
 
 
-                        <FloatingInput value={nip} valueSetter={nipValueSetter} inputPlaceHolder='NIP' inputType='number' />
 
 
-
-                        <FloatingInput value={city} valueSetter={setCity} inputPlaceHolder='City' inputType='text' />
-
-
-                        <FloatingInput value={postCode} valueSetter={setPostCode} inputPlaceHolder='ZIP Code' inputType='text' />
-
-
-                        <hr className='border-gray-600' />
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Street:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={street} onChange={(e) => setStreet(e.target.value)} />
+                        </div>
 
 
 
 
-                        <FloatingInput value={street} valueSetter={setStreet} inputPlaceHolder='Street' inputType='text' />
-
-                        <FloatingInput value={buidlingNumber} valueSetter={setBuidlingNumber} inputPlaceHolder='Building Number' inputType='text' />
-
-                        <FloatingInput value={apartmentNumber} valueSetter={setApartmentNumber} inputPlaceHolder='Apartment Number' inputType='text' />
-
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Building Number:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={buidlingNumber} onChange={(e) => setBuidlingNumber(e.target.value)} />
+                        </div>
 
 
 
 
-                        <button type='submit' className='bg-orange-400 rounded-lg px-4 py-2 font-bold text-white w-full'>
+                        <div className='grid grid-cols-4 gap-4 items-center'>
+                            <label className='text-white text-xl'>Apartment Number:</label>
+                            <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={apartmentNumber} onChange={(e) => setApartmentNumber(e.target.value)} />
+                        </div>
+
+
+                        <button type='submit' className='bg-orange-400 rounded-full px-4 py-2 font-bold text-white w-full'>
                             {loading ? (
                                 <div role="status">
                                     <svg aria-hidden="true" className="inline w-6 h-6 text-slate-700 animate-spin  fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -275,9 +317,9 @@ const Profile = () => {
             </form>
 
             <div className='col-span-3 space-y-4'>
-                <div className='bg-slate-700 rounded-xl py-2 flex justify-around items-center'>
-                    <button onClick={() => setActiveSet("orders")} className={`cursor-pointer ${activeSet === "orders" ? "bg-white" : "text-white"} px-4 py-1 rounded-lg`}>Order / Invoices</button>
-                    <button onClick={() => setActiveSet("cart")} className={`cursor-pointer ${activeSet === "cart" ? "bg-white" : "text-white"} px-4 py-1 rounded-lg`}>Cart</button>
+                <div className='bg-slate-700 rounded-full py-2 flex justify-around items-center'>
+                    <button onClick={() => setActiveSet("orders")} className={`cursor-pointer ${activeSet === "orders" ? "bg-white" : "text-white"} px-4 py-1 rounded-full`}>Order / Invoices</button>
+                    <button onClick={() => setActiveSet("cart")} className={`cursor-pointer ${activeSet === "cart" ? "bg-white" : "text-white"} px-4 py-1 rounded-full`}>Cart</button>
                     {/* <button onClick={() => setActiveSet("wishlist")} className={`cursor-pointer ${activeSet === "wishlist" ? "bg-white" : "text-white"} px-4 py-1 rounded-full`}>Wishlist</button> */}
                 </div>
                 <div className='border-2 border-black py-8 rounded-2xl'>

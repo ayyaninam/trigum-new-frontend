@@ -58,11 +58,11 @@ const SuccessStory:React.FC = () => {
 
             <div className="buttons_l_r text-center my-4 space-x-4">
 
-            <button className='hover:bg-orange-300 p-4 bg-orange-400 rounded-full text-center text-white font-serif font-bold text-2xl h-fit w-fit' onClick={()=>{setActiveStory(activeStory-1<1?4:activeStory-1)}}>
+            <button className='hover:bg-orange-300 p-4 bg-orange-400 rounded-lg text-center text-white font-serif font-bold text-2xl h-fit w-fit' onClick={()=>{setActiveStory(activeStory-1<1?4:activeStory-1)}}>
                 <BiLeftArrow/>
             </button>
 
-            <button onClick={()=>{setActiveStory(activeStory+1>4?1:activeStory+1)}} className='hover:bg-orange-300 p-4 bg-orange-400 rounded-full text-center text-white font-serif font-bold text-2xl h-fit w-fit'>
+            <button onClick={()=>{setActiveStory(activeStory+1>4?1:activeStory+1)}} className='hover:bg-orange-300 p-4 bg-orange-400 rounded-lg text-center text-white font-serif font-bold text-2xl h-fit w-fit'>
                 <BiRightArrow />
             </button>
             </div>

@@ -9,8 +9,12 @@ import { ProductList } from "@/types";
 import { ImageMagnifierType } from "@/types";
 import Image from "next/image";
 import AddToCartBtn from "@/components/AddToCartBtn";
+import BreadCrumb from "@/components/BreadCrumb";
 
-const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
+const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: string } }> = ({ params, searchParams }) => {
+
+    const queryString = new URLSearchParams(searchParams).toString()
+
 
     const [product, setProduct] = useState<ProductList >()
     const [images, setImages] = useState<string[]>([]);
@@ -124,7 +128,19 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
     }, [params?.id])
 
     return (
+        <>
+        <BreadCrumb
+          links={[
+            { name: "Home", link: "/" },
+            { name: "Products", link: queryString ? `/products?${queryString}` : "/products" },
+            { name: product ? `${product?.brand_name} ${product?.tread_name} ${product?.size_text}` : "Product", link: "/" },
+          ]}
+        />
+
+
         <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mt-40 mx-auto px-8 sm:px-0">
+
+            
 
             <div>
                 <ImageMagnifier
@@ -377,6 +393,8 @@ const Card: React.FC<{ params: { id: string } }> = ({ params }) => {
             </div>
 
         </div>
+        </>
+
     );
 }
 

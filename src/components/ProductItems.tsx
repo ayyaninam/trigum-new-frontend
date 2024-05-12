@@ -4,7 +4,7 @@ import { ProductItemsProps } from '@/types';
 import Image from 'next/image';
 
 import AddToCartBtn from './AddToCartBtn';
-const ProductItems: React.FC<ProductItemsProps> = ({ list, prodLoading }) => {
+const ProductItems: React.FC<ProductItemsProps> = ({ list, prodLoading, queryString }) => {
 
     // const MemoizedProductList = useMemo(() => list, [list]);
 
@@ -30,7 +30,7 @@ const ProductItems: React.FC<ProductItemsProps> = ({ list, prodLoading }) => {
                 <div className=" grid sm:grid-cols-2 lg:grid-cols-3 mt-20 p-4">
                     {MemoizedProductList && MemoizedProductList?.length > 0 ? MemoizedProductList.map((product) => (
                         <div key={product?.id} className="w-[99%] max-w-full bg-white border border-gray-200 rounded-lg shadow mb-2">
-                            <Link href={`/product/${product?.id}`}>
+                            <Link href={`/product/${product?.id}?${queryString}`}>
                                 <Image
                                     src={product?.image_urls[0]}
                                     alt={product?.brand_name}

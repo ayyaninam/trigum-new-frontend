@@ -1,15 +1,11 @@
 'use client'
 import React, { useState, useEffect } from "react";
-import { FaCircleCheck } from "react-icons/fa6";
-import { FaCartShopping } from "react-icons/fa6";
-import { FaFacebook } from "react-icons/fa";
-import Link from "next/link";
-// import { useRouter } from 'next/router'
-import { PairProductImageClickArrayType, PairProductsListData } from "@/types";
+import { PairProductsListData } from "@/types";
 import { ImageMagnifierType } from "@/types";
 import Image from "next/image";
 import PairAddToCartBtn from "@/components/PairAddToCartBtn";
 import { getPairProductsAllIds } from "@/processor/custom";
+import BreadCrumb from "@/components/BreadCrumb";
 
 const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: string } }> = ({ params, searchParams }) => {
 
@@ -139,6 +135,16 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
     }, [products])
 
     return (
+        <>
+        
+        <BreadCrumb
+          links={[
+            { name: "Home", link: "/" },
+            { name: "Products", link: queryString ? `/products/pair?${queryString}` : "/products" },
+            { name: "Pair Products", link: "/" },
+          ]}
+        />
+        
         <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mt-40 mx-auto px-8 sm:px-0">
 
 
@@ -287,6 +293,9 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
             </div> */}
 
         </div>
+
+        </>
+
     );
 }
 

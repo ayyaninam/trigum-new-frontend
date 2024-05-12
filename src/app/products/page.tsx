@@ -9,6 +9,7 @@ import { useSearchParams } from 'next/navigation'
 
 import { useData } from "@/context/DataContext/DataState";
 import { useCart } from "@/context/CartContext/CartState";
+import BreadCrumb from "@/components/BreadCrumb";
 
 const Products = () => {
 
@@ -86,7 +87,13 @@ const Products = () => {
 
             <div className="my-8">
                 <h1 className="text-start sm:text-center text-5xl text-mono font-bold decoration-orange-400 underline sm:mx-0 mx-8">{products ? products.length : 0} Products Found</h1>
-                <ProductItems list={products} prodLoading={prodLoading} />
+                <BreadCrumb
+                links={[
+                    {name:"Home", link:"/"},
+                    {name:"Products", link:"/"},
+                ]}
+                />
+                <ProductItems list={products} prodLoading={prodLoading} queryString={queryString} />
             </div>
         </div>
     );

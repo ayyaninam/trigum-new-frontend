@@ -81,6 +81,7 @@ export type SearchBoxProps = {
 export type ProductItemsProps = {
     list: ProductList[] | null,
     prodLoading: boolean,
+    queryString?: string,
 }
 
 export type ImageMagnifierType = {

@@ -81,7 +81,7 @@ const Navbar = () => {
 
                     <div className={`${(!menuIcon && "hidden")}  w-full md:block md:w-auto`} id="navbar-default">
                         <ul className="font-medium h-screen md:h-auto flex md:items-center flex-col p-4 md:p-0 mt-4 rounded-lg bg-none md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 ">
-                            <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
+                            {/* <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
                                 <Link href="/contact">Oferta</Link>
                             </li>
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
@@ -93,14 +93,15 @@ const Navbar = () => {
                             </li>
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
                                 <Link href="/faq">Pytania</Link>
+                            </li> */}
+                            <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
+                                <Link href="/products">Products</Link>
                             </li>
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
-                                <Link href="/contact">Kontakt</Link>
+                                <Link href="/products/pair">Pairs</Link>
                             </li>
 
-
-                            <Link onClick={() => menuIcon && handleMenuIcon()} className='bg-orange-400 text-white rounded-full my-4 text-center md:px-2' href={"tel: 733-456-474"}>733-456-474</Link>
-
+                            <Link onClick={() => menuIcon && handleMenuIcon()} className='bg-orange-400 text-white rounded-lg my-4 text-center md:px-2' href={"tel: 733-456-474"}>733-456-474</Link>
 
 
                             <div className='flex md:hidden mx-auto'>
