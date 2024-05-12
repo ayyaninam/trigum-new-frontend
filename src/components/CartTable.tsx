@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { useCart } from '@/context/CartContext/CartState'
 import Link from 'next/link';
 
-const CartTable = ({ img, name, price, id, updateCartTotal, onlyWithPrice = false }: { img: string, name: string, price: number, id: number, updateCartTotal: () => void, onlyWithPrice?: boolean }) => {
+const CartTable = ({ img, name, price, id, updateCartTotal, onlyWithPrice = false }: { img: string, name: string, price: number, id: number, updateCartTotal?: () => void, onlyWithPrice?: boolean }) => {
 
 
     const { fetchCartProducts } = useCart()
@@ -47,7 +47,7 @@ const CartTable = ({ img, name, price, id, updateCartTotal, onlyWithPrice = fals
             fetchCartProducts()
         }
         setTotal(totalprice)
-        updateCartTotal();
+        updateCartTotal && updateCartTotal();
     }, [quantity])
 
 

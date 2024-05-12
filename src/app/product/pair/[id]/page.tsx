@@ -215,7 +215,7 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
 
 
 
-            <PairAddToCartBtn productIds={productsIds} productQty={1}/>
+            <PairAddToCartBtn productIds={productsIds} productQty={1} fullWidth={true} />
 
 
 

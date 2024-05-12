@@ -16,16 +16,23 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
   //  ----------
   const [activeBrands, setActiveBrands] = useState<number[]>([]);
   const [allBrandsShow, setAllBrandsShow] = useState<boolean>(false);
+  const [advanceFiltersShow, setAdvanceFiltersShow] = useState<boolean>(false);
+
+  // ---------
+  const [activeAdvanceFiltersCount, setActiveAdvanceFiltersCount] = useState<number>(0);
 
   // BTN FILTERS
   const [isSteel, setIsSteel] = useState<boolean>(false);
   const [isDrive, setIsDrive] = useState<boolean>(false);
   const [isTrailer, setIsTrailer] = useState<boolean>(false);
   const [isRetreaded, setIsRetreaded] = useState<boolean>(false);
+
+  // -------------
   const [isPair, setIsPair] = useState<boolean>(false);
 
 
   const brandsRef = useRef(null);
+  const advanceRef = useRef(null);
 
 
   const router = useRouter()
@@ -80,6 +87,10 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
       if (brandsRef.current && !(brandsRef.current as HTMLElement).contains(event.target as Node)) {
         setAllBrandsShow(false);
       }
+      if (advanceRef.current && !(advanceRef.current as HTMLElement).contains(event.target as Node)) {
+        setAdvanceFiltersShow(false);
+      }
+
     };
 
     document.addEventListener('click', handleClickOutside);
@@ -89,6 +100,23 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
     };
   }, []);
 
+
+  const advanceActiveFiltersCounter = (): number => {
+    let count = 0;
+  
+    if (isSteel) count++;
+    if (isDrive) count++;
+    if (isTrailer) count++;
+    if (isRetreaded) count++;
+  
+    return count;
+  };
+
+
+  useEffect(() => {
+    setActiveAdvanceFiltersCount(advanceActiveFiltersCounter())
+  }, [isSteel, isDrive, isTrailer, isRetreaded])
+  
 
 
   useEffect(() => {
@@ -127,20 +155,20 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
       <div className="relative w-full top-0">
 
         <div className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 bg-gray-200 flex flex-col space-y-2 p-4 rounded-md mx-auto my-10">
-<div className="flex justify-end">
+  <div className="flex justify-start my-2">
 
           <label className="inline-flex items-center cursor-pointer">
             <input
               onClick={() => setIsPair(!isPair)}
               type="checkbox"
-              className="sr-only peer "
+              className="sr-only peer size-4"
               checked={isPair}
               onChange = {e => {}}
             />
-            <div className={`p-2 items-center relative w-11 h-6 rounded-full peer ${isPair ? 'peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full bg-blue-700' : 'bg-slate-700'} peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all outline-none ring-0`} />
-            <span className="ms-3 text-sm font-medium text-gray-900">Search Pairs</span>
+            <div className={`p-2 items-center relative w-[3.4rem] h-7 rounded-full peer ${isPair ? 'peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full bg-blue-700' : 'bg-slate-700'} peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all outline-none ring-0`} />
+            <span className="ms-3 text-lg font-medium text-gray-900">{isPair? "Search Pairs": "Search Single"}</span>
           </label>
-</div>
+  </div>
 
 
 
@@ -165,10 +193,14 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
               </div>
             </div>
+
           </div>
 
           {/* brand Name */}
           <div ref={brandsRef} id="brand_name" className="w-[100%] relative">
+
+
+
             <label className="mb-2 text-sm font-medium text-black dark:text-black bg-slate-50 px-4 py-2 rounded-xl cursor-pointer flex justify-between hover:bg-slate-100 items-center" onClick={() => setAllBrandsShow(!allBrandsShow)}>
 
               <span className="text-xl text-gray-500 font-normal">{activeBrands.length > 0 ? `${activeBrands.includes(0) ? "All Brands Selected" : `${activeBrands.length} Brand Selected`}` : "Select a Brand"}</span>
@@ -185,6 +217,9 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
 
             </label>
+
+
+            
             {allBrandsShow && (
               <div className={`rounded-xl bg-slate-50 p-4 cursor-pointer space-y-2 max-h-40 overflow-auto absolute w-full z-20`}>
                 <div onClick={() => handleSingleBrandClick(0)} className={`hover:bg-slate-200 flex justify-between py-2 px-2 rounded-lg`}>
@@ -221,10 +256,31 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
           </div>
 
           {/* Axis */}
-          <div className="w-[100%] flex flex-col space-y-2 mt-8">
-            <label htmlFor="osie" className="block text-sm font-medium text-black dark:text-black">Osie</label>
-            <div id="osie">
-              <ul className="max-w-full w-full grid grid-cols-2 sm:grid-cols-4 items-stretch">
+          <div ref={advanceRef} className="w-[100%]  relative">
+            {/* <label htmlFor="osie" className="block text-sm font-medium text-black dark:text-black">Osie</label> */}
+
+
+            <label className="mb-2 text-sm font-medium text-black dark:text-black bg-slate-50 px-4 py-2 rounded-xl cursor-pointer flex justify-between hover:bg-slate-100 items-center" onClick={() => setAdvanceFiltersShow(!advanceFiltersShow)}>
+
+              <span className="text-xl text-gray-500 font-normal">{activeAdvanceFiltersCount? `Active Filters (${activeAdvanceFiltersCount})` : "Advance Filters"}</span>
+
+              {!advanceFiltersShow ? (
+                <span>
+                  <BiDownArrowAlt />
+                </span>
+              ) : (
+                <span>
+                  <BiUpArrowAlt />
+                </span>
+              )}
+
+
+            </label>
+
+        {advanceFiltersShow && (
+
+            <div id="osie" className="absolute z-10">
+              <ul className="max-w-full w-full grid grid-cols-2 sm:grid-cols-4 items-stretch bg-slate-50 px-8 py-2 rounded-lg">
 
                 <li className="flex p-1">
                   <input onClick={() => setIsSteel(!isSteel)} type="checkbox" id="Sterujaca" value="" className="hidden peer" />
@@ -279,6 +335,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
               </ul>
             </div>
+
+)}
           </div>
 
           <div></div>

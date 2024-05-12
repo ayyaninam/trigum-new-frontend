@@ -1,4 +1,5 @@
 import { PairProductsListData } from "@/types";
+import { Ref } from "react";
 
 const fetchAllSizes = async () => {
     let response = await fetch(`${process.env.API_URL}/api/tyreadderapp/sizes/`, {
@@ -36,6 +37,7 @@ const getPairProductsAllIds = (productsList:PairProductsListData):string => {
   const combinedIds: string = ids.join(",");
   return combinedIds;
 }
+
 
 
 

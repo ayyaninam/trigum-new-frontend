@@ -6,13 +6,16 @@ import { useCart } from '@/context/CartContext/CartState';
 import { isProductInCart } from '@/lib/cart';
 import { CiShoppingBasket } from 'react-icons/ci';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { BsArrowRight } from 'react-icons/bs';
 type AddToCartBtnProps = {
     productIds: string;
     productQty: number;
-    fullWidth?: boolean
+    fullWidth?: boolean;
+    pairLink?:string;
 }
 
-const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty, fullWidth = false }) => {
+const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty, fullWidth = false, pairLink }) => {
 
     const router = useRouter();
     const [isInCart, setIsInCart] = useState(false)
@@ -40,7 +43,7 @@ const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty,
     }
 
 
-    const checkpoint = () =>{
+    const checkpoint = () => {
         if (productIds) {
             const ids: string[] = productIds.split(',');
             let isInCartnow = false;
@@ -68,12 +71,19 @@ const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty,
 
 
     return (
-        <button
-            onClick={() => addToCartClicked()}
-            className={`${fullWidth && "w-full"} flex justify-center text-white ${isInCart ? "bg-green-400 hover:bg-green-500 text-xl" : "bg-orange-400 hover:bg-orange-500 text-sm"} font-medium rounded-lg px-5 py-2.5 text-center`}
-        >
-            {isInCart ? <CiShoppingBasket /> : "KUP"}
-        </button>
+        <div className='flex space-x-2'>
+            <button
+                onClick={() => addToCartClicked()}
+                className={`${fullWidth && "w-full"} flex justify-center text-white ${isInCart ? "bg-green-400 hover:bg-green-500 text-xl" : "bg-orange-400 hover:bg-orange-500 text-sm"} font-medium rounded-lg px-5 py-2.5 text-center`}
+            >
+                {isInCart ? <CiShoppingBasket /> : "KUP"}
+            </button>
+            {!fullWidth && (
+                <Link href={pairLink?pairLink:"/"} className='hover:bg-gray-100 hover:border-gray-300 bg-white border border-white px-4 py-2 rounded-lg text-xl text-center'>
+                    <BsArrowRight/>
+                </Link>
+            )}
+        </div>
     )
 };
 

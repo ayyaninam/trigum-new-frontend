@@ -40,7 +40,7 @@ const PairProductItems: React.FC<PairItemsArray> = ({ list, queryString, prodLoa
                         <div className={`grid md:grid-cols-${plist.products.length+1}  gap-4 items-end my-8 bg-gray-100 rounded-lg px-8 py-8 grid-cols-1 mx-auto w-full sm:w-fit md:w-full md:place-items-end`} key={plist?.id}>
 
                             {plist.products.map((product: PairProduct) => (
-                                <Link href={`/product/pair/${plist?.id}/?${queryString&&queryString}`} className='cursor-pointer' key={product?.id}>
+                                <Link href={`/product/pair/${plist?.id}/?${queryString&&queryString}`} className='cursor-pointer space-y-4' key={product?.id}>
                                     <Image
                                         src={product?.image_urls[0]}
                                         width={100}
@@ -49,19 +49,22 @@ const PairProductItems: React.FC<PairItemsArray> = ({ list, queryString, prodLoa
                                         className='w-full h-64 object-cover rounded-lg sm:w-64 md:w-72 md:h-72'
                                         alt="Product Images"
                                     />
-                                    <span >
+                                    <span className=''>
                                         <h5 className="text-xl font-bold tracking-tight text-gray-900">
                                             <span>{product?.brand_name}</span>
                                         </h5>
                                         <h5 className="text-xl font-bold tracking-tight text-slate-400">
                                             <span>{product?.tread_name}</span>
                                         </h5>
+                                        <h5 className="text-xl font-bold tracking-tight text-gray-900">
+                                            <span>{product?.size_text}</span>
+                                        </h5>
                                     </span>
 
                                 </Link>
                             ))}
 
-                            <PairAddToCartBtn productIds={getPairProductsAllIds(plist)} productQty={1} />
+                            <PairAddToCartBtn productIds={getPairProductsAllIds(plist)} productQty={1} pairLink={`/product/pair/${plist?.id}/?${queryString&&queryString}`} />
                         </div>
                     )
                 }

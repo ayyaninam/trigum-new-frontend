@@ -1,17 +1,19 @@
 'use client'
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { addOrUpdateProductToCart } from '@/lib/cart';
 import { useCart } from '@/context/CartContext/CartState';
 import { isProductInCart } from '@/lib/cart';
 import { CiShoppingBasket } from 'react-icons/ci';
 import { useRouter } from 'next/navigation';
+import { BsArrowRight } from 'react-icons/bs';
 type AddToCartBtnProps = {
     productId: number;
     productQty: number;
-    fullWidth?:boolean
+    fullWidth?: boolean
 }
 
-const AddToCartBtn: React.FC<AddToCartBtnProps> = ({ productId, productQty, fullWidth=false }) => {
+const AddToCartBtn: React.FC<AddToCartBtnProps> = ({ productId, productQty, fullWidth = false }) => {
     const router = useRouter();
     const [isInCart, setIsInCart] = useState(false)
 
@@ -38,12 +40,19 @@ const AddToCartBtn: React.FC<AddToCartBtnProps> = ({ productId, productQty, full
 
 
     return (
-        <button
-            onClick={() => addToCartClicked()}
-            className={`${fullWidth&&"w-full"} flex justify-center text-white ${isInCart ? "bg-green-400 hover:bg-green-500 text-xl" : "bg-orange-400 hover:bg-orange-500 text-sm"} font-medium rounded-lg px-5 py-2.5 text-center`}
-        >
-            {isInCart ? <CiShoppingBasket /> : "KUP"}
-        </button>
+            <button
+                onClick={() => addToCartClicked()}
+                className={`${fullWidth && "w-full"} flex justify-center text-white ${isInCart ? "bg-green-400 hover:bg-green-500 text-xl" : "bg-orange-400 hover:bg-orange-500 text-sm"} font-medium rounded-lg px-5 py-2.5 text-center`}
+            >
+                {isInCart ? <CiShoppingBasket /> : "KUP"}
+                {/* {!fullWidth && (
+                <Link href={`product/${productId}`} className='border border-gray-100 hover:bg-white bg-gray-100 px-4 py-2 rounded-lg text-xl'>
+                    <BsArrowRight />
+                </Link>
+            )} */}
+            </button>
+
+
     )
 };
 

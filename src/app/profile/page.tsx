@@ -6,11 +6,16 @@ import { CookieValueTypes } from 'cookies-next'
 import { UserType } from '@/types'
 import { useRouter } from 'next/navigation'
 import { useUser } from '@/context/UserContext/UserState'
-
+import { useCart } from '@/context/CartContext/CartState'
+import CartTable from '@/components/CartTable'
+import ProductModal from '@/components/profile/ProductModal'
+import AddressModal from '@/components/profile/AddressModal'
 const Profile = () => {
     const router = useRouter()
 
-    const {authToken, userId, logout} = useUser();
+    const { authToken, userId, logout } = useUser();
+
+    const { cartProducts } = useCart()
 
     const [activeSet, setActiveSet] = useState<string>("cart")
     const [userDetails, setUserDetails] = useState<UserType>()
@@ -20,17 +25,17 @@ const Profile = () => {
 
 
 
-  const [companyName, setCompanyName] = useState<string>("")
-  const [surName, setSurName] = useState<string>("")
-  const [name, setName] = useState<string>("")
-  const [nip, setNip] = useState<number>()
+    const [companyName, setCompanyName] = useState<string>("")
+    const [surName, setSurName] = useState<string>("")
+    const [name, setName] = useState<string>("")
+    const [nip, setNip] = useState<number>()
 
 
-  const [city, setCity] = useState<string>("")
-  const [postCode, setPostCode] = useState<string>("")
-  const [street, setStreet] = useState<string>("")
-  const [buidlingNumber, setBuidlingNumber] = useState<string>("")
-  const [apartmentNumber, setApartmentNumber] = useState<string>("")
+    const [city, setCity] = useState<string>("")
+    const [postCode, setPostCode] = useState<string>("")
+    const [street, setStreet] = useState<string>("")
+    const [buidlingNumber, setBuidlingNumber] = useState<string>("")
+    const [apartmentNumber, setApartmentNumber] = useState<string>("")
 
 
 
@@ -98,13 +103,13 @@ const Profile = () => {
         formData.append('company_name', companyName)
         formData.append('surname', surName)
         formData.append('name', name)
-        formData.append('nip', nip?nip?.toString():"")
+        formData.append('nip', nip ? nip?.toString() : "")
         formData.append('city', city)
         formData.append('post_code', postCode)
         formData.append('street', street)
         formData.append('street_number', buidlingNumber)
         formData.append('apartment_number', apartmentNumber)
-        
+
         const response = await fetch(`${process.env.API_URL}/api/users/${userID}/`, {
             method: "PATCH",
             headers: {
@@ -163,7 +168,7 @@ const Profile = () => {
                         height={200}
                         loader={() => imageSrc}
                         alt="user profile picture"
-                        className='rounded-full mt-8 mb-2 border-2 border-white w-52 h-52 object-cover cursor-pointer'
+                        className='rounded-full mt-8 mb-2 border-2 border-white w-36 h-36 object-cover cursor-pointer'
                         onClick={() => handleImageClick()}
                     />
 
@@ -177,6 +182,7 @@ const Profile = () => {
                     />
 
                     <span className='text-white font-extrabold my-2 text-3xl'>{userDetails?.name || userDetails?.surname && userDetails?.surname.toUpperCase()}</span>
+
                 </div>
                 <div className=' py-16 flex flex-col items-start bg-slate-700 rounded-b-3xl'>
                     <div className='w-4/5 mx-auto space-y-8'>
@@ -243,7 +249,7 @@ const Profile = () => {
                         <div className='grid grid-cols-4 gap-4 items-center'>
                             <label className='text-white text-xl'>NIP:</label>
                             <input className='rounded-full px-4 py-1 w-full col-span-3 h-fit' type="text" value={nip}
-                            onChange={(e) => setNip(((/^\d{0,10}$/.test(e.target.value)) ? parseInt(e.target.value) : nip))}
+                                onChange={(e) => setNip(((/^\d{0,10}$/.test(e.target.value)) ? parseInt(e.target.value) : nip))}
                             />
                         </div>
 
@@ -311,75 +317,113 @@ const Profile = () => {
 
             <div className='col-span-3 space-y-4'>
                 <div className='bg-slate-700 rounded-full py-2 flex justify-around items-center'>
-                    <button onClick={() => setActiveSet("cart")} className={`cursor-pointer ${activeSet === "cart" ? "bg-white" : "text-white"} px-4 py-1 rounded-full`}>Orders</button>
-                    <button onClick={() => setActiveSet("orders")} className={`cursor-pointer ${activeSet === "orders" ? "bg-white" : "text-white"} px-4 py-1 rounded-full`}>Cart</button>
-                    <button onClick={() => setActiveSet("wishlist")} className={`cursor-pointer ${activeSet === "wishlist" ? "bg-white" : "text-white"} px-4 py-1 rounded-full`}>Wishlist</button>
+                    <button onClick={() => setActiveSet("orders")} className={`cursor-pointer ${activeSet === "orders" ? "bg-white" : "text-white"} px-4 py-1 rounded-full`}>Order / Invoices</button>
+                    <button onClick={() => setActiveSet("cart")} className={`cursor-pointer ${activeSet === "cart" ? "bg-white" : "text-white"} px-4 py-1 rounded-full`}>Cart</button>
+                    {/* <button onClick={() => setActiveSet("wishlist")} className={`cursor-pointer ${activeSet === "wishlist" ? "bg-white" : "text-white"} px-4 py-1 rounded-full`}>Wishlist</button> */}
                 </div>
                 <div className='border-2 border-black py-8 rounded-2xl'>
 
 
-                    <div className="relative overflow-x-auto">
-                        <table className="w-4/5 text-sm text-left rtl:text-right text-gray-500 mx-auto">
+                    <div className="overflow-x-auto">
+
+                        <div>
                             {activeSet === "cart" && (
+                                <div>
+                                    {cartProducts ? (
 
-                                <thead className="text-xs text-gray-700 uppercase ">
-                                    <tr>
-                                        <th scope="col" className="px-6 py-3">
 
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Order ID
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Order Date
-                                        </th>
+                                        <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+                                            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                                                <tr>
+                                                    <th scope="col" className="px-6 py-3">
+                                                        Image
+                                                    </th>
+                                                    <th scope="col" className="px-6 py-3">
+                                                        Name
+                                                    </th>
 
-                                    </tr>
-                                </thead>
+                                                    <th scope="col" className="px-6 py-3">
+                                                        Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {cartProducts?.results?.map((product) => (
+                                                    <CartTable
+                                                        key={product?.id}
+                                                        img={product?.image_urls[0]}
+                                                        name={`${product?.brand_name} ${product?.tread_name} ${product?.size_text}`}
+                                                        price={product?.net_price}
+                                                        id={product?.id}
+                                                    // updateCartTotal={updateCartTotal}
+                                                    />
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    ) : (
+                                        <div className='space-y-2'>
+                                            <div className='px-4 text-xl font-bold'>Cart Products</div>
+                                            <hr />
+                                            <button className='bg-red-200 text-red-800 rounded-lg px-4 py-2 mx-auto flex my-8'>No Products Found.</button>
+                                        </div>
+                                    )}
+                                </div>
                             )}
-                            {((activeSet === "orders") || (activeSet === "wishlist")) && (
+                        </div>
 
-                                <thead className="text-xs text-gray-700 uppercase ">
-                                    <tr>
-                                        <th scope="col" className="px-6 py-3">
-                                            Product
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Product Name
-                                        </th>
-                                        <th scope="col" className="px-6 py-3">
-                                            Cost
-                                        </th>
+                        <div>
+                            {activeSet === "orders" && (
+                                <div>
+                                    {cartProducts ? (
 
-                                    </tr>
-                                </thead>
 
+                                        <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+                                            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+                                                <tr>
+                                                    <th scope="col" className="px-6 py-3">
+                                                        Order ID.
+                                                    </th>
+                                                    <th scope="col" className="px-6 py-3">
+                                                        Products
+                                                    </th>
+
+                                                    <th scope="col" className="px-6 py-3">
+                                                        Address
+                                                    </th>
+                                                    <th scope="col" className="px-6 py-3">
+                                                        Invoice
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr className="bg-white border-b">
+                                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                        #100003
+                                                    </th>
+
+                                                    <th className="px-6 py-4">
+                                                            <ProductModal/>
+                                                    </th>
+                                                    <th className="px-6 py-4">
+                                                        <AddressModal/>
+                                                    </th>
+                                                    <th className="px-6 py-4">
+                                                        <button className='bg-orange-400 rounded-lg px-4 py-2 text-white'>Download</button>
+                                                    </th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    ) : (
+                                        <div className='space-y-2'>
+                                            <div className='px-4 text-xl font-bold'>Order / Invoices</div>
+                                            <hr />
+                                            <button className='bg-red-200 text-red-800 rounded-lg px-4 py-2 mx-auto flex my-8'>No Products Found.</button>
+                                        </div>
+                                    )}
+                                </div>
                             )}
+                        </div>
 
-
-
-
-                            <tbody >
-                                <tr className='border-b'>
-                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                        <Image
-                                            src="/kwadracik.jpg"
-                                            width={50}
-                                            height={50}
-                                            alt="user profile picture"
-                                            className='rounded-lg'
-                                        />
-                                    </th>
-                                    <td className="px-6 py-4 underline decoration-orange-400 text-orange-400 cursor-pointer">
-                                        #100013
-                                    </td>
-                                    <td className="px-6 py-4">
-                                        23 Dec 2023
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
                     </div>
 
                 </div>
