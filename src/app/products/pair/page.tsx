@@ -28,6 +28,7 @@ const PairProducts = () => {
     isdrive: search.get('isdrive') || "",
     istrailer: search.get('istrailer') || "",
     isretreaded: search.get('isretreaded') || "",
+    isincised: search.get('isincised') || "",
     ispair: search.get('ispair') || "",
     advance: search.get('advance') === "true",
   });
@@ -39,15 +40,26 @@ const PairProducts = () => {
     is_drive: searchParams.isdrive,
     is_trailer: searchParams.istrailer,
     is_retreaded: searchParams.isretreaded,
+    is_incised: searchParams.isincised,
   };
 
   const queryString = new URLSearchParams(queryParams).toString();
+
+  const fetchProdQueryString = new URLSearchParams(
+    {
+        ...queryParams, 
+
+        is_incised:((!(queryParams.is_incised === "true")) === true ? "true":"").toString(),
+
+        is_retreaded:((!(queryParams.is_retreaded === "true")) === true ? "true":"").toString()
+    }
+).toString();
 
   const fetchProducts = async () => {
     setprodLoading(true)
 
     const response = await fetch(
-      `${process.env.API_URL}/api/tyreadderapp/pairs/?${queryString}`
+      `${process.env.API_URL}/api/tyreadderapp/pairs/?${fetchProdQueryString}`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -74,6 +86,7 @@ const PairProducts = () => {
       isdrive: search.get('isdrive') || "",
       istrailer: search.get('istrailer') || "",
       isretreaded: search.get('isretreaded') || "",
+      isincised: search.get('isincised') || "",
       ispair: search.get('ispair') || "",
       advance: search.get('advance') === "true",
     })
@@ -82,7 +95,7 @@ const PairProducts = () => {
 
   return (
     <div>
-      <SearchBox size={searchParams.size} brands={searchParams.brands} issteel={searchParams.issteel} isdrive={searchParams.isdrive} istrailer={searchParams.istrailer} isretreaded={searchParams.isretreaded} allBrands={allBrands} allSizes={allSizes} ispair={searchParams.ispair} advance={searchParams.advance}
+      <SearchBox size={searchParams.size} brands={searchParams.brands} issteel={searchParams.issteel} isdrive={searchParams.isdrive} istrailer={searchParams.istrailer} isretreaded={searchParams.isretreaded} isincised={searchParams.isincised} allBrands={allBrands} allSizes={allSizes} ispair={searchParams.ispair} advance={searchParams.advance}
       />
 
       <div className="my-8">

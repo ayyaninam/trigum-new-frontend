@@ -72,6 +72,7 @@ export type SearchBoxProps = {
     isdrive: boolean | string | null;
     istrailer: boolean | string | null;
     isretreaded: boolean | string | null;
+    isincised: boolean | string | null;
     allBrands: AllBrandsType[];
     allSizes: AllSizesType[];
     ispair: boolean | string | null;

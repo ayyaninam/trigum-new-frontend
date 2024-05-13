@@ -13,7 +13,7 @@ const Home:React.FC = async  () => {
   const allSizes:AllSizesType[] = await fetchAllSizes()
   return (
     <>
-    <SearchBox size={""} brands={""} issteel={false} isdrive={false} istrailer={false} isretreaded={false} allBrands={allBrands} allSizes={allSizes} ispair={false} advance={false} />
+    <SearchBox size={""} brands={""} issteel={false} isdrive={false} istrailer={false} isretreaded={false} allBrands={allBrands} allSizes={allSizes} ispair={false} advance={false} isincised={false} />
 
     <div className="my-16">
       <SuccessStory/>

@@ -7,7 +7,7 @@ import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { useRouter } from 'next/navigation'
 import { SearchBoxProps } from "@/types";
 
-const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, istrailer, isretreaded, allBrands, allSizes, ispair, advance }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, istrailer, isretreaded, isincised, allBrands, allSizes, ispair, advance }) => {
 
   const [allFilteredSizes, setAllFilteredSizes] = useState(allSizes)
   const [sizeInputVal, setsizeInputVal] = useState<string>("")
@@ -24,6 +24,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
   const [isDrive, setIsDrive] = useState<boolean>(false);
   const [isTrailer, setIsTrailer] = useState<boolean>(false);
   const [isRetreaded, setIsRetreaded] = useState<boolean>(false);
+  const [isIncised, setIsIncised] = useState<boolean>(false);
 
   // -------------
   const [isPair, setIsPair] = useState<boolean>(false);
@@ -51,6 +52,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
       isdrive: isDrive ? isDrive.toString() : "",
       istrailer: isTrailer ? isTrailer.toString() : "",
       isretreaded: isRetreaded ? isRetreaded.toString() : "",
+      isincised: isIncised ? isIncised.toString() : "",
       ispair: isPair.toString(),
       advance: advanceFiltersShow? advanceFiltersShow.toString() : "false",
     };
@@ -83,6 +85,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
       setAdvanceFiltersShow(input)
       if (input === false){
       setIsRetreaded(false)
+      setIsIncised(false)
     }
   }
 
@@ -133,6 +136,10 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
     setIsRetreaded(isretreaded ? isretreaded === "true" : false);
   }, [isretreaded])
 
+  useEffect(() => {
+    setIsIncised(isincised ? isincised === "true" : false);
+  }, [isincised])
+
   
   useEffect(() => {
     setAdvanceFiltersShow(advance)
@@ -182,7 +189,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
                 <input onBlur={() => setTimeout(() => { setSizePartActive(false) }, 200)} onFocus={() => setSizePartActive(true)} value={sizeInputVal} onChange={(e) => handleSizeChange(e)} type="text" id="size__input" className={`text-xl bg-gray-50 text-gray-900 rounded-lg block w-full p-2.5`} placeholder="385/55 R22.5" />
 
-                <div className={`all_suggestions rounded-xl bg-slate-50 overflow-auto ${sizePartActive ? "opacity-100 max-h-40 w-full" : "opacity-0 max-h-0 w-0"}  transition-height ease-in-out delay-150 duration-500 absolute  z-30 transition-all`}>
+                <div className={`all_suggestions rounded-xl bg-slate-50 overflow-auto ${sizePartActive ? "opacity-100 visible max-h-40 w-full" : "opacity-0 invisible max-h-0 w-0"}  transition-height ease-in-out delay-150 duration-500 absolute  z-30 transition-all`}>
                   {allFilteredSizes && allFilteredSizes.map((data) => {
                     return <div key={data.id} className="hover:bg-slate-200 border-b border-slate-100 cursor-pointer w-[100%] text-black px-4 py-2 text-md" onClick={() => { setsizeInputVal(data.size), setAllFilteredSizes([]) }}>{data.size}</div>
                   })}
@@ -216,7 +223,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
 
 
-              <div className={`${allBrandsShow?"opacity-100 max-h-40":"opacity-0 max-h-0 h-0 w-0"} rounded-xl bg-slate-50 p-4 cursor-pointer space-y-2 overflow-auto absolute w-full z-20 transition-all duration-300`}>
+              <div className={`${allBrandsShow?"opacity-100 visible max-h-40 w-full":"opacity-0 invisible max-h-0 h-0 w-0"} rounded-xl bg-slate-50 p-4 cursor-pointer space-y-2 overflow-auto absolute z-20  transition-all duration-300`}>
                 <div onClick={() => handleSingleBrandClick(0)} className={`hover:bg-slate-200 flex justify-between py-2 px-2 rounded-lg`}>
                   {"All"}
                   {activeBrands?.includes(0) && (
@@ -301,14 +308,23 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
             
 
-              <div className={`overflow-y-hidden  duration-700 transition-all z-10 ${advanceFiltersShow?"opacity-100 w-full max-h-24":"opacity-0 max-h-0 w-0"}`}>
-                <ul className="max-w-full w-full grid grid-cols-2 sm:grid-cols-4 items-stretch bg-slate-50 px-8 py-2 rounded-lg">
+              <div className={`overflow-y-hidden  duration-700 transition-all z-10 ${advanceFiltersShow?"opacity-100 visible w-full max-h-24":"opacity-0 invisible max-h-0 w-0"}`}>
+                <ul className="max-w-full w-full grid grid-cols-2 sm:grid-cols-3 items-stretch bg-slate-50 px-8 py-2 rounded-lg">
 
                   <li className="flex p-1">
                     <input onClick={() => setIsRetreaded(!isRetreaded)} type="checkbox" id="Bieżnikowana" value="" className="hidden peer" />
                     <label htmlFor="Bieżnikowana" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isRetreaded ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
+                      <div className="block w-fit">
+                        <div className="break-all text-xs font-semibold ">Bieznikowana</div>
+                      </div>
+                    </label>
+                  </li>
+
+                  <li className="flex p-1">
+                    <input onClick={() => setIsIncised(!isIncised)} type="checkbox" id="isIncised" value="" className="hidden peer" />
+                    <label htmlFor="isIncised" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isIncised ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                       <div className="block">
-                        <div className="break-all text-xs font-semibold ">Bieżnikowana</div>
+                        <div className="break-all text-xs font-semibold ">Nacinania</div>
                       </div>
                     </label>
                   </li>
