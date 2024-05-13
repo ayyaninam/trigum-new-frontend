@@ -140,7 +140,7 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
         <BreadCrumb
           links={[
             { name: "Home", link: "/" },
-            { name: "Products", link: queryString ? `/products/pair?${queryString}` : "/products" },
+            { name: "Pairs", link: queryString ? `/products/pair?${queryString}` : "/products" },
             { name: "Pair Products", link: "/" },
           ]}
         />

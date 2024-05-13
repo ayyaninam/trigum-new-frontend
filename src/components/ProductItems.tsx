@@ -48,6 +48,19 @@ const ProductItems: React.FC<ProductItemsProps> = ({ list, prodLoading, queryStr
                                     <h5 className="text-xl font-bold tracking-tight text-slate-400">
                                         <span>{product?.tread_name}</span>
                                     </h5>
+                                    <h5 className="text-xl font-bold tracking-tight text-slate-900">
+                                        <span>{product?.size_text}</span>
+                                    </h5>
+                                    <h5 className="text-xl font-bold tracking-tight ">
+                                    <span className='text-slate-400 text-sm mr-2 font-mono'>DOT:</span>
+                                        <span className='text-slate-900'>{product?.dot}</span>
+                                    </h5>
+                                    <h5 className="text-xl font-bold tracking-tight text-slate-900">
+                                        <span>
+                                            <span className='text-slate-400 text-sm mr-2 font-mono'>TREAD MIN - MAX:</span>
+                                            <span className='font-bold'>{product?.tread_depth_min} - {product?.tread_depth_max}</span>
+                                        </span>
+                                    </h5>
                                 </Link>
                                 <div className="flex items-center justify-between">
                                     <div className='space-x-1'>

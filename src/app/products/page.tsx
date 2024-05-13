@@ -10,6 +10,7 @@ import { useSearchParams } from 'next/navigation'
 import { useData } from "@/context/DataContext/DataState";
 import { useCart } from "@/context/CartContext/CartState";
 import BreadCrumb from "@/components/BreadCrumb";
+import { advanceInvertorBoolen } from "@/processor/custom";
 
 const Products = () => {
 
@@ -50,13 +51,15 @@ const Products = () => {
 
     const queryString = new URLSearchParams(queryParams).toString();
 
+
+
     const fetchProdQueryString = new URLSearchParams(
         {
             ...queryParams, 
 
-            is_incised:(!(queryParams.is_incised === "true")).toString(),
+            is_incised:advanceInvertorBoolen(queryParams.is_incised),
 
-            is_retreaded:(!(queryParams.is_retreaded === "true")).toString()
+            is_retreaded:advanceInvertorBoolen(queryParams.is_retreaded),
         }
     ).toString();
 

@@ -38,7 +38,8 @@ const getPairProductsAllIds = (productsList:PairProductsListData):string => {
   return combinedIds;
 }
 
+const advanceInvertorBoolen = (stringValue: string): string => (stringValue.toLowerCase() === "true" ? "true" : (stringValue.toLowerCase() === "false" ? "" : ""));
 
 
 
-export {fetchAllSizes, fetchAllBrands, getPairProductsAllIds}
+export {fetchAllSizes, fetchAllBrands, getPairProductsAllIds, advanceInvertorBoolen}
