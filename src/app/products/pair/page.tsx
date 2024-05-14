@@ -69,6 +69,7 @@ const PairProducts = () => {
     }
     const data = await response.json();
     const ListData = data && data;
+    console.log(ListData)
     setProducts(ListData)
     setprodLoading(false)
   };

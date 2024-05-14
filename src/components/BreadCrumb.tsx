@@ -16,7 +16,7 @@ const BreadCrumb = ({ links }: {
     }[],
 }) => {
     return (
-        <ol className="flex items-center justify-center whitespace-nowrap my-8 rounded-lg bg-gray-50 border-gray-100 border-2 w-fit mx-auto py-4 px-8 max-w-full flex-wrap">
+        <ol className="flex items-center justify-start whitespace-nowrap my-8 rounded-lg bg-gray-50 border-gray-100 border-2 w-fit mx-auto py-4 px-8 max-w-full flex-wrap">
 
             {links?.map((link, index) => {
 
