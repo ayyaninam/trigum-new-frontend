@@ -99,11 +99,14 @@ const Navbar = () => {
                                 <Link href="/contact">Kontakt</Link>
                             </li>
                             
-                            <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
+                            {/* <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
                                 <Link href="/products">Products</Link>
                             </li>
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
                                 <Link href="/products/pair">Pairs</Link>
+                            </li> */}
+                            <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
+                                <Link href="/products/comparison">Comparison</Link>
                             </li>
 
                             <Link onClick={() => menuIcon && handleMenuIcon()} className='bg-orange-400 text-white rounded-lg my-4 text-center md:px-2' href={"tel: 733-456-474"}>733-456-474</Link>

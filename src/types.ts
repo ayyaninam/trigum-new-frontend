@@ -25,6 +25,11 @@ export type CartContextType =  {
     fetchCartProducts: () => void;
 }
 
+export type CompContextType =  {
+   compProductsIds: number[];
+   setCompProductsIds: (id:number) => void;
+}
+
 
 export type RootLayoutProps  = {
     children: any;

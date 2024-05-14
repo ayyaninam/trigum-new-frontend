@@ -12,6 +12,7 @@ import { useCart } from "@/context/CartContext/CartState";
 import BreadCrumb from "@/components/BreadCrumb";
 import { advanceInvertorBoolen } from "@/processor/custom";
 
+
 const Products = () => {
 
     const search = useSearchParams();
@@ -23,6 +24,7 @@ const Products = () => {
 
 
     const {cartProducts} = useCart()
+    
 
     const [searchParams, setSearchParams] = useState({
         size: search.get('size') || "",
@@ -63,8 +65,7 @@ const Products = () => {
         }
     ).toString();
 
-    console.log(queryString)
-    console.log(fetchProdQueryString)
+
 
 
     const fetchProducts = async () => {
@@ -86,6 +87,7 @@ const Products = () => {
     useEffect(() => {
         fetchProducts()
     }, [])
+
     useEffect(() => {
         fetchProducts()
     }, [searchParams, cartProducts])

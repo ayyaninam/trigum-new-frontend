@@ -1,4 +1,4 @@
-import { PairProductsListData } from "@/types";
+import { CartProductType, PairProductsListData } from "@/types";
 import { Ref } from "react";
 
 const fetchAllSizes = async () => {
@@ -38,8 +38,14 @@ const getPairProductsAllIds = (productsList:PairProductsListData):string => {
   return combinedIds;
 }
 
+const getCompProductsAllIds = (productsList:CartProductType):string => {
+  const ids = productsList?.results.map((product:any) => product.id)
+  const combinedIds: string = ids.join(",");
+  return combinedIds;
+}
+
 const advanceInvertorBoolen = (stringValue: string): string => (stringValue.toLowerCase() === "true" ? "true" : (stringValue.toLowerCase() === "false" ? "" : ""));
 
 
 
-export {fetchAllSizes, fetchAllBrands, getPairProductsAllIds, advanceInvertorBoolen}
+export {fetchAllSizes, fetchAllBrands, getPairProductsAllIds, advanceInvertorBoolen, getCompProductsAllIds}

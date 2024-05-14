@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/context/CartContext/CartState";
 import { UserProvider } from "@/context/UserContext/UserState";
 import { DataProvider } from "@/context/DataContext/DataState";
+import { CompProvider } from "@/context/CompContext/CompState";
 
 export const metadata: Metadata = {
   title: "Tirgum",
@@ -24,13 +25,15 @@ export default function RootLayout({
         <DataProvider>
         <UserProvider>
           <CartProvider>
+          <CompProvider>
 
             
             <Navbar />
             {children}
             <Footer />
 
-
+            
+            </CompProvider>
           </CartProvider>
         </UserProvider>
         </DataProvider>
