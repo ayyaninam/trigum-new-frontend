@@ -6,6 +6,7 @@ import Image from "next/image";
 import PairAddToCartBtn from "@/components/PairAddToCartBtn";
 import { getPairProductsAllIds } from "@/processor/custom";
 import BreadCrumb from "@/components/BreadCrumb";
+import ProductSpecs from "@/components/product/ProductSpecs";
 
 const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: string } }> = ({ params, searchParams }) => {
 
@@ -65,6 +66,7 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
                 <img
                     src={src}
                     style={{ height: height, width: width, objectFit: "cover" }}
+                    className="rounded-lg"
                     onMouseEnter={(e) => {
                         // update image size and turn-on magnifier
                         const elem = e.currentTarget;
@@ -145,13 +147,16 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
           ]}
         />
         
-        <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mt-40 mx-auto px-8 sm:px-0">
+        <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mx-auto px-8 sm:px-0">
 
 
             {products?.products.map((product, prod_index) => {
                 return <div key={prod_index}>
 
                     <div className="space-y-2 my-8">
+
+                    <div className='flex justify-center items-center text-xl font-bold text-center rounded-full p-2 bg-orange-400 aspect-square size-8 text-white font-serif'>{product?.tyre_class}</div>
+
                         <h2 className="text-4xl font-bold uppercase mb-2">
                             {product?.brand_name}
                             <br />
@@ -159,22 +164,11 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
                             <br />
                             {product?.size_text}
                         </h2>
-                        <div className="border-b border-gray-200">
-                            <p className="text-gray-400 font-semibold space-x-2">
-                                <span className="text-gray-800">Id:</span>
-                                <span className="text-gray-600">{product?.id}</span>
-                            </p>
-                            <p className="text-gray-400 font-semibold space-x-2">
-                                <span className="text-gray-800">Marka:</span>
-                                <span className="text-gray-600">{product?.brand_name ? product.brand_name : "------"}</span>
-                            </p>
-                            <p className="text-gray-400 font-semibold space-x-2">
-                                <span className="text-gray-800">Bieżnik:</span>
-                                <span className="text-gray-600">{product?.tread_name ? product.tread_name : "------"}</span>
-                            </p>
 
 
-                        </div>
+                    <ProductSpecs
+                        product={product&&product}
+                    />
 
 
 
@@ -204,7 +198,7 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
                                         unoptimized={true}
                                         src={image}
                                         onClick={() => handleImageClick(prod_index, img_index + 1, products)}
-                                        className="w-full aspect-square object-cover cursor-pointer border border-primary"
+                                        className="rounded-lg w-full aspect-square object-cover cursor-pointer border border-primary"
                                         alt={`${product?.brand_name} ${product?.tread_name} ${product?.size_text}`}
                                     />
                                 ))}

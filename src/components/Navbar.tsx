@@ -8,6 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import CartDrawer from './CartDrawer';
 import { useUser } from '@/context/UserContext/UserState';
+import { useComp } from '@/context/CompContext/CompState';
 
 const Navbar = () => {
     const pathname = usePathname();
@@ -20,7 +21,9 @@ const Navbar = () => {
         setMenuIcon(!menuIcon);
     };
 
-    const {authToken, setAuthToken, userName, setUserName, logout} = useUser()
+    const { authToken, setAuthToken, userName, setUserName, logout } = useUser()
+
+    const  {compProductsIds} = useComp();
 
     const logoutUser = () => {
         logout()
@@ -61,12 +64,12 @@ const Navbar = () => {
                     <div className="flex md:order-2 space-x-3  rtl:space-x-reverse items-center">
                         <div className='hidden md:block'>
                             <AuthBtn authToken={authToken} logoutUser={logoutUser} userName={userName} handleMenuIcon={null} />
-                           
+
                         </div>
 
                         <div className='ml-8'>
 
-                        <CartDrawer handleMenuIcon={() => handleMenuIcon()}/>
+                            <CartDrawer handleMenuIcon={() => handleMenuIcon()} />
                         </div>
 
 
@@ -98,7 +101,7 @@ const Navbar = () => {
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
                                 <Link href="/contact">Kontakt</Link>
                             </li>
-                            
+
                             {/* <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
                                 <Link href="/products">Products</Link>
                             </li>
@@ -106,8 +109,19 @@ const Navbar = () => {
                                 <Link href="/products/pair">Pairs</Link>
                             </li> */}
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
-                                <Link href="/products/comparison">Comparison</Link>
+                                <Link href="/products/comparison" className="relative inline-flex items-center p-2 text-sm font-medium text-center text-white">
+ 
+                                    Comparison
+                                    {compProductsIds && compProductsIds?.length>0 && (
+
+                                    <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-orange-400 border-2 border-white rounded-full -top-2 -end-2">{compProductsIds?.length}</div>
+                                )}
+                                </Link>
+
                             </li>
+
+
+
 
                             <Link onClick={() => menuIcon && handleMenuIcon()} className='bg-orange-400 text-white rounded-lg my-4 text-center md:px-2' href={"tel: 733-456-474"}>733-456-474</Link>
 
@@ -115,7 +129,7 @@ const Navbar = () => {
                             <div className='flex md:hidden mx-auto'>
                                 <AuthBtn authToken={authToken} logoutUser={logoutUser} userName={userName} handleMenuIcon={handleMenuIcon} />
                             </div>
-                            
+
 
                             <div className="flex md:hidden space-x-4 text-2xl cursor-pointer my-8 justify-center text-white">
                                 <Link href={"/"}><FaFacebook /></Link>

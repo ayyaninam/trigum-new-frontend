@@ -8,6 +8,7 @@ import { CiShoppingBasket } from 'react-icons/ci';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { BsArrowRight } from 'react-icons/bs';
+import { FaCartPlus } from 'react-icons/fa';
 type AddToCartBtnProps = {
     productIds: string;
     productQty: number;
@@ -74,9 +75,10 @@ const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty,
         <div className='flex space-x-2'>
             <button
                 onClick={() => addToCartClicked()}
-                className={`${fullWidth && "w-full"} flex justify-center text-white ${isInCart ? "bg-green-400 hover:bg-green-500 text-xl" : "bg-orange-400 hover:bg-orange-500 text-sm"} font-medium rounded-lg px-5 py-2.5 text-center`}
+                className={`${fullWidth && "w-full"} flex justify-center text-white ${isInCart ? "bg-green-400 hover:bg-green-500 " : "bg-orange-400 hover:bg-orange-500"} font-medium rounded-lg px-5 py-2.5 text-center text-xl`}
             >
-                {isInCart ? <CiShoppingBasket /> : "KUP"}
+
+                {isInCart ? <CiShoppingBasket /> : <FaCartPlus/>}
             </button>
             {!fullWidth && (
                 <Link href={pairLink?pairLink:"/"} className='hover:bg-gray-100 hover:border-gray-300 bg-white border border-white px-4 py-2 rounded-lg text-xl text-center'>

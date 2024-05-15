@@ -105,6 +105,7 @@ export type ProductList = {
     title: string;
     brand_name: string;
     tread_name: string;
+    tyre_class:string;
     size_text: string;
     description: string;
     image_urls: string[];
@@ -187,7 +188,7 @@ export type PairProduct =  {
 
 export type PairItem =  {
     id: number;
-    products: PairProduct[];
+    products: ProductList[];
     name: string;
 }
 
@@ -209,7 +210,7 @@ export type PairProductsList =  {
 
 export type PairProductsListData =  {
     id: number;
-    products: PairProductsList[];
+    products: ProductList[];
     name: string;
 }
 

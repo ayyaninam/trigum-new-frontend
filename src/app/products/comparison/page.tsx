@@ -66,6 +66,7 @@ const ComparisonPage: React.FC = () => {
         <img
           src={src}
           style={{ height: height, width: width, objectFit: "cover" }}
+          className="rounded-lg"
           onMouseEnter={(e) => {
             // update image size and turn-on magnifier
             const elem = e.currentTarget;
@@ -127,7 +128,7 @@ const ComparisonPage: React.FC = () => {
   useEffect(() => {
     if (compProductsIds?.length > 0) {
       fetchProduct();
-    } else{
+    } else {
       setProducts(null)
     }
   }, [compProductsIds])
@@ -149,14 +150,31 @@ const ComparisonPage: React.FC = () => {
         ]}
       />
 
+      {compProductsIds && compProductsIds.length > 0 && (
+        <div className="container mx-auto">
+          <div className="font-serif text-center text-2xl font-bold">Make Wise Decisions Through Comparing</div>
+
+          <div className="bg-gradient-to-r from-transparent via-orange-400 to-transparent py-8 font-bold text-center  flex flex-col mb-8">
+            <span className="text-black text-sm">You are comparing</span>
+            <span className="text-white text-5xl">{compProductsIds?.length} Products</span>
+            <span className="text-black text-sm">right now...</span>
+          </div>
+        </div>
+      )}
+
+
+
       {products ?
-        <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mt-40 mx-auto px-8 sm:px-0">
+        <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mx-auto px-8 sm:px-0">
 
 
           {products?.results.map((product, prod_index) => {
             return <div key={prod_index}>
 
               <div className="space-y-2 my-8">
+
+                <div className='flex justify-center items-center text-xl font-bold text-center rounded-full p-2 bg-orange-400 aspect-square size-8 text-white font-serif'>{product?.tyre_class}</div>
+
                 <h2 className="text-4xl font-bold uppercase mb-2">
                   {product?.brand_name}
                   <br />
@@ -209,7 +227,7 @@ const ComparisonPage: React.FC = () => {
                         unoptimized={true}
                         src={image}
                         onClick={() => handleImageClick(prod_index, img_index + 1, products)}
-                        className="w-full aspect-square object-cover cursor-pointer border border-primary"
+                        className="rounded-lg w-full aspect-square object-cover cursor-pointer border border-primary"
                         alt={`${product?.brand_name} ${product?.tread_name} ${product?.size_text}`}
                       />
                     ))}
@@ -225,9 +243,9 @@ const ComparisonPage: React.FC = () => {
 
             </div>
 
-          })} 
-          
-          </div> : (
+          })}
+
+        </div> : (
 
           <NoProductExc />
         )}

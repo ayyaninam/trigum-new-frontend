@@ -6,6 +6,7 @@ import Image from 'next/image';
 import AddToCartBtn from './AddToCartBtn';
 import AddToCompBtn from './AddToCompBtn';
 import NoProductExc from './NoProductExc';
+import ProductMiniDetails from './product/ProductMiniDetails';
 const ProductItems: React.FC<ProductItemsProps> = ({ list, prodLoading, queryString }) => {
 
     // const MemoizedProductList = useMemo(() => list, [list]);
@@ -39,30 +40,13 @@ const ProductItems: React.FC<ProductItemsProps> = ({ list, prodLoading, queryStr
                                     width={100}
                                     height={100}
                                     unoptimized={true}
-                                    className="p-8 rounded w-full h-80 sm:h-96 object-cover"
+                                    style={{borderRadius:"3rem"}}
+                                    className="p-8 rounded-lg w-full h-80 sm:h-96 object-cover"
                                 />
                             </Link>
-                            <div className="px-5 pb-5">
+                            <div className="px-8 mb-8">
                                 <Link href={`/product/${product?.id}`}>
-                                    <h5 className="text-xl font-bold tracking-tight text-gray-900">
-                                        <span>{product?.brand_name}</span>
-                                    </h5>
-                                    <h5 className="text-xl font-bold tracking-tight text-slate-400">
-                                        <span>{product?.tread_name}</span>
-                                    </h5>
-                                    <h5 className="text-xl font-bold tracking-tight text-slate-900">
-                                        <span>{product?.size_text}</span>
-                                    </h5>
-                                    <h5 className="text-xl font-bold tracking-tight ">
-                                    <span className='text-slate-400 text-sm mr-2 font-mono'>DOT:</span>
-                                        <span className='text-slate-900'>{product?.dot}</span>
-                                    </h5>
-                                    <h5 className="text-xl font-bold tracking-tight text-slate-900">
-                                        <span>
-                                            <span className='text-slate-400 text-sm mr-2 font-mono'>TREAD MIN - MAX:</span>
-                                            <span className='font-bold'>{product?.tread_depth_min} - {product?.tread_depth_max}</span>
-                                        </span>
-                                    </h5>
+                                    <ProductMiniDetails product={product&&product}/>
                                 </Link>
                                 <div className="flex items-center justify-between">
                                     <div className='space-x-1'>
@@ -73,9 +57,11 @@ const ProductItems: React.FC<ProductItemsProps> = ({ list, prodLoading, queryStr
                                             <span>netto/1szt</span>
                                         </span>
                                     </div>
+                                    <div className="grid grid-cols-2 gap-2">
                                     <AddToCompBtn productId={product?.id}/>
 
                                     <AddToCartBtn productId={product?.id} productQty={1} />
+                                    </div>
                                 </div>
                             </div>
                         </div>

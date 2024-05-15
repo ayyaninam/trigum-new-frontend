@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { adjustInComparisonProducts, commaSepCompProductIds } from "@/lib/comparison";
 import { useComp } from '@/context/CompContext/CompState';
-import { MdOutlineDoNotDisturbOnTotalSilence } from 'react-icons/md';
+import { MdOutlineCompare, MdOutlineDoNotDisturbOnTotalSilence } from 'react-icons/md';
+import { CiSquareRemove } from 'react-icons/ci';
 
 
-const AddToCompBtn = ({productId}:{productId:number}) => {
+const AddToCompBtn = ({productId}:{productId:number|undefined}) => {
 
     const {compProductsIds, setCompProductsIds} = useComp();
     const [isInComp, setIsInComp] = useState(false)
 
 
     const setCompClicked = () => {
-        setCompProductsIds(productId)
+        productId && setCompProductsIds(productId)
         setIsInComp(!isInComp)
     }
     useEffect(() => {
@@ -25,10 +26,11 @@ const AddToCompBtn = ({productId}:{productId:number}) => {
     <button
     onClick={() => setCompClicked()}
 
-    className={`flex ${isInComp ? "bg-green-400 hover:bg-green-500 " : "bg-orange-400 hover:bg-orange-500"} justify-center text-white text-sm font-medium rounded-lg px-5 py-2.5 text-center`}
+    className={`flex ${isInComp ? "bg-red-400 hover:bg-red-500 " : "bg-slate-400 hover:bg-slate-500"} text-xl items-center justify-center text-white rounded-lg text-center`}
 >
-    {!isInComp ?  "Add To Comp":  "Remove" }
-        </button>
+        {!isInComp ?  <MdOutlineCompare /> :  <CiSquareRemove /> }
+    
+    </button>
 
   )
 }
