@@ -136,10 +136,10 @@ export const decreaseProductQuantity = (productId: number, quantityToSubtract: n
             cart.splice(index, 1);
         }
     }
-
     // Update the cart in the cookie
     updateCartInCookie(cart);
 }
+
 
 
 export const isProductInCart = (productId: number): boolean => {
