@@ -1,8 +1,10 @@
 
+import Faqs from "@/components/Faqs";
 import NewsLetter from "@/components/NewsLetter";
 import PeopleSays from "@/components/PeopleSays";
 import SearchBox from "@/components/SearchBox";
 import SuccessStory from "@/components/SuccessStory";
+
 import { getUserName } from "@/lib/session";
 import { fetchAllBrands, fetchAllSizes } from "@/processor/custom";
 import { AllBrandsType, AllSizesType } from "@/types";
@@ -23,9 +25,15 @@ const Home:React.FC = async  () => {
       <PeopleSays/>
       </div>
 
+      <div className="my-16">
+      <Faqs />
+      </div>
+
     <div className="my-16">
       <NewsLetter/>
       </div>
+
+
 
     </>
   );

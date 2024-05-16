@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { BsArrowRight } from 'react-icons/bs';
 import { FaCartPlus } from 'react-icons/fa';
+import { ToolTip } from './ToolTip';
 type AddToCartBtnProps = {
     productIds: string;
     productQty: number;
@@ -70,16 +71,27 @@ const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty,
         checkpoint()
     }, [productIds, cartProducts])
 
+  const [showTooltip, setShowTooltip] = useState(false);
+
+
 
     return (
         <div className='flex space-x-2'>
             <button
+             onMouseEnter={() => setShowTooltip(true)}
+             onMouseLeave={() => setShowTooltip(false)}
                 onClick={() => addToCartClicked()}
-                className={`${fullWidth && "w-full"} flex justify-center text-white ${isInCart ? "bg-green-400 hover:bg-green-500 " : "bg-orange-400 hover:bg-orange-500"} font-medium rounded-lg px-5 py-2.5 text-center text-xl`}
+                className={`${fullWidth && "w-full"} flex justify-center text-white ${isInCart ? "bg-green-400 hover:bg-green-500 " : "bg-orange-400 hover:bg-orange-500"} font-medium rounded-lg px-5 py-2.5 text-center text-xl relative`}
             >
 
                 {isInCart ? <CiShoppingBasket /> : <FaCartPlus/>}
+                
+                {showTooltip && (
+          // login for showing Cart and add to cart 
+          <ToolTip text={isInCart ? "Cart" : "Add to Cart"}/>
+        )}
             </button>
+          
             {!fullWidth && (
                 <Link href={pairLink?pairLink:"/"} className='hover:bg-gray-100 hover:border-gray-300 bg-white border border-white px-4 py-2 rounded-lg text-xl text-center'>
                     <BsArrowRight/>

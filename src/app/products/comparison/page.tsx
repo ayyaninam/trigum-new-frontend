@@ -95,6 +95,8 @@ const ComparisonPage: React.FC = () => {
           style={{
             display: showMagnifier ? "" : "none",
             position: "absolute",
+            zIndex:"100",
+
 
             // prevent magnifier blocks the mousemove event of img
             pointerEvents: "none",

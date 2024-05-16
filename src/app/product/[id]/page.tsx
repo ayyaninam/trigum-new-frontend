@@ -96,6 +96,7 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
                     style={{
                         display: showMagnifier ? "" : "none",
                         position: "absolute",
+                        zIndex:"100",
 
                         // prevent magnifier blocks the mousemove event of img
                         pointerEvents: "none",
