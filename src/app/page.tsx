@@ -25,11 +25,7 @@ const Home:React.FC = async  () => {
       <PeopleSays/>
       </div>
 
-      <div className="my-16">
-      <Faqs />
-      </div>
-
-    <div className="my-16">
+     <div className="my-16">
       <NewsLetter/>
       </div>
 

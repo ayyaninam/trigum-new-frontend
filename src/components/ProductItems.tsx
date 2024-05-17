@@ -55,16 +55,20 @@ const ProductItems: React.FC<ProductItemsProps> = ({ list, prodLoading, queryStr
                                             <span>{product?.net_price} zł</span>
                                         </span>
                                         <span className="text-lg font-medium text-gray-500 ">
+                                            
                                             <span>netto/1szt</span>
+                                            
                                         </span>
                                     </div>
                                     <div className="grid grid-cols-2 gap-2">
                                     
                                    
+
                                     <AddToCompBtn productId={product?.id}/>
                                    
-
                                     <AddToCartBtn productId={product?.id} productQty={1} />
+
+                                   
                                     </div>
                                 </div>
                             </div>
