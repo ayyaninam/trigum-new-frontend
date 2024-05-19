@@ -5,9 +5,11 @@ import { useRouter } from 'next/navigation'
 import { CookieValueTypes } from 'cookies-next'
 import { useUser } from '@/context/UserContext/UserState'
 import Link from 'next/link'
+import { useScopedI18n } from '@/locales/client'
 
 
 const CheckoutRight = () => {
+    const t: any = useScopedI18n("signupConverts");
 
     const router = useRouter()
 
@@ -78,19 +80,19 @@ const CheckoutRight = () => {
     return (
         <>
         <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 '>
-            <FloatingInput value={email} valueSetter={setEmail} inputType='email' inputPlaceHolder='Email'/>
-            <FloatingInput value={phone} valueSetter={setPhone} inputType='phone' inputPlaceHolder='Phone Number'/>
-            <FloatingInput value={name} valueSetter={setName} inputType='text' inputPlaceHolder='Name'/>
-            <FloatingInput value={surName} valueSetter={setSurName} inputType='text' inputPlaceHolder='Surname'/>
-            <FloatingInput value={companyName} valueSetter={setCompanyName} inputType='text' inputPlaceHolder='Company Name'/>
-            <FloatingInput value={nip} valueSetter={nipValueSetter} inputType='number' inputPlaceHolder='NIP'/>
-            <FloatingInput value={city} valueSetter={setCity} inputType='text' inputPlaceHolder='City'/>
-            <FloatingInput value={postCode} valueSetter={setPostCode} inputType='text' inputPlaceHolder='Zip Code'/>
-            <FloatingInput value={street} valueSetter={setStreet} inputType='text' inputPlaceHolder='Street'/>
-            <FloatingInput value={buidlingNumber} valueSetter={setBuidlingNumber} inputType='text' inputPlaceHolder='Building Number'/>
-            <FloatingInput value={apartmentNumber} valueSetter={setApartmentNumber} inputType='text' inputPlaceHolder='Apartment Number'/>
+            <FloatingInput value={email} valueSetter={setEmail} inputType='email' inputPlaceHolder={t("email")}/>
+            <FloatingInput value={phone} valueSetter={setPhone} inputType='phone' inputPlaceHolder={t("phone")}/>
+            <FloatingInput value={name} valueSetter={setName} inputType='text' inputPlaceHolder={t("firstname")}/>
+            <FloatingInput value={surName} valueSetter={setSurName} inputType='text' inputPlaceHolder={t("lastname")}/>
+            <FloatingInput value={companyName} valueSetter={setCompanyName} inputType='text' inputPlaceHolder={t("companyname")}/>
+            <FloatingInput value={nip} valueSetter={nipValueSetter} inputType='number' inputPlaceHolder={t("vatnumber")}/>
+            <FloatingInput value={city} valueSetter={setCity} inputType='text' inputPlaceHolder={t("city")}/>
+            <FloatingInput value={postCode} valueSetter={setPostCode} inputType='text' inputPlaceHolder={t("postcode")}/>
+            <FloatingInput value={street} valueSetter={setStreet} inputType='text' inputPlaceHolder={t("street")}/>
+            <FloatingInput value={buidlingNumber} valueSetter={setBuidlingNumber} inputType='text' inputPlaceHolder={t("streetnumber")}/>
+            <FloatingInput value={apartmentNumber} valueSetter={setApartmentNumber} inputType='text' inputPlaceHolder={t("apartmentnumber")}/>
         </div>
-        <Link href={"/thankyou"} className='rounded-lg px-4 py-2 bg-orange-400 font-bold text-white my-8 float-end'>Place Order</Link>
+        <Link href={"/thankyou"} className='rounded-lg px-4 py-2 bg-orange-400 font-bold text-white my-8 float-end'>{t("placeorder")}</Link>
         </>
     )
 }

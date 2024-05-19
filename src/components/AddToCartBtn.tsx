@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { BsArrowRight } from "react-icons/bs";
 import { FaCartPlus } from "react-icons/fa";
 import { ToolTip } from "./ToolTip";
+import { useScopedI18n } from "@/locales/client";
 
 type AddToCartBtnProps = {
   productId: number;
@@ -26,7 +27,7 @@ const AddToCartBtn: React.FC<AddToCartBtnProps> = ({
   const [showTooltip, setShowTooltip] = useState(false);
 
   const { fetchCartProducts } = useCart();
-
+  const t:any = useScopedI18n("Comparison")
   const addToCartClicked = async () => {
     if (isInCart) {
       router.push("/cart");
@@ -69,7 +70,7 @@ const AddToCartBtn: React.FC<AddToCartBtnProps> = ({
 
         {showTooltip && (
           // login for showing Cart and add to cart 
-          <ToolTip text={isInCart ? "Cart" : "Add to Cart"}/>
+          <ToolTip text={isInCart ? t("Cart") : t("AddToCart")}/>
         )}
       </button>
     </>

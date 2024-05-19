@@ -2,8 +2,10 @@
 import React, { useState } from 'react'
 import { BiLeftArrow, BiRightArrow } from 'react-icons/bi'
 import Image from 'next/image'
+import { useScopedI18n } from '@/locales/client'
 const SuccessStory:React.FC = () => {
     const [activeStory, setActiveStory] = useState(1)
+    const t: any = useScopedI18n("SmallConverts");
 
     const getPhotoForStory = (id:number) =>{
         if (id === 1){return "/termopres.jpg"}
@@ -13,9 +15,10 @@ const SuccessStory:React.FC = () => {
         else{return "/termopres.jpg"}
     }
 
+
   return (
     <div className='container mx-auto'>
-        <h1 className='decoration-orange-400 underline text-center text-5xl text-mono font-bold'>Our Success Stories</h1>
+        <h1 className='decoration-orange-400 underline text-center text-5xl text-mono font-bold'>{t("OurSuccessStories")}</h1>
 
     <div className='grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-16 my-16'>
         

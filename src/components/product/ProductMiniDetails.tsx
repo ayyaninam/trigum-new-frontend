@@ -4,7 +4,8 @@ import React from 'react'
 const ProductMiniDetails = ({ product }: { product: ProductList }) => {
     return (
         <>
-            <div className='flex justify-center items-center text-xl font-bold text-center rounded-full p-2 bg-orange-400 aspect-square size-8 text-white font-serif'>{product?.tyre_class}</div>
+            <div className='flex justify-center items-center text-xl font-bold text-center rounded-full p-2 bg-orange-400 aspect-square size-8 text-white font-serif ml-auto'>
+                {product?.tyre_class}</div>
             <h5 className="text-xl font-bold tracking-tight text-gray-900">
                 <span>{product?.brand_name}</span>
             </h5>

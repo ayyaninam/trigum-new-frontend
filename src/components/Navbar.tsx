@@ -10,7 +10,26 @@ import CartDrawer from './CartDrawer';
 import { useUser } from '@/context/UserContext/UserState';
 import { useComp } from '@/context/CompContext/CompState';
 
+
+import { useScopedI18n, useChangeLocale, useCurrentLocale, useI18n } from "@/locales/client";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select";
+  
+import { locales } from "@/constants/locales";
+
 const Navbar = () => {
+    const changeLocale = useChangeLocale();
+    const locale = useCurrentLocale();
+
+    const t: any = useScopedI18n("header");
+
+
+
     const pathname = usePathname();
     const router = useRouter();
 
@@ -23,7 +42,7 @@ const Navbar = () => {
 
     const { authToken, setAuthToken, userName, setUserName, logout } = useUser()
 
-    const  {compProductsIds} = useComp();
+    const { compProductsIds } = useComp();
 
     const logoutUser = () => {
         logout()
@@ -39,8 +58,8 @@ const Navbar = () => {
             <div className="flex opening__hrs__headline bg-orange-400 text-white z-50 justify-between font-serif mx-auto items-center py-1 px-4">
                 <div className="hidden md:flex"></div>
                 <div className="flex space-x-8 mx-auto">
-                    <p>Workshop Open: Mon-Fri 8:00 - 16:00</p>
-                    <p>Mobile Tire Service: 24 hours</p>
+                    <p>{t('workShopOpen')}</p>
+                    <p>{t('tireService')}</p>
                 </div>
                 <div className="hidden md:flex space-x-4 text-lg cursor-pointer">
                     <Link href={"/"}><FaFacebook /></Link>
@@ -85,21 +104,26 @@ const Navbar = () => {
                     <div className={`${(!menuIcon && "hidden")}  w-full md:block md:w-auto`} id="navbar-default">
                         <ul className="font-medium h-screen md:h-auto flex md:items-center flex-col p-4 md:p-0 mt-4 rounded-lg bg-none md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 ">
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
-                                <Link href="/contact">Oferta</Link>
+                                <Link href="/contact">{t("offer")}</Link>
                             </li>
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
-                                <Link href="/about">O nas</Link>
+                                <Link href="/about">{t("about")}</Link>
                             </li>
 
+                            {/* <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
+                                <Link href="/pricelist">{t("Pricelist")}</Link>
+                            </li> */}
+
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
-                                <Link href="/pricelist">Cennik</Link>
+                                <Link href="/faqs">{t("faq")}</Link>
                             </li>
-                            <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
+
+                            {/* <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
                                 <Link href="/faq">Pytania</Link>
-                            </li>
+                            </li> */}
 
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
-                                <Link href="/contact">Kontakt</Link>
+                                <Link href="/contact">{t("contact")}</Link>
                             </li>
 
                             {/* <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
@@ -110,12 +134,11 @@ const Navbar = () => {
                             </li> */}
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
                                 <Link href="/products/comparison" className="relative inline-flex items-center p-2 text-sm font-medium text-center text-white">
- 
-                                    Comparison
-                                    {compProductsIds && compProductsIds?.length>0 && (
 
-                                    <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-orange-400 border-2 border-white rounded-full -top-2 -end-2">{compProductsIds?.length}</div>
-                                )}
+                                    {t("Comparison")}                                    {compProductsIds && compProductsIds?.length > 0 && (
+
+                                        <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-orange-400 border-2 border-white rounded-full -top-2 -end-2">{compProductsIds?.length}</div>
+                                    )}
                                 </Link>
 
                             </li>
@@ -124,6 +147,32 @@ const Navbar = () => {
 
 
                             <Link onClick={() => menuIcon && handleMenuIcon()} className='bg-orange-400 text-white rounded-lg my-4 text-center md:px-2' href={"tel: 733-456-474"}>733-456-474</Link>
+
+
+                            <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
+                                <Select
+                                    onValueChange={(selectedLocale: any) => {
+                                        changeLocale(selectedLocale as any);
+                                    }}
+                                    value={locale}
+                                >
+                                    <SelectTrigger
+                                        className="w-[80px] bg-slate-700 text-white border-none"
+                                        value={locale}
+                                    >
+                                        <SelectValue placeholder={locale} />
+                                    </SelectTrigger>
+                                    <SelectContent className="w-[80px] min-w-0 bg-slate-700 text-white">
+                                        {locales.map((locale, i) => {
+                                            return (
+                                                <SelectItem key={i} value={locale}>
+                                                    {locale.toUpperCase()}
+                                                </SelectItem>
+                                            );
+                                        })}
+                                    </SelectContent>
+                                </Select>
+                            </li>
 
 
                             <div className='flex md:hidden mx-auto'>

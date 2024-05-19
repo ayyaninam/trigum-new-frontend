@@ -1,9 +1,15 @@
 "use client"
 import React, { useState } from 'react'
+import { FaqType } from '@/types'
+import { useScopedI18n } from '@/locales/client';
 
 const Accordian = () => {
-    const faqs = [
+  
+  
 
+
+
+    const faqs:FaqType = [
         {
           "title": "Echoes of Eternity",
           "description": "In the vast expanse of the cosmos, where stars twinkle like distant memories, there exists a timeless symphony of existence. 'Echoes of Eternity' invites you on a cosmic journey, where the whispers of celestial bodies weave tales of creation and wonder. From the birth of galaxies to the dance of black holes, each moment unfolds like a chapter in the saga of the universe. Join us as we traverse the cosmic tapestry, exploring the mysteries that lie beyond the bounds of comprehension."

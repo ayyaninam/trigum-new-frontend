@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import CartTable from '../CartTable';
 import { useCart } from '@/context/CartContext/CartState';
+import { useScopedI18n } from '@/locales/client';
 const ProductModal: React.FC = () => {
     const [show, setShow] = useState(false)
     const { cartProducts } = useCart()
     const modalRef = useRef<any>(null)
+    const t:any = useScopedI18n("ProfileConvert")
 
     const handleClickOutside = (event: MouseEvent) => {
         if (modalRef.current && !(modalRef.current as HTMLElement).contains(event.target as Node)) {
@@ -36,7 +38,7 @@ const ProductModal: React.FC = () => {
                 type="button"
                 onClick={(e) => { setShow(!show) }}
             >
-                Show Products
+                {t("ShowProducts")}
             </button>
 
             {show && (
@@ -45,7 +47,7 @@ const ProductModal: React.FC = () => {
                         <div className="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto ">
                             <div className="flex justify-between items-center py-3 px-4 border-b">
                                 <h3 className="font-bold text-gray-800 ">
-                                    All Ordered Products 
+                                    {t("AllOrderedProducts")} 
                                 </h3>
                                 <button type="button" className="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none " data-hs-overlay="#hs-basic-modal" onClick={() => setShow(false)}>
                                     <span className="sr-only">Close</span>
@@ -60,10 +62,10 @@ const ProductModal: React.FC = () => {
                                     <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                                         <tr>
                                             <th scope="col" className="px-6 py-3">
-                                                Name
+                                                {t("Name")}
                                             </th>
                                             <th scope="col" className="px-6 py-3">
-                                                Price
+                                                {t("Price")}
                                             </th>
 
 

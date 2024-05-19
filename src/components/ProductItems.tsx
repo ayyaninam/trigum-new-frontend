@@ -8,11 +8,16 @@ import AddToCompBtn from './AddToCompBtn';
 import NoProductExc from './NoProductExc';
 import ProductMiniDetails from './product/ProductMiniDetails';
 
+
+
+
 const ProductItems: React.FC<ProductItemsProps> = ({ list, prodLoading, queryString }) => {
 
     // const MemoizedProductList = useMemo(() => list, [list]);
+   
 
     const MemoizedProductList = list
+
 
     return (
         <div className="h-full">

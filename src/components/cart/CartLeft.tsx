@@ -2,9 +2,11 @@
 import React from 'react'
 import CartTable from '../CartTable'
 import { useCart } from '@/context/CartContext/CartState'
+import { useScopedI18n } from '@/locales/client'
 const CartLeft = ({updateCartTotal}:{updateCartTotal?: () => void}) => {
     
     const {cartProducts, cartLoading} = useCart();
+    const t: any = useScopedI18n("signupConverts");
 
     return (
 
@@ -15,11 +17,11 @@ const CartLeft = ({updateCartTotal}:{updateCartTotal?: () => void}) => {
                     <tr>
 
                         <th scope="col" className="px-6 py-3">
-                            Name
+                            {t("Name")}
                         </th>
 
                         <th scope="col" className="px-6 py-3">
-                            Price
+                            {t("Price")}
                         </th>
 
                     </tr>

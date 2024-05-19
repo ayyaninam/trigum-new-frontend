@@ -1,3 +1,8 @@
+export type FaqType = {
+    "title":string,
+    "description":string,
+  }[]
+
 
 
 export type UserContextType =  {

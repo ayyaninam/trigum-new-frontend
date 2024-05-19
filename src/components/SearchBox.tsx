@@ -2,13 +2,17 @@
 import { useState, useEffect, ChangeEvent, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useScopedI18n } from '@/locales/client'
 import { AiOutlineSearch } from "react-icons/ai";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { useRouter } from 'next/navigation'
 import { SearchBoxProps } from "@/types";
 
-const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, istrailer, isretreaded, isincised, allBrands, allSizes, ispair, advance }) => {
 
+const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, istrailer, isretreaded, isincised, allBrands, allSizes, ispair, advance }) => {
+  const t: any = useScopedI18n("searchbox");
+
+  
   const [allFilteredSizes, setAllFilteredSizes] = useState(allSizes)
   const [sizeInputVal, setsizeInputVal] = useState<string>("")
   const [sizePartActive, setSizePartActive] = useState<boolean>(false)
@@ -29,6 +33,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
   // -------------
   const [isPair, setIsPair] = useState<boolean>(false);
 
+  
 
   const brandsRef = useRef(null);
 
@@ -38,7 +43,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
   function SearchBtn() {
     return (
       <button onClick={() => redirectFunc()} className={`p-2 px-4 rounded-md bg-orange-400 text-white mt-4 w-full text-center disabled:opacity-50 ${!(sizeInputVal) && ("cursor-not-allowed")}`} disabled={!(sizeInputVal)}>
-        Szukaj
+        {t("Search")}
       </button>
     );
   }
@@ -164,7 +169,10 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
                 onChange={e => { }}
               />
               <div className={`p-2 items-center relative w-[3.4rem] h-7 rounded-full peer ${isPair ? 'peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full bg-blue-700' : 'bg-slate-700'} peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all outline-none ring-0`} ></div>
-              <span className="ms-3 text-lg font-medium text-gray-900">{isPair ? "Search Pairs" : "Search Single"}</span>
+              <span className="ms-3 text-lg font-medium text-gray-900">
+              {isPair ? t("SearchPairs") : t("SingleSearch")}
+
+                </span>
             </label>
 
 
@@ -183,7 +191,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
             <div id="size" className="w-[100%] " >
               <div className="relative">
                 <label htmlFor="size__input" className="block mb-2 text-sm font-medium text-black">
-                  <span>Choose a Size</span>
+                  <span>{t("ChooseSize")}</span>
                   <span className="text-red-500 mx-2">*</span>
                 </label>
 
@@ -206,7 +214,9 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
             <label className={`mb-2 text-sm font-medium px-4 py-2 rounded-xl cursor-pointer flex justify-between hover:bg-opacity-80 items-center ${allBrandsShow?"bg-orange-400 text-white":"bg-slate-50 text-black"}`} onClick={() => setAllBrandsShow(!allBrandsShow)}>
 
-              <span className="text-xl font-normal">{activeBrands.length > 0 ? `${activeBrands.includes(0) ? "All Brands Selected" : `${activeBrands.length} Brand Selected`}` : "Select a Brand"}</span>
+              <span className="text-xl font-normal">{activeBrands.length > 0 ?
+              
+              `${activeBrands.includes(0) ? "All Brands Selected" : `${activeBrands.length} Brand Selected`}` : t("SelectABrand")}</span>
 
               {!allBrandsShow ? (
                 <span>
@@ -225,7 +235,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
               <div className={`${allBrandsShow?"opacity-100 visible max-h-40 w-full":"opacity-0 invisible max-h-0 h-0 w-0"} rounded-xl bg-slate-50 p-4 cursor-pointer space-y-2 overflow-auto absolute z-20  transition-all duration-300`}>
                 <div onClick={() => handleSingleBrandClick(0)} className={`hover:bg-slate-200 flex justify-between py-2 px-2 rounded-lg`}>
-                  {"All"}
+                  {t("All")}
                   {activeBrands?.includes(0) && (
                     <span className=" inline-flex items-center justify-center w-5 h-5 me-2 text-sm font-semibold text-gray-800 bg-gray-100 rounded-full dark:bg-orange-400 dark:text-white">
                       <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
@@ -264,7 +274,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
                 <input onClick={() => setIsSteel(!isSteel)} type="checkbox" id="Sterujaca" value="" className="hidden peer" />
                 <label htmlFor="Sterujaca" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isSteel ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                   <div className="block">
-                    <div className="break-all text-xs font-semibold">Sterujaca</div>
+                    <div className="break-all text-xs font-semibold">{t("Steering")}</div>
                   </div>
                 </label>
               </li>
@@ -273,7 +283,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
                 <input onClick={() => setIsDrive(!isDrive)} type="checkbox" id="Naped" value="" className="hidden peer" />
                 <label htmlFor="Naped" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isDrive ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                   <div className="block">
-                    <div className="break-all text-xs font-semibold">Naped</div>
+                    <div className="break-all text-xs font-semibold">{t("Drive")}</div>
                   </div>
                 </label>
               </li>
@@ -282,7 +292,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
                 <input onClick={() => setIsTrailer(!isTrailer)} type="checkbox" id="Wleczona" value="" className="hidden peer" />
                 <label htmlFor="Wleczona" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isTrailer ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                   <div className="block">
-                    <div className="break-all text-xs font-semibold">Wleczona</div>
+                    <div className="break-all text-xs font-semibold">{t("Trailing")}</div>
                   </div>
                 </label>
               </li>
@@ -303,7 +313,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
                 onChange={e => { }}
               />
               <div className={`p-2 items-center relative w-[3.4rem] h-7 rounded-full peer ${advanceFiltersShow ? 'peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full bg-blue-700' : 'bg-slate-700'} peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[3px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all outline-none ring-0`} ></div>
-              <span className="ms-3 text-lg font-medium text-gray-900">Advance Filters</span>
+              <span className="ms-3 text-lg font-medium text-gray-900">{t("AdvanceFilter")}</span>
             </label>
 
             
@@ -315,7 +325,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
                     <input onClick={() => setIsRetreaded(!isRetreaded)} type="checkbox" id="Bieżnikowana" value="" className="hidden peer" />
                     <label htmlFor="Bieżnikowana" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isRetreaded ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                       <div className="block w-fit">
-                        <div className="break-all text-xs font-semibold ">Bieznikowana</div>
+                        <div className="break-all text-xs font-semibold ">{t("Appliedwithatread")}</div>
                       </div>
                     </label>
                   </li>
@@ -324,7 +334,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
                     <input onClick={() => setIsIncised(!isIncised)} type="checkbox" id="isIncised" value="" className="hidden peer" />
                     <label htmlFor="isIncised" className={`justify-center inline-flex items-center text-center  p-5 bg-white border-2  rounded-lg cursor-pointer ${isIncised ? ("border-orange-400 text-gray-600") : ("border-gray-200 text-gray-500")} hover:text-gray-600 hover:bg-gray-50 max-w-[100%] w-[100%]`}>
                       <div className="block">
-                        <div className="break-all text-xs font-semibold ">Nacinania</div>
+                        <div className="break-all text-xs font-semibold ">{t("Cutting")}</div>
                       </div>
                     </label>
                   </li>

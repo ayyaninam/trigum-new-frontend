@@ -4,11 +4,13 @@ import { useComp } from '@/context/CompContext/CompState';
 import { MdOutlineCompare, MdOutlineDoNotDisturbOnTotalSilence } from 'react-icons/md';
 import { CiSquareRemove } from 'react-icons/ci';
 import { ToolTip} from '@/components/ToolTip';
+import { useScopedI18n } from '@/locales/client';
 
 
 
 
 const AddToCompBtn = ({productId}:{productId:number|undefined}) => {
+    const t:any = useScopedI18n("Comparison")
 
     const {compProductsIds, setCompProductsIds} = useComp();
     const [isInComp, setIsInComp] = useState(false)
@@ -39,7 +41,8 @@ const AddToCompBtn = ({productId}:{productId:number|undefined}) => {
 >
         {!isInComp ?  <MdOutlineCompare /> :  <CiSquareRemove /> }
         
-        {showTooltip && <ToolTip text={!isInComp ? " Add to Comparison" : " Remove from Comparison"}/>}
+        {showTooltip && <ToolTip text={!isInComp ? t("AddtoComparison") : t("RemoveFromComparison")}/>}
+
         
     </button>
 

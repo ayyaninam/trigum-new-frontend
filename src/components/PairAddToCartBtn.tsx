@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { BsArrowRight } from 'react-icons/bs';
 import { FaCartPlus } from 'react-icons/fa';
 import { ToolTip } from './ToolTip';
+import { useScopedI18n } from '@/locales/client';
 type AddToCartBtnProps = {
     productIds: string;
     productQty: number;
@@ -72,6 +73,7 @@ const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty,
     }, [productIds, cartProducts])
 
   const [showTooltip, setShowTooltip] = useState(false);
+  const t:any = useScopedI18n("Comparison")
 
 
 
@@ -88,7 +90,7 @@ const PairAddToCartBtn: React.FC<AddToCartBtnProps> = ({ productIds, productQty,
                 
                 {showTooltip && (
           // login for showing Cart and add to cart 
-          <ToolTip text={isInCart ? "Cart" : "Add to Cart"}/>
+          <ToolTip text={isInCart ? t("Cart") : t("AddToCart")}/>
         )}
             </button>
           

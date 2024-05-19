@@ -5,12 +5,13 @@ import { increaseProductQuantity, decreaseProductQuantity, getCartProductQuantit
 import React, { useEffect, useState } from 'react'
 import { useCart } from '@/context/CartContext/CartState'
 import Link from 'next/link';
+import { useScopedI18n } from '@/locales/client';
 
 const CartTable = ({ img, name, price, id, updateCartTotal, onlyWithPrice = false }: { img: string, name: string, price: number, id: number, updateCartTotal?: () => void, onlyWithPrice?: boolean }) => {
 
 
     const { fetchCartProducts } = useCart()
-
+    const t:any = useScopedI18n("ProductMiniDetail")
     const [quantity, setquantity] = useState(0)
     const [total, setTotal] = useState(0)
 
@@ -94,7 +95,7 @@ const CartTable = ({ img, name, price, id, updateCartTotal, onlyWithPrice = fals
                 {!onlyWithPrice && (
 
                     <th className="px-6 py-4">
-                        <div onClick={(e) => removeProductsFromCartCalled(id&&id)} className='bg-orange-400 rounded-lg px-4 py-2 text-center text-white cursor-pointer'>Remove</div>
+                        <div onClick={(e) => removeProductsFromCartCalled(id&&id)} className='bg-orange-400 rounded-lg px-4 py-2 text-center text-white cursor-pointer'>{t("Remove")}</div>
                     </th>
                 )}
 
