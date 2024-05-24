@@ -3,8 +3,11 @@ import Link from 'next/link'
 import { MdOnlinePrediction } from 'react-icons/md';
 import { BiUser } from 'react-icons/bi';
 import { AuthBtnProps } from '@/types';
+import { useScopedI18n } from '@/locales/client';
 
 const AuthBtn:React.FC<AuthBtnProps> = ({ authToken, logoutUser, userName, handleMenuIcon }) => {
+    const t: any = useScopedI18n("header");
+
     return (
         <div className="flex gap-2">
             {authToken ? (
@@ -24,15 +27,11 @@ const AuthBtn:React.FC<AuthBtnProps> = ({ authToken, logoutUser, userName, handl
                 <>
                     <Link href="/login">
                         <button onClick={() => (handleMenuIcon && handleMenuIcon())} className="px-4 py-2 rounded-lg border border-gray-400 text-white hover:bg-slate-600">
-                            Login
+                            {t("Login")}
                         </button>
                     </Link>
 
-                    <Link href="/signup">
-                        <button onClick={() => (handleMenuIcon && handleMenuIcon())} className="px-4 py-2 rounded-lg border border-gray-400 text-white hover:bg-slate-600">
-                            Signup
-                        </button>
-                    </Link>
+                   
                 </>
             )}
 

@@ -212,7 +212,8 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
 
 
-            <label className={`mb-2 text-sm font-medium px-4 py-2 rounded-xl cursor-pointer flex justify-between hover:bg-opacity-80 items-center ${allBrandsShow?"bg-orange-400 text-white":"bg-slate-50 text-black"}`} onClick={() => setAllBrandsShow(!allBrandsShow)}>
+            <label className={`mb-2 text-sm font-medium px-4 py-2 rounded-xl cursor-pointer flex justify-between hover:bg-opacity-80 items-center ${allBrandsShow?"bg-orange-400 text-white":"bg-slate-50 text-black"}`} 
+            onClick={() => setAllBrandsShow(!allBrandsShow)}>
 
               <span className="text-xl font-normal">{activeBrands.length > 0 ?
               
@@ -233,7 +234,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ size, brands, issteel, isdrive, i
 
 
 
-              <div className={`${allBrandsShow?"opacity-100 visible max-h-40 w-full":"opacity-0 invisible max-h-0 h-0 w-0"} rounded-xl bg-slate-50 p-4 cursor-pointer space-y-2 overflow-auto absolute z-20  transition-all duration-300`}>
+              <div className={`${allBrandsShow?"opacity-100 visible max-h-[15em] w-full":"opacity-0 invisible max-h-0 h-0 w-0"} rounded-xl bg-slate-50 p-4 cursor-pointer space-y-2 overflow-auto absolute z-20  transition-all duration-300`}>
                 <div onClick={() => handleSingleBrandClick(0)} className={`hover:bg-slate-200 flex justify-between py-2 px-2 rounded-lg`}>
                   {t("All")}
                   {activeBrands?.includes(0) && (

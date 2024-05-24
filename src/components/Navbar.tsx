@@ -18,8 +18,8 @@ import {
     SelectItem,
     SelectTrigger,
     SelectValue,
-  } from "@/components/ui/select";
-  
+} from "@/components/ui/select";
+
 import { locales } from "@/constants/locales";
 
 const Navbar = () => {
@@ -133,9 +133,10 @@ const Navbar = () => {
                                 <Link href="/products/pair">Pairs</Link>
                             </li> */}
                             <li onClick={() => menuIcon && handleMenuIcon()} className="py-2 md:py-0 md:border-none border-b border-slate-500 text-white hover:text-orange-300">
-                                <Link href="/products/comparison" className="relative inline-flex items-center p-2 text-sm font-medium text-center text-white">
+                                <Link href="/products/comparison" className="relative inline-flex items-center p-2  text-center text-white  hover:text-orange-300">
 
-                                    {t("Comparison")}                                    {compProductsIds && compProductsIds?.length > 0 && (
+                                    {t("Comparison")}
+                                    {compProductsIds && compProductsIds?.length > 0 && (
 
                                         <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-orange-400 border-2 border-white rounded-full -top-2 -end-2">{compProductsIds?.length}</div>
                                     )}
@@ -160,14 +161,30 @@ const Navbar = () => {
                                         className="w-[80px] bg-slate-700 text-white border-none"
                                         value={locale}
                                     >
-                                        <SelectValue placeholder={locale} />
+                                    <SelectValue placeholder={locale} />
                                     </SelectTrigger>
                                     <SelectContent className="w-[80px] min-w-0 bg-slate-700 text-white">
                                         {locales.map((locale, i) => {
                                             return (
-                                                <SelectItem key={i} value={locale}>
-                                                    {locale.toUpperCase()}
-                                                </SelectItem>
+                                                    <SelectItem key={i} value={locale} >
+                                                        <div className='grid grid-cols-2 items-center'>
+                                                        <div>
+                                                        <Image
+                                                            src={`https://flagsapi.com/${locale.toUpperCase()}/shiny/64.png`.replace("UK", "UA")}
+                                                            height={10}
+                                                            width={10}
+                                                            className='object-cover'
+                                                            alt={`${locale} Icon Tirgum`}
+                                                            loader={() => `https://flagsapi.com/${locale.toUpperCase()}/shiny/64.png`.replace("UK", "UA")}
+                                                        />
+                                                        
+                                                        </div>
+                                                        <div>
+                                                        {locale.toUpperCase()}
+                                                        </div>
+                                                        </div>
+
+                                                    </SelectItem>
                                             );
                                         })}
                                     </SelectContent>

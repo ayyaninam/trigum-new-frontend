@@ -152,6 +152,7 @@ export type ProductList = {
     tread: number;
     size: number;
     pair: number;
+    
 };
 
 
