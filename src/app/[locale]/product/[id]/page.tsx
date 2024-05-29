@@ -13,6 +13,14 @@ import BreadCrumb from "@/components/BreadCrumb";
 import ProductSpecs from "@/components/product/ProductSpecs";
 import AddToCompBtn from "@/components/AddToCompBtn";
 import { useScopedI18n } from "@/locales/client";
+import tireDescriptions from "@/data.json"
+
+
+interface TireDescriptions {
+  [key: string]: {
+    description: string;
+  };
+}
 
 
 const Card: React.FC<{
@@ -35,6 +43,22 @@ const Card: React.FC<{
     setImages(updatedImages);
   };
 
+
+  const generateTireDescription = (product: ProductList | null) => {
+    if (!product) return null;
+
+    const descriptions = Object.entries(tireDescriptions as TireDescriptions)
+      .filter(([key]) => product[key as keyof ProductList])
+      .map(([key, value]) => <p key={key}>{value.description}</p>);
+
+    return (
+      <div className="w-full pt-6">
+        <div className="space-y-4">{descriptions}</div>
+      </div>
+    );
+  };
+  
+
   const fetchProduct = async () => {
     const response = await fetch(
       `${process.env.API_URL}/api/tyreadderapp/products/${params?.id}/`
@@ -46,6 +70,8 @@ const Card: React.FC<{
     setProduct(data && data);
     setImages(data?.image_urls);
   };
+
+  
 
   function ImageMagnifier({
     src,
@@ -242,11 +268,7 @@ const Card: React.FC<{
           </h3>
           <div className="w-full pt-6">
             <div className="space-y-4">
-              <p>
-                {product?.advert_description
-                  ? product.advert_description
-                  : "No description available"}
-              </p>
+            {product && generateTireDescription(product)}
             </div>
           </div>
         </div>
@@ -287,22 +309,17 @@ const Card: React.FC<{
               Ogólne zasady
             </h3>
             <p>
-              Każda z naszych opon jest dokładnie sprawdzana ciśnieniowo oraz
-              wizualnie. Inspekcja jednej opony trwa ok 3 minuty i 30 sek.
+              {t("InspekcjaOpony")}
             </p>
             <p>
-              Wszelkie naprawy wykonywane są zgodnie ze sztuką wulkanizacyjną z
-              zastosowaniem odpowiednich standardów oraz chemii naprawczej.
+             {t("NaprawaOpony")}.
             </p>
-            <p>Każda z naszych opon jest oznaczona etykietą.</p>
+            <p>{t("tykietaOpony")}</p>
             <p>
-              Wysyłamy opony na paletach. Możesz je również odebrać osobiście.
-              Sprawdź również naszą ofertę montażu na miejscu i mobilnie.
+              {t("WysylkaOpon")}
             </p>
             <p>
-              Kurierzy często się spóźniają. My dowozimy nasze opony do centrum
-              przeładunkowego, dzięi czemu opóźnienia w dostawie zdarzają się
-              niezwykle rzadko.
+              {t("DostawaOpon")}
             </p>
           </div>
         </div>

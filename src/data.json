@@ -1,0 +1,60 @@
+{
+    "is_tire_bead_damaged": {
+      "description": "The tire bead is damaged"
+    },
+    "is_incised": {
+      "description": "There are incisions on the tire"
+    },
+    "front_repairs": {
+      "description": "Number of repairs made on the front part of the tire"
+    },
+    "is_side_repair": {
+      "description": "There have been repairs on the side of the tire"
+    },
+    "is_visible_cracks": {
+      "description": "There are visible cracks on the tire"
+    },
+    "is_braked": {
+      "description": "The tire has been braked"
+    },
+    "is_braked_repair": {
+      "description": "The tire has been repaired after being braked"
+    },
+    "is_shoulder_repair": {
+      "description": "There have been repairs on the shoulder of the tire"
+    },
+    "is_cosmetology": {
+      "description": "The tire has undergone cosmetic treatments"
+    },
+    "is_toothed_out": {
+      "description": "The tire has been toothed out"
+    },
+    "is_retreaded": {
+      "description": "The tire has been retreaded"
+    },
+    "is_ruts": {
+      "description": "The tire has ruts"
+    },
+    "is_circumventional_cut": {
+      "description": "The tire has circumferential cuts"
+    },
+    "is_label_printed": {
+      "description": "A label is printed on the tire"
+    },
+    "is_allegro": {
+      "description": "The tire is listed on Allegro"
+    },
+    "is_otomoto": {
+      "description": "The tire is listed on Otomoto"
+    },
+    "is_merchant_center": {
+      "description": "The tire is listed on Merchant Center"
+    },
+    "is_olx": {
+      "description": "The tire is listed on OLX"
+    },
+    "is_olx_active": {
+      "description": "The OLX listing is currently active"
+    }
+  }
+  

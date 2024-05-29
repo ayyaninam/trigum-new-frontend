@@ -24,7 +24,6 @@ export default {
     SelectABrand: "Wybierz markę",
     SingleSearch: "Wyszukiwanie", // Single search
     All: "Wszystkie",
-
   },
 
   Comparison: {
@@ -118,7 +117,22 @@ export default {
     Productdescription: "Opis produktu",
     Comparewithanewtire: "Porównaj z nową oponą",
     Netprice: "Cena netto",
+    
+    InspekcjaOpony:
+      "Każda z naszych opon jest dokładnie sprawdzana ciśnieniowo oraz wizualnie. Inspekcja jednej opony trwa ok 3 minuty i 30 sek.",
+
+    NaprawaOpony:
+      "Wszelkie naprawy wykonywane są zgodnie ze sztuką wulkanizacyjną z zastosowaniem odpowiednich standardów oraz chemii naprawczej.",
+
+    EtykietaOpony: "Każda z naszych opon jest oznaczona etykietą.",
+
+    WysylkaOpon:
+      "Wysyłamy opony na paletach. Możesz je również odebrać osobiście. Sprawdź również naszą ofertę montażu na miejscu i mobilnie.",
+
+    DostawaOpon:
+      "Kurierzy często się spóźniają. My dowozimy nasze opony do centrum przeładunkowego, dzięki czemu opóźnienia w dostawie zdarzają się niezwykle rzadko.",
   },
+
   SmallConverts: {
     NoFoundProduct: "Brak znalezionego produktu",
     PleaseTryAgainAndAdjustYourFilters:
@@ -177,7 +191,7 @@ export default {
     EnterYourZipCode: "Wprowadź swój kod pocztowy",
     EnterYourStreet: "Wprowadź swoją ulicę",
     EnterYourBuildingNumber: "Wprowadź numer budynku",
-    EnterYourAppartment: "Wprowadź numer mieszkania"
+    EnterYourAppartment: "Wprowadź numer mieszkania",
   },
 
   ProfileConvert: {
@@ -224,7 +238,6 @@ export default {
     ShowProducts: "Pokaż produkty",
     AllOrderedProducts: "Wszystkie zamówione produkty",
     Price: "Cena",
-    
   },
 
   ProductMiniDetail: {
@@ -233,28 +246,24 @@ export default {
     Close: "Zamknij",
     ShowProducts: "Pokaż produkty",
     AllOrderedProducts: "Wszystkie zamówione produkty",
-    
+
     Name: "Nazwa",
     Price: "Cena",
     OK: "OK",
     Remove: "Usuń",
     PairFound: "Para znaleziona", // Pair/page.tsx
-    ProductsFound: "Produkty znalezione" // Products found
-    },
+    ProductsFound: "Produkty znalezione", // Products found
+  },
 
   ThankyouConverts: {
     ThankYou: "Dziękujemy",
     forYourOrder: "za zamówienie",
     PrintRecipt: "Wydrukuj paragon",
     ContinueShopping: "Kontynuuj zakupy",
-    OrderedItems: "Zamówione przedmioty"
+    OrderedItems: "Zamówione przedmioty",
   },
-
 
   netPrice: {
     price: "netto/1szt",
   },
-
- 
-
 } as const;

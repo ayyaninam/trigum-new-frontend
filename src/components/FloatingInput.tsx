@@ -3,7 +3,7 @@ import React from 'react'
 const FloatingInput = ({inputType, inputPlaceHolder, label, value, valueSetter}:{inputType:string, inputPlaceHolder:string, label?:string, value:any, valueSetter:(input:any) => void}) => {
 
     return (
-        <div className="w-full sm:max-w-sm space-y-3">
+        <div className="w-full sm:max-w-sm md:max-w-full lg:max-w-full space-y-3">
 
             <div className="relative">
                 <input type={inputType} id="hs-floating-input-email" className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 

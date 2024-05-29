@@ -38,7 +38,7 @@ const ProductSpecs = ({ product }: { product: ProductList | undefined }) => {
           </span>
         </p>
       </div>
-
+      <div className="min-h-[100%]">
       <div className="flex items-center space-x-2">
         {product?.is_tire_bead_damaged === true && (
           <>
@@ -127,8 +127,11 @@ const ProductSpecs = ({ product }: { product: ProductList | undefined }) => {
           </>
         )}
       </div>
+      </div>
     </div>
   );
 };
 
 export default ProductSpecs;
+
+

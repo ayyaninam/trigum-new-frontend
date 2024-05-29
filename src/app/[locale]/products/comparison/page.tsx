@@ -14,13 +14,13 @@ import AddToCartBtn from "@/components/AddToCartBtn";
 import AddToCompBtn from "@/components/AddToCompBtn";
 import NoProductExc from "@/components/NoProductExc";
 import { useScopedI18n } from "@/locales/client";
+import ProductSpecs from "@/components/product/ProductSpecs";
 
 const ComparisonPage: React.FC = () => {
   const [products, setProducts] = useState<CartProductType | null>(null);
   const [productsIds, setProductsIds] = useState<string>("");
   const { compProductsIds } = useComp();
   const t: any = useScopedI18n("ProductDetail");
-
 
   const fetchProduct = async () => {
     console.log(
@@ -178,10 +178,11 @@ const ComparisonPage: React.FC = () => {
       )}
 
       {products ? (
-        <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mx-auto px-8 sm:px-0">
+        <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mx-auto px-8 sm:px-0 items-stretch auto-rows-max">
           {products?.results.map((product, prod_index) => {
             return (
-              <div key={prod_index}>
+              <div key={prod_index} className="flex justify-between flex-col">
+                
                 <div className="space-y-2 my-8">
                   <div className="flex justify-center items-center text-xl font-bold text-center rounded-full p-2 bg-orange-400 aspect-square size-8 text-white font-serif">
                     {product?.tyre_class}
@@ -196,70 +197,59 @@ const ComparisonPage: React.FC = () => {
                     <br />
                     {product?.size_text}
                   </h2>
-                  <div className="border-b border-gray-200">
-                    <p className="text-gray-400 font-semibold space-x-2">
-                      <span className="text-gray-800">Id:</span>
-                      <span className="text-gray-600">{product?.id}</span>
-                    </p>
-                    <p className="text-gray-400 font-semibold space-x-2">
-                      <span className="text-gray-800">{t("Brand")}:</span>
-                      <span className="text-gray-600">
-                        {product?.brand_name ? product.brand_name : "------"}
-                      </span>
-                    </p>
-                    <p className="text-gray-400 font-semibold space-x-2">
-                      <span className="text-gray-800">{t("Tread")}:</span>
-                      <span className="text-gray-600">
-                        {product?.tread_name ? product.tread_name : "------"}
-                      </span>
-                    </p>
-                  </div>
+                 
+                  <ProductSpecs product={product}/>
                 </div>
 
                 <div>
-                  <ImageMagnifier
-                    src={product && product.image_urls[0]}
-                    width={"100%"}
-                    height={"35rem"}
-                    magnifierHeight={400}
-                    magnifieWidth={400}
-                    zoomLevel={1.7}
-                  />
-                  {product.image_urls && (
-                    <div className={`grid grid-cols-3 gap-2 my-2`}>
-                      {/* Render smaller images dynamically */}
-                      {product.image_urls?.slice(1).map((image, img_index) => (
-                        <Image
-                          key={img_index}
-                          width={100}
-                          height={100}
-                          loader={() => image}
-                          unoptimized={true}
-                          src={image}
-                          onClick={() =>
-                            handleImageClick(
-                              prod_index,
-                              img_index + 1,
-                              products
-                            )
-                          }
-                          className="rounded-lg w-full aspect-square object-cover cursor-pointer border border-primary"
-                          alt={`${product?.brand_name} ${product?.tread_name} ${product?.size_text}`}
-                        />
-                      ))}
-                    </div>
-                  )}
+
+                  <div>
+                    <ImageMagnifier
+                      src={product && product.image_urls[0]}
+                      width={"100%"}
+                      height={"35rem"}
+                      magnifierHeight={400}
+                      magnifieWidth={400}
+                      zoomLevel={1.7}
+                    />
+                    {product.image_urls && (
+                      <div className={`grid grid-cols-3 gap-2 my-2`}>
+                        {/* Render smaller images dynamically */}
+                        {product.image_urls?.slice(1).map((image, img_index) => (
+                          <Image
+                            key={img_index}
+                            width={100}
+                            height={100}
+                            loader={() => image}
+                            unoptimized={true}
+                            src={image}
+                            onClick={() =>
+                              handleImageClick(
+                                prod_index,
+                                img_index + 1,
+                                products
+                              )
+                            }
+                            className="rounded-lg w-full aspect-square object-cover cursor-pointer border border-primary"
+                            alt={`${product?.brand_name} ${product?.tread_name} ${product?.size_text}`}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-8">
+                    <AddToCompBtn productId={product?.id} />
+
+                    <AddToCartBtn
+                      productId={product?.id}
+                      productQty={1}
+                      fullWidth={false}
+                    />
+                  </div>
+
                 </div>
 
-                <div className="grid grid-cols-2 gap-8">
-                  <AddToCompBtn productId={product?.id} />
-
-                  <AddToCartBtn
-                    productId={product?.id}
-                    productQty={1}
-                    fullWidth={false}
-                  />
-                </div>
               </div>
             );
           })}
