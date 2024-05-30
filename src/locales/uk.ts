@@ -195,6 +195,9 @@ export default {
     EnterYourStreet: "Введіть свою вулицю",
     EnterYourBuildingNumber: "Введіть номер будинку",
     EnterYourAppartment: "Введіть номер квартири",
+    Message: "Повідомлення",
+    EnterYourMessage: "Введіть своє повідомлення",
+    Direction: "Напрямок"
   },
   ProductMiniDetail: {
     ShowProducts: "Показати продукти",

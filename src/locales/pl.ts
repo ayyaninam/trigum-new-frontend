@@ -192,6 +192,9 @@ export default {
     EnterYourStreet: "Wprowadź swoją ulicę",
     EnterYourBuildingNumber: "Wprowadź numer budynku",
     EnterYourAppartment: "Wprowadź numer mieszkania",
+    Message:" Wiadomość",
+    EnterYourMessage: "Wpisz swoją wiadomość",
+    Direction: "Kierunek"
   },
 
   ProfileConvert: {
