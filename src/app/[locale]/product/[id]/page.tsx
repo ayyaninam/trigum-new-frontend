@@ -12,9 +12,10 @@ import AddToCartBtn from "@/components/AddToCartBtn";
 import BreadCrumb from "@/components/BreadCrumb";
 import ProductSpecs from "@/components/product/ProductSpecs";
 import AddToCompBtn from "@/components/AddToCompBtn";
-import { useScopedI18n } from "@/locales/client";
+import { useScopedI18n, useCurrentLocale } from "@/locales/client";
 import tireDescriptions from "@/data.json"
-
+import tireDescription2 from "@/productDescriptionPl.json"
+import tireDescription3 from "@/productDescriptionUk.json"
 
 interface TireDescriptions {
   [key: string]: {
@@ -28,6 +29,8 @@ const Card: React.FC<{
   searchParams?: { [key: string]: string };
 }> = ({ params, searchParams }) => {
   const queryString = new URLSearchParams(searchParams).toString();
+  const lang: any = useCurrentLocale();
+  
   const t: any = useScopedI18n("SingleProd");
 
   const [product, setProduct] = useState<ProductList>();
@@ -46,8 +49,15 @@ const Card: React.FC<{
 
   const generateTireDescription = (product: ProductList | null) => {
     if (!product) return null;
-
-    const descriptions = Object.entries(tireDescriptions as TireDescriptions)
+    let selectedDescriptions: TireDescriptions;
+    if (lang === "uk") {
+      selectedDescriptions = tireDescription3;
+    } else if (lang === "pl") {
+      selectedDescriptions = tireDescription2;
+    } else {
+      selectedDescriptions = tireDescriptions;
+    }
+    const descriptions = Object.entries(selectedDescriptions as TireDescriptions)
       .filter(([key]) => product[key as keyof ProductList])
       .map(([key, value]) => <p key={key}>{value.description}</p>);
 

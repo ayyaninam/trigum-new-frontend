@@ -15,6 +15,7 @@ import AddToCompBtn from "@/components/AddToCompBtn";
 import NoProductExc from "@/components/NoProductExc";
 import { useScopedI18n } from "@/locales/client";
 import ProductSpecs from "@/components/product/ProductSpecs";
+import Link from "next/link";
 
 const ComparisonPage: React.FC = () => {
   const [products, setProducts] = useState<CartProductType | null>(null);
@@ -176,18 +177,20 @@ const ComparisonPage: React.FC = () => {
           </div>
         </div>
       )}
-
+     
       {products ? (
         <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mx-auto px-8 sm:px-0 items-stretch auto-rows-max">
+            
           {products?.results.map((product, prod_index) => {
             return (
+            
               <div key={prod_index} className="flex justify-between flex-col">
-                
+               
                 <div className="space-y-2 my-8">
                   <div className="flex justify-center items-center text-xl font-bold text-center rounded-full p-2 bg-orange-400 aspect-square size-8 text-white font-serif">
                     {product?.tyre_class}
                   </div>
-
+                  <Link href={`/product/${product?.id}`}>
                   <h2 className="text-4xl font-bold uppercase mb-2">
                     {product?.brand_name}
                     <br />
@@ -197,13 +200,16 @@ const ComparisonPage: React.FC = () => {
                     <br />
                     {product?.size_text}
                   </h2>
-                 
+                  </Link>
+                  <Link href={`/product/${product?.id}`}>
                   <ProductSpecs product={product}/>
+                  </Link>
                 </div>
 
                 <div>
 
                   <div>
+                  <Link href={`/product/${product?.id}`}>
                     <ImageMagnifier
                       src={product && product.image_urls[0]}
                       width={"100%"}
@@ -212,6 +218,7 @@ const ComparisonPage: React.FC = () => {
                       magnifieWidth={400}
                       zoomLevel={1.7}
                     />
+                    </Link>
                     {product.image_urls && (
                       <div className={`grid grid-cols-3 gap-2 my-2`}>
                         {/* Render smaller images dynamically */}
@@ -251,13 +258,14 @@ const ComparisonPage: React.FC = () => {
                 </div>
 
               </div>
+           
             );
           })}
         </div>
       ) : (
         <NoProductExc />
       )}
-
+    
       {products && products?.results.length % 2 && <div></div>}
 
       {/* <PairAddToCartBtn productIds={productsIds} productQty={1} fullWidth={true} /> */}
