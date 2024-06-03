@@ -1,0 +1,41 @@
+{
+    "is_tire_bead_damaged": {
+        "description": "Opona posiada kosmetyczny ubytek gumy na stopce. Takie uszkodzenie zawsze powstaje podczas nieostrożnego montażu opony na felgę. Jeżeli uszkodzona jest jedynie guma na stopce (a tylko takie uszkodzenia dopuszczamy do sprzedaży) to nie wpływa to w żaden sposób na dalszą eksploatację opony."
+    },
+    "is_incised": {
+        "description": "Bieżnik opony został pogłębiony zgodnie z zaleceniami producenta."
+    },
+    "front_repairs": {
+        "description": "Opona została profesjonalnie naprawiona w czole bieżnika."
+    },
+    "is_side_repair": {
+        "description": "Opona została profesjonalnie naprawiona po niedużym uszkodzeniu ściany bocznej."
+    },
+    "is_visible_cracks": {
+        "description": "Na oponie widoczne są powierzchowne pęknięcia gumy. Jest to naturalny proces starzenia się gumy. Niektóre z opon noszą takie ślady nawet po 1 roku użytkowania. W żaden sposób nie wpływa to na jakość oraz dalszą eksploatację opony. W zamian za to, jest ona sprzedawana w niższej cenie."
+    },
+    "is_braked": {
+        "description": "Na oponie jest widoczny nieduży ślad po hamowaniu. Jest on mało wyczuwalny po przejechaniu ręką, dzięki czemu opona jak najbardziej nadaje się do dalszej eksploatacji. Ze względu na 'hamulec', sprzedajemy w obniżonej cenie."
+    },
+    "is_braked_repair": {
+        "description": "Jest to opona zregenerowana przez bieżnikownie. Miała ona ślad po hamowaniu, natomiast nie została uszkodzona (przytarta była jedynie guma opony)."
+    },
+    "is_shoulder_repair": {
+        "description": "Opona została profesjonalnie naprawiona w strefie barku."
+    },
+    "is_cosmetology": {
+        "description": "Opona posiada kosmetyczne uzupełnienie ubytku gumy, które w żaden sposób nie wpływa na dalszą eksploatację opony, a jedynie na jej wygląd."
+    },
+    "is_toothed_out": {
+        "description": "Opona ma widoczne ślady wyząbkowania."
+    },
+    "is_retreaded": {
+        "description": "Opona jest bieżnikowana."
+    },
+    "is_ruts": {
+        "description": "Bieżnik opony ma mniejszą głębokość na zewnętrznych rowkach niż w środku. Nie jest to wada opony, najczęściej jest to spotykane w oponach osi sterującej i jest to normalna oznaka eksploatacji."
+    },
+    "is_circumventional_cut": {
+        "description": "Opona ma wyżłobiony dodatkowy rowek."
+    }
+}
