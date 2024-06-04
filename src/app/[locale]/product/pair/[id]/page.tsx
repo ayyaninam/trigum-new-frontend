@@ -149,11 +149,11 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
           ]}
         />
         
-        <div className="container grid grid-cols-1 sm:grid-cols-2 gap-6 mx-auto px-8 sm:px-0">
+        <div className="container grid grid-cols-1 sm:grid-cols-2  gap-6 mx-auto px-8 sm:px-0">
 
 
             {products?.products.map((product, prod_index) => {
-                return <div key={prod_index}>
+                return <div key={prod_index}  className="flex justify-between flex-col">
 
                     <div className="space-y-2 my-8">
 
@@ -178,7 +178,7 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
                     </div>
 
 
-
+                        {/*  */}
                     <div>
                         <ImageMagnifier
                             src={product && product.image_urls[0]}
@@ -209,15 +209,17 @@ const Card: React.FC<{ params: { id: string }, searchParams?: { [key: string]: s
                     </div>
 
 
-
+                
                 </div>
+                   
 
             })}
+            <div className="min-h-10 mt-auto">
+                <PairAddToCartBtn productIds={productsIds} productQty={1} fullWidth={true} />
+                </div>
 
 
-
-
-            <PairAddToCartBtn productIds={productsIds} productQty={1} fullWidth={true} />
+            
 
 
 

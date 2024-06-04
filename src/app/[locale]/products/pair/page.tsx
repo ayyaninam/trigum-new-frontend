@@ -111,7 +111,9 @@ const PairProducts = () => {
             { name: "Pair Products", link: "/" },
           ]}
         />
+        
         <PairProductItems list={products} queryString={queryString} prodLoading={prodLoading} />
+       
       </div>
     </div>
   );

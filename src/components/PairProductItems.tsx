@@ -51,39 +51,44 @@ const PairProductItems: React.FC<PairItemsArray> = ({
           </div>
         </div>
       ) : (
-        <div className="flex flex-row md:flex-col flex-wrap mt-20 p-4">
+        <div className="flex flex-row  md:flex-col flex-wrap mt-20 p-4">
           {MemoizedProductList && MemoizedProductList?.length > 0 ? (
             MemoizedProductList.map((plist: PairItem) => {
               if (plist?.products.length > 0) {
                 return (
-                  <div
-                    className={`grid md:grid-cols-${
-                      plist.products.length + 1
-                    }  gap-4 items-end my-8 bg-gray-100 rounded-lg px-8 py-8 grid-cols-1 mx-auto w-full sm:w-fit md:w-full md:place-items-end`}
-                    key={plist?.id}
-                  >
-                    {plist.products.map((product: ProductList) => (
-                      <Link
-                        href={`/product/pair/${plist?.id}/?${
-                          queryString && queryString
-                        }`}
-                        className="cursor-pointer space-y-4"
-                        key={product?.id}
-                      >
-                        <Image
-                          src={product?.image_urls[0]}
-                          width={100}
-                          height={100}
-                          unoptimized={true}
-                          className="w-full h-64 object-cover rounded-lg sm:w-64 md:w-72 md:h-72 mb-4"
-                          alt="Product Images"
-                        />
-                        <span className="">
-                          <ProductMiniDetails product={product && product} />
-                        </span>
-                      </Link>
-                    ))}
+                  <div className="flex flex-col bg-gray-100 rounded-lg px-8 py-8 mx-auto w-full sm:w-fit md:w-full md:place-items-end">
 
+                  <div
+                   className={`grid md:grid-cols-${
+                    plist.products.length + 1
+                  }  gap-4 items-end my-8 bg-gray-100 rounded-lg px-8 py-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-auto w-full sm:w-fit md:w-full md:place-items-end`}
+                  key={plist?.id}
+                >
+                  {plist.products.map((product: ProductList) => (
+                    <Link
+                      href={`/product/pair/${plist?.id}/?${
+                        queryString && queryString
+                      }`}
+                      className="cursor-pointer space-y-4"
+                      key={product?.id}
+                    >
+                      <Image
+                        src={product?.image_urls[0]}
+                        width={100}
+                        height={100}
+                        unoptimized={true}
+                        className="w-full h-64 object-cover rounded-lg sm:w-64 md:w-72 md:h-72 mb-4"
+                        alt="Product Images"
+                      />
+                      <span className="">
+                        <ProductMiniDetails product={product && product} />
+                      </span>
+                    </Link>
+                  ))}
+
+                    
+                  </div>
+                    <div className="ml-auto">
                     <PairAddToCartBtn
                       productIds={getPairProductsAllIds(plist)}
                       productQty={1}
@@ -91,7 +96,7 @@ const PairProductItems: React.FC<PairItemsArray> = ({
                         queryString && queryString
                       }`}
                     />
-
+                </div>
                   </div>
                 );
               }

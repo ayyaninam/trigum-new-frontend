@@ -208,7 +208,7 @@ const ComparisonPage: React.FC = () => {
 
                 <div>
 
-                  <div>
+                <div>
                   <Link href={`/product/${product?.id}`}>
                     <ImageMagnifier
                       src={product && product.image_urls[0]}
