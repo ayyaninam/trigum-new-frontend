@@ -269,4 +269,58 @@ export default {
   netPrice: {
     price: "netto/1szt",
   },
+
+  privacyPolicy : {
+    sellerHead: "Sprzedawca",
+    sellerAdmin: "Sprzedawca - Administrator danych Tirgum Mateusz Celej z siedzibą w Boruszowicach ul. Armii Krajowej 6 42-690 Boruszowice. Prowadzona przez Tirgum Mateusz Celej Jednoosobowa Działalność Gospodarcza wpisana jest do rejestru przedsiębiorców CEIDG, pod numerem: NIP: 6452547332",
+
+
+    shophead:"Sklep",
+    shop: "internetowy prowadzony przez Sprzedawcę pod adresem internetowym www.tirgum.pl",
+
+
+    client: "Klient- osoba fizyczna, osoba prawna lub jednostka organizacyjna niebędąca osobą prawną, której przepisy szczególnie przyznają zdolność prawną, która dokonuje zamówienia w ramach sklepu.",
+
+
+    consumer: "Konsument – Kupujący będący osobą fizyczną, dokonujący zakupu niezwiązanego bezpośrednio z działalnością gospodarczą lub zawodową ( art. 221Kodeksu Cywilnego )",
+
+
+    entrepreneur: "Przedsiębiorca - osoba fizyczna, osoba prawna i jednostka organizacyjna niebędąca osobą prawną, której odrębna ustawa przyznaje zdolność prawną, wykonująca we własnym imieniu działalność gospodarczą, która korzysta ze Sklepu. Kupujący zawierający umowę ( umowę sprzedaży za pośrednictwem sklepu) bezpośrednio związaną z działalnością gospodarczą.",
+
+
+    treadDepth: "Głębokość bieżnika - Głębokość bieżnika mierzona do dna rowka opony ( nie do punktu TWI). Pomiar jest wykonywany w 5 różnych miejscach po całym obwodzie bieżnika. Podawana jest najniższa oraz najwyższa zmierzona wartość.",
+
+
+    businessDay: "Dzień roboczy - jeden dzień od poniedziałku do piątku z wyłączeniem dni ustawowo wolnych od pracy.",
+
+
+    account: "Konto- konto klienta w Sklepie, są w nim gromadzone dane podane przez Klienta oraz informacje o złożonych przez niego Zamówieniach w Sklepie",
+
+
+    registrationForm: "Formularz rejestracji - formularz dostępny w sklepie, umożliwiający utworzenie Konta",
+
+
+    termsAndConditions: "Regulamin - niniejszy regulamin sklepu internetowego www.tirgum.pl",
+
+
+    order: "Zamówienie - oświadczenie woli Klienta składane za pomocą Formularza Zamówienia i zmierzające bezpośrednio do zawarcia Umowy Sprzedaży Produktu lub Produktów ze Sprzedawcą",
+
+
+    orderForm: "Formularz zamówienia - interaktywny formularz dostępny w Sklepie umożliwiający złożenie Zamówienia, w szczególności poprzez dodanie Produktów do Koszyka oraz określenie warunków Umowy Sprzedaży, w tym sposobu dostawy i płatności.",
+
+
+    product: "Produkt - dostępna w Sklepie rzecz ruchoma będąca przedmiotem Umowy Sprzedaży między Klientem a Sprzedawcą.",
+
+
+    cart: "Koszyk - element oprogramowania Sklepu, w którym widoczne są wybrane przez Klienta Produkty do zakupu, a także istnieje możliwość ustalenia i modyfikacji danych Zamówienia, w szczególności ilości produktów.",
+
+
+    salesContract: "Umowa sprzedaży - umowa sprzedaży Produktu zawierana albo zawarta między Klientem a Sprzedawcą za pośrednictwem Sklepu internetowego. Przez Umowę Sprzedaży rozumie się też - stosowanie do cech Produktu - umowę o świadczenie usług i umowę o dzieło.",
+
+
+    gdpr: "RODO - Rozporządzenie Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016r. w sprawie ochrony osób fizycznych w związku z przetwarzaniem danych osobowych i w sprawie swobodnego przepływu takich danych oraz uchylenia dyrektywy 95/46/WE."
+
+
+  },
+  
 } as const;

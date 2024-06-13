@@ -73,7 +73,7 @@ const Footer: React.FC = async () => {
           <div className="my-4 ">
             <ul className="list-none space-y-2">
               <li>
-                <Link href={"/"}>{t("regulations")}</Link>
+                <Link href={"/privacy-policy"}>{t("regulations")}</Link>
               </li>
               <li>
                 <Link href={"/"}>{t("privacyPolicy")}</Link>
