@@ -18,7 +18,6 @@ function Login() {
   const [loginLoading, setLoginLoading] = useState(false)
   const t: any = useScopedI18n("signupConverts");
 
-
   const {authToken, setAuthToken, setUserName, setUserId} = useUser()
 
   const login = async (event:FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>) => {
