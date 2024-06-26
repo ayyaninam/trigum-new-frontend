@@ -104,8 +104,8 @@ const Card: React.FC<{
       >
         <img
           src={src}
-          style={{ height: height, width: width, objectFit: "cover" }}
-          className="rounded-lg"
+          style={{ height: height, width: width, }}
+          className="rounded-lg w-full h-full aspect-square object-contain sm:object-contain md:object-cover"
           onMouseEnter={(e) => {
             // update image size and turn-on magnifier
             const elem = e.currentTarget;
